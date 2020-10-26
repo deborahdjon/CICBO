@@ -1,0 +1,618 @@
+swagger: "2.0"
+info:
+  description: "This is the API of CICBO - CICBO is a Corona Business Optimizer. \nBy Deborah Djon and Ferdinand Koenig for Web Engineering 2 at Cooperative State University Stuttgart (DHBW Stuttgart) \nLecturer: Danny Amor (DXC)"
+  version: "0.4"
+  title: "CICBO"
+  termsOfService: "https://github.com/lipilli/CICBO"
+  contact:
+    email: "inf19211@lehre.dhbw-stuttgart.de"
+  license:
+    name: "Non defined license"
+    url: "https://github.com/lipilli/CICBO"
+host: "localhost"
+basePath: "/v2"
+tags:
+- name: "guest"
+  description: "Managing your digital guest list"
+- name: "staff"
+  description: "Access to your staff"
+- name: "room"
+  description: "Operations on different rooms"
+- name: "alarm"
+  description: "All meta-methods in case of an outbreak"
+schemes:
+- "https"
+- "http"
+paths:
+  /guest:
+    post:
+      tags:
+      - "guest"
+      summary: "Add a new guest"
+      description: ""
+      operationId: "addGuest"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "guest"
+        description: "Guest object that needs to be added to the guest list"
+        required: true
+        schema:
+          $ref: "#/definitions/Guest"
+      responses:
+        "405":
+          description: "Invalid input"
+
+    get:
+      tags:
+      - "guest"
+      summary: "List all guests"
+      description: ""
+      operationId: "listGuests"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Everything OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/GuestwId"
+      
+  /guest/findByName:
+    get:
+      tags:
+      - "guest"
+      summary: "Finds guests by name"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "findGuestsbyName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "query"
+        description: "Name filter"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/GuestwId"
+        "400":
+          description: "Invalid status value"
+
+  /guest/findByDate:
+    get:
+      tags:
+      - "guest"
+      summary: "Finds guests by date"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "findGuetsByDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Date"
+        in: "query"
+        description: "Name filter"
+        required: true
+        type: "string"
+        pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/GuestwId"
+        "400":
+          description: "Invalid status value"
+
+  /guest/{guestId}:
+    get:
+      tags:
+      - "guest"
+      summary: "Find guest by ID"
+      description: "Returns a single guest"
+      operationId: "getGuestById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "guestId"
+        in: "path"
+        description: "ID of guest to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/GuestwId"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Guest not found"
+
+    put:
+      tags:
+      - "guest"
+      summary: "Updates a guest with form data"
+      description: ""
+      operationId: "updateGuestWithForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "guestId"
+        in: "path"
+        description: "guest id to update"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "guest"
+        description: "Updated guest"
+        required: true
+        schema:
+          $ref: "#/definitions/Guest"
+      responses:
+        "405":
+          description: "Invalid input"
+
+    delete:
+      tags:
+      - "guest"
+      summary: "Deletes a guest"
+      description: ""
+      operationId: "deleteGuest"
+      parameters:
+      - name: "guestId"
+        in: "path"
+        description: "guest id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Guest not found"
+        
+  /staff:
+    post:
+      tags:
+      - "staff"
+      summary: "Add a new staff member"
+      description: ""
+      operationId: "addStaff"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "staff"
+        description: "Staff object that needs to be added to the staff list"
+        required: true
+        schema:
+          $ref: "#/definitions/Staff"
+      responses:
+        "405":
+          description: "Invalid input"
+    get:
+      tags:
+      - "staff"
+      summary: "List all staff members"
+      description: ""
+      operationId: "listStaff"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Everything OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/StaffwId"
+      
+  /staff/findByName:
+    get:
+      tags:
+      - "staff"
+      summary: "Finds staff members by name"
+      description: ""
+      operationId: "findStaffMembersbyName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "query"
+        description: "Name filter"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/StaffwId"
+        "400":
+          description: "Invalid status value"
+  /staff/findByDate:
+    get:
+      tags:
+      - "staff"
+      summary: "Finds staff members by date"
+      description: ""
+      operationId: "findStaffMembersByDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Date"
+        in: "query"
+        description: "Name filter"
+        required: true
+        type: "string"
+        pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/StaffwId"
+        "400":
+          description: "Invalid status value"
+  /staff/{staffId}:
+    get:
+      tags:
+      - "staff"
+      summary: "Find staff member by ID"
+      description: "Returns a single staff member"
+      operationId: "getStaffMemberById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "staffId"
+        in: "path"
+        description: "ID of staff member to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/StaffwId"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Staff member not found"
+    put:
+      tags:
+      - "staff"
+      summary: "Updates a staff member"
+      description: ""
+      operationId: "updateStaff"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "staffId"
+        in: "path"
+        description: "staff id to update"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "staff"
+        description: "Updated staff"
+        required: true
+        schema:
+          $ref: "#/definitions/Staff"
+      responses:
+        "405":
+          description: "Invalid input"
+    delete:
+      tags:
+      - "staff"
+      summary: "Deletes a staff member"
+      description: ""
+      operationId: "deleteStaffMember"
+      parameters:
+      - name: "staffId"
+        in: "path"
+        description: "staff id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Staff member not found"
+        
+  /room:
+    post:
+      tags:
+      - "room"
+      summary: "Add a new room"
+      description: ""
+      operationId: "addRoom"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "room"
+        description: "Room object that needs to be added to the room list"
+        required: true
+        schema:
+          $ref: "#/definitions/Room"
+      responses:
+        "405":
+          description: "Invalid input"
+    get:
+      tags:
+      - "room"
+      summary: "List all rooms"
+      description: ""
+      operationId: "listRooms"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Everything OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Room"
+  
+  /room/{roomNr}:       
+    delete:
+      tags:
+      - "room"
+      summary: "Delete a room"
+      description: ""
+      operationId: "deleteRoom"
+      parameters:
+      - name: "roomNr"
+        in: "path"
+        description: "room number to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Room not found"
+          
+  /alarm:
+    get:
+      tags:
+      - "alarm"
+      summary: "Creates contact list with potential contaminated persons"
+      description: ""
+      operationId: "createContactList"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Date"
+        description: "Name filter"
+        required: true
+        schema:
+          $ref: "#/definitions/AlarmQueryObject"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/StaffwId"
+        "400":
+          description: "Invalid status value"
+        
+        
+
+definitions:
+  Room:
+      type: "object"
+      required:
+      - "number"
+      properties:
+          number:
+              type: "integer"
+          name:
+              type: "string"
+              example: "large hall"
+  StaffwId:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    - "firstName"
+    - "arrivedAt"
+    - "leftAt"
+    - "room"
+    properties:
+        id:
+            type: "integer"
+            format: "int64"
+        firstName:
+            type: "string"
+            example: "Jane"
+        name:
+            type: "string"
+            example: "Doe"
+        mail:
+            type: "string"
+            pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            example: "jane.doe@example.com"
+        phone:
+            type: "string"
+        adress:
+            type: "string"
+        arrivedAt:
+            type: "string"
+            pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+            example: "2020-10-22 04:20"
+        leftAt:
+            type: "string"
+            pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+            example: "2020-10-22 04:20"
+        rooms:
+            type: "array"
+            items:
+              $ref: "#/definitions/Room"
+  Staff:
+    type: "object"
+    required:
+    - "name"
+    - "firstName"
+    - "arrivedAt"
+    - "leftAt"
+    - "room"
+    properties:
+        firstName:
+            type: "string"
+            example: "Jane"
+        name:
+            type: "string"
+            example: "Doe"
+        mail:
+            type: "string"
+            pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            example: "jane.doe@example.com"
+        phone:
+            type: "string"
+        adress:
+            type: "string"
+        arrivedAt:
+            type: "string"
+            pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+            example: "2020-10-22 04:20"
+        leftAt:
+            type: "string"
+            pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+            example: "2020-10-22 04:20"
+        rooms:
+            type: "array"
+            items:
+              $ref: "#/definitions/Room"
+  GuestwId:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    - "firstName"
+    - "arrivedAt"
+    - "leftAt"
+    - "room"
+    properties:
+        id:
+            type: "integer"
+            format: "int64"
+        firstName:
+            type: "string"
+            example: "Jane"
+        name:
+            type: "string"
+            example: "Doe"
+        mail:
+            type: "string"
+            pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            example: "jane.doe@example.com"
+        phone:
+            type: "string"
+        adress:
+            type: "string"
+        arrivedAt:
+            type: "string"
+            pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+            example: "2020-10-22 04:20"
+        leftAt:
+            type: "string"
+            pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+            example: "2020-10-22 04:20"
+        room:
+            $ref: "#/definitions/Room"
+  
+  Guest:
+    type: "object"
+    required:
+    - "name"
+    - "firstName"
+    - "arrivedAt"
+    - "leftAt"
+    - "room"
+    properties:
+        firstName:
+            type: "string"
+            example: "Jane"
+        name:
+            type: "string"
+            example: "Doe"
+        mail:
+            type: "string"
+            pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            example: "jane.doe@example.com"
+        phone:
+            type: "string"
+        adress:
+            type: "string"
+        arrivedAt:
+            type: "string"
+            pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+            example: "2020-10-22 04:20"
+        leftAt:
+            type: "string"
+            pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+            example: "2020-10-22 04:20"
+        room:
+            $ref: "#/definitions/Room"
+            
+  AlarmQueryObject:
+    type: "object"
+    required:
+    - "type"
+    properties:
+      type:
+        type: "string"
+      firstName:
+        type: "string"
+      name:
+        type: "string"
+      arrivedAt:
+          type: "string"
+          pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+          example: "2020-10-22 04:20"
+      leftAt:
+          type: "string"
+          pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+          example: "2020-10-22 04:20"
+        
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
