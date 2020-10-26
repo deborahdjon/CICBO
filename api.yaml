@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "This is the API of CICBO - CICBO is a Corona Business Optimizer. \nBy Deborah Djon and Ferdinand Koenig for Web Engineering 2 at Cooperative State University Stuttgart (DHBW Stuttgart) \nLecturer: Danny Amor (DXC)"
-  version: "0.4"
+  version: "0.5"
   title: "CICBO"
   termsOfService: "https://github.com/lipilli/CICBO"
   contact:
@@ -10,7 +10,7 @@ info:
     name: "Non defined license"
     url: "https://github.com/lipilli/CICBO"
 host: "localhost"
-basePath: "/v2"
+basePath: "/"
 tags:
 - name: "guest"
   description: "Managing your digital guest list"
@@ -23,6 +23,7 @@ tags:
 schemes:
 - "https"
 - "http"
+
 paths:
   /guest:
     post:
@@ -43,8 +44,12 @@ paths:
         schema:
           $ref: "#/definitions/Guest"
       responses:
+        "200":
+          description: "Everything OK"
         "405":
           description: "Invalid input"
+        "418":
+          description: "I'm a teapot and not a valid room. (No existing room with this number)"
 
     get:
       tags:
@@ -62,54 +67,29 @@ paths:
             items:
               $ref: "#/definitions/GuestwId"
       
-  /guest/findByName:
+  /guest/find:
     get:
       tags:
       - "guest"
-      summary: "Finds guests by name"
-      description: "Multiple status values can be provided with comma separated strings"
-      operationId: "findGuestsbyName"
+      summary: "Finds guests"
+      description: ""
+      operationId: "findGuests"
       produces:
       - "application/json"
       parameters:
-      - name: "name"
-        in: "query"
-        description: "Name filter"
+      - in: "body"
+        name: "Search filter"
+        description: "Search filter object"
         required: true
-        type: "string"
+        schema:
+          $ref: '#/definitions/SearchObject'
       responses:
         "200":
           description: "successful operation"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/GuestwId"
-        "400":
-          description: "Invalid status value"
-
-  /guest/findByDate:
-    get:
-      tags:
-      - "guest"
-      summary: "Finds guests by date"
-      description: "Multiple status values can be provided with comma separated strings"
-      operationId: "findGuetsByDate"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "Date"
-        in: "query"
-        description: "Name filter"
-        required: true
-        type: "string"
-        pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/GuestwId"
+              $ref: "#/definitions/StaffwId"
         "400":
           description: "Invalid status value"
 
@@ -180,6 +160,8 @@ paths:
         type: "integer"
         format: "int64"
       responses:
+        "200":
+          description: "Deleted guest"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -204,8 +186,12 @@ paths:
         schema:
           $ref: "#/definitions/Staff"
       responses:
+        "200":
+          description: "Everything OK"
         "405":
           description: "Invalid input"
+        "418":
+          description: "I'm a teapot and not a valid room. (No existing room with this number)"
     get:
       tags:
       - "staff"
@@ -222,46 +208,22 @@ paths:
             items:
               $ref: "#/definitions/StaffwId"
       
-  /staff/findByName:
+  /staff/find:
     get:
       tags:
       - "staff"
-      summary: "Finds staff members by name"
+      summary: "Finds staff members"
       description: ""
-      operationId: "findStaffMembersbyName"
+      operationId: "findStaffMembers"
       produces:
       - "application/json"
       parameters:
-      - name: "name"
-        in: "query"
-        description: "Name filter"
+      - in: "body"
+        name: "Search filter"
+        description: "Search filter object"
         required: true
-        type: "string"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/StaffwId"
-        "400":
-          description: "Invalid status value"
-  /staff/findByDate:
-    get:
-      tags:
-      - "staff"
-      summary: "Finds staff members by date"
-      description: ""
-      operationId: "findStaffMembersByDate"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "Date"
-        in: "query"
-        description: "Name filter"
-        required: true
-        type: "string"
-        pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+        schema:
+          $ref: '#/definitions/SearchObject'
       responses:
         "200":
           description: "successful operation"
@@ -336,6 +298,8 @@ paths:
         type: "integer"
         format: "int64"
       responses:
+        "200":
+          description: "Deleted staff member"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -382,8 +346,8 @@ paths:
     delete:
       tags:
       - "room"
-      summary: "Delete a room"
-      description: ""
+      summary: "Deletes a room"
+      description: "Deletes a room if not in use. If it is in use, it sets the active-flag to false. \nIn a later version, this could be extended to automatically deleting inactive rooms if they are not in use"
       operationId: "deleteRoom"
       parameters:
       - name: "roomNr"
@@ -393,6 +357,10 @@ paths:
         type: "integer"
         format: "int64"
       responses:
+        "200":
+          description: "Deleted room"
+        "202":
+          description: "Set active-flag to false"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -418,9 +386,7 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/StaffwId"
+            $ref: "#/definitions/ContactList"
         "400":
           description: "Invalid status value"
         
@@ -437,8 +403,18 @@ definitions:
           name:
               type: "string"
               example: "large hall"
+          active:
+              type: "boolean"
+  RoomIdentifier:
+      type: "object"
+      required:
+      - "number"
+      properties:
+          number:
+              type: "integer"
   StaffwId:
     type: "object"
+    description: "Staff-object in response"
     required:
     - "id"
     - "name"
@@ -478,6 +454,7 @@ definitions:
               $ref: "#/definitions/Room"
   Staff:
     type: "object"
+    description: "Staff-object in querry"
     required:
     - "name"
     - "firstName"
@@ -510,9 +487,10 @@ definitions:
         rooms:
             type: "array"
             items:
-              $ref: "#/definitions/Room"
+              $ref: "#/definitions/RoomIdentifier"
   GuestwId:
     type: "object"
+    description: "Guest-object in response"
     required:
     - "id"
     - "name"
@@ -548,9 +526,9 @@ definitions:
             example: "2020-10-22 04:20"
         room:
             $ref: "#/definitions/Room"
-  
   Guest:
     type: "object"
+    description: "Guest-object in querry"
     required:
     - "name"
     - "firstName"
@@ -581,8 +559,7 @@ definitions:
             pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
             example: "2020-10-22 04:20"
         room:
-            $ref: "#/definitions/Room"
-            
+            $ref: "#/definitions/RoomIdentifier"
   AlarmQueryObject:
     type: "object"
     required:
@@ -602,6 +579,28 @@ definitions:
           type: "string"
           pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
           example: "2020-10-22 04:20"
+  SearchObject:
+    description: "Subset of attributes"
+    type: "object"
+    properties:
+      {}
+    example:
+      firstName: "Jane"
+      name: "Doe"
+      arrivedAt: "2020-10-22 04:20"
+      leftAt: "2020-10-22 16:20"
+  ContactList:
+    type: "object"
+    properties:
+      staff members:
+        type: "array"
+        items:
+          $ref: '#/definitions/StaffwId'
+      guests:
+        type: "array"
+        items:
+          $ref: '#/definitions/GuestwId'
+      
         
   ApiResponse:
     type: "object"
@@ -614,5 +613,5 @@ definitions:
       message:
         type: "string"
 externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+  description: "Repository on Github"
+  url: "https://github.com/lipilli/CICBO"
