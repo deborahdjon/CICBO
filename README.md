@@ -1,5 +1,13 @@
 # CICBO
 
+
+## Name's origin
+CICBO Is Corona Business Optimizer
+
+## Project specifications
+https://hpe-my.sharepoint.com/:w:/p/ferdinand_koenig/EcO6d5LLL9dGrdLAqiohaMgBLYzZ_TTWC8uAkmEWiBJWqg?e=60QUCe
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
 ## Development server
