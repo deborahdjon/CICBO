@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "This is the API of CICBO - CICBO is a Corona Business Optimizer. \nBy Deborah Djon and Ferdinand Koenig for Web Engineering 2 at Cooperative State University Stuttgart (DHBW Stuttgart) \nLecturer: Danny Amor (DXC)"
-  version: "0.6"
+  version: "1.0"
   title: "CICBO"
   termsOfService: "https://github.com/lipilli/CICBO"
   contact:
@@ -89,7 +89,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/StaffwId"
+              $ref: "#/definitions/GuestwId"
         "400":
           description: "Invalid status value"
 
@@ -377,8 +377,8 @@ paths:
       - "application/json"
       parameters:
       - in: "body"
-        name: "Date"
-        description: "Name filter"
+        name: "Search filter"
+        description: "Search filter object"
         required: true
         schema:
           $ref: "#/definitions/AlarmQueryObject"
