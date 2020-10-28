@@ -594,7 +594,7 @@ definitions:
   ContactList:
     type: "object"
     properties:
-      staff members:
+      staffMembers:
         type: "array"
         items:
           $ref: '#/definitions/StaffwId'
