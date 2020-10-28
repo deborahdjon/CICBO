@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "This is the API of CICBO - CICBO is a Corona Business Optimizer. \nBy Deborah Djon and Ferdinand Koenig for Web Engineering 2 at Cooperative State University Stuttgart (DHBW Stuttgart) \nLecturer: Danny Amor (DXC)"
-  version: "1.1"
+  version: "1.0"
   title: "CICBO"
   termsOfService: "https://github.com/lipilli/CICBO"
   contact:
@@ -378,7 +378,7 @@ paths:
       parameters:
       - in: "body"
         name: "Search filter"
-        description: "Search filter object"
+        description: "Alarm query object"
         required: true
         schema:
           $ref: "#/definitions/AlarmQueryObject"
@@ -585,12 +585,13 @@ definitions:
           pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
           example: "2020-10-22 04:20"
   SearchObject:
-    description: "Subset of attributes"
+    description: "Subset of attributes to filter the search"
     type: "object"
     required:
     - "sortByName"
     properties:
-      {}
+      sortByName:
+        type: "boolean"
     example:
       sortByName: true
       firstName: "Jane"
