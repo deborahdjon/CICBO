@@ -5,16 +5,21 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavigationComponent } from './navigation/navigation.component';
+import { MenuButtonComponent } from './menu-button/menu-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    NavigationComponent,
+    MenuButtonComponent
   ],
-  imports: [
+  exports:[NavigationComponent],
+  imports:[
     BrowserModule,
     MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
