@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "This is the API of CICBO - CICBO is a Corona Business Optimizer. \nBy Deborah Djon and Ferdinand Koenig for Web Engineering 2 at Cooperative State University Stuttgart (DHBW Stuttgart) \nLecturer: Danny Amor (DXC)"
-  version: "1.2"
+  version: "1.3"
   title: "CICBO"
   termsOfService: "https://github.com/lipilli/CICBO"
   contact:
@@ -44,9 +44,9 @@ paths:
         schema:
           $ref: "#/definitions/Guest"
       responses:
-        "200":
-          description: "Everything OK"
-        "405":
+        "201":
+          description: "Guest created"
+        "400":
           description: "Invalid input"
         "418":
           description: "I'm a teapot and not a valid room. (No existing room with this number)"
@@ -143,7 +143,7 @@ paths:
         schema:
           $ref: "#/definitions/Guest"
       responses:
-        "405":
+        "400":
           description: "Invalid input"
 
     delete:
@@ -160,7 +160,7 @@ paths:
         type: "integer"
         format: "int64"
       responses:
-        "200":
+        "204":
           description: "Deleted guest"
         "400":
           description: "Invalid ID supplied"
@@ -186,9 +186,9 @@ paths:
         schema:
           $ref: "#/definitions/Staff"
       responses:
-        "200":
-          description: "Everything OK"
-        "405":
+        "201":
+          description: "Staff member created"
+        "400":
           description: "Invalid input"
         "418":
           description: "I'm a teapot and not a valid room. (No existing room with this number)"
@@ -282,7 +282,7 @@ paths:
         schema:
           $ref: "#/definitions/Staff"
       responses:
-        "405":
+        "400":
           description: "Invalid input"
     delete:
       tags:
@@ -298,7 +298,7 @@ paths:
         type: "integer"
         format: "int64"
       responses:
-        "200":
+        "204":
           description: "Deleted staff member"
         "400":
           description: "Invalid ID supplied"
@@ -324,7 +324,9 @@ paths:
         schema:
           $ref: "#/definitions/RoomConstructor"
       responses:
-        "405":
+        "201":
+          description: "Room created"
+        "400":
           description: "Invalid input"
     get:
       tags:
@@ -357,7 +359,7 @@ paths:
         type: "integer"
         format: "int64"
       responses:
-        "200":
+        "204":
           description: "Deleted room"
         "202":
           description: "Set active-flag to false"
