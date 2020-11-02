@@ -328,6 +328,8 @@ paths:
           description: "Room created"
         "400":
           description: "Invalid input"
+        "409":
+          description: "Room with this number already exists"
     get:
       tags:
       - "room"
