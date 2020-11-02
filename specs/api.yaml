@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "This is the API of CICBO - CICBO is a Corona Business Optimizer. \nBy Deborah Djon and Ferdinand Koenig for Web Engineering 2 at Cooperative State University Stuttgart (DHBW Stuttgart) \nLecturer: Danny Amor (DXC)"
-  version: "1.3"
+  version: "1.4"
   title: "CICBO"
   termsOfService: "https://github.com/lipilli/CICBO"
   contact:
@@ -452,7 +452,7 @@ definitions:
             example: "jane.doe@example.com"
         phone:
             type: "string"
-        adress:
+        address:
             type: "string"
         arrivedAt:
             type: "string"
@@ -488,7 +488,7 @@ definitions:
             example: "jane.doe@example.com"
         phone:
             type: "string"
-        adress:
+        address:
             type: "string"
         arrivedAt:
             type: "string"
@@ -528,7 +528,7 @@ definitions:
             example: "jane.doe@example.com"
         phone:
             type: "string"
-        adress:
+        address:
             type: "string"
         arrivedAt:
             type: "string"
@@ -562,7 +562,7 @@ definitions:
             example: "jane.doe@example.com"
         phone:
             type: "string"
-        adress:
+        address:
             type: "string"
         arrivedAt:
             type: "string"
