@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
 import { MenuButtonComponent } from './menu-button/menu-button.component';
 import { MainContainerComponent } from './main-container/main-container.component';
+import { NavElementComponent } from './nav-element/nav-element.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { MainContainerComponent } from './main-container/main-container.componen
     NavigationComponent,
     MenuButtonComponent,
     MainContainerComponent,
+    NavElementComponent,
   ],
   exports:[NavigationComponent],
   imports:[

@@ -1,20 +1,13 @@
-.cicbo-navigation{
-  width: 100%;
-}
-
 .nav-element{
   border-bottom: white solid 3px;
   background: #559C5E;
-  padding-left: 2%;
   height: 60px;
   color: white;
   text-decoration: none;
   font-family: "Arial Rounded MT",sans-serif;
   font-size: 25px;
 }
-
 a:hover, a:visited, a:link, a:active{
   text-decoration: none;
 }
-
 

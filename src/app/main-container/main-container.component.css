@@ -1,0 +1,33 @@
+.main-container{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100vh;
+  width: 100vw;
+  background-color: yellow;
+}
+.navigation-container{
+  display: none; /*TODO: change to flex*/
+  width: 500px;
+  flex-direction: column;
+  height: 100%;
+  background-color:  #559C5E;
+  position: absolute;
+  z-index: 1;
+}
+
+
+.menu-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: orange;
+}
+
+.view{
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #5D6A5E;
+  flex-grow: 1;
+  height: available;
+}

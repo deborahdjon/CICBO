@@ -4,13 +4,12 @@
   font-size: 45px;
   color: #5D6A5E;
   font-family: "Arial Rounded MT", sans-serif;
-  margin: 30px 0 30px 30px;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.16);
 }
 
 .img-menu{
   height: 100px;
-  margin-left: 20px;
+  margin-left: 15px;
 }
 
 .text{

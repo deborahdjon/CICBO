@@ -1,20 +1,19 @@
+.header{
+  display: flex;
+  width: 100vw;
+  background: #559C5E;
+  border-bottom:white solid 3px ;
+}
+
 .title{
   font-size: 45px;
   color: white;
   font-family: "Arial Rounded MT", sans-serif;
   margin-right: 10px;
 }
-.nav-button{
-  height: 50%;
-}
+
 .img-nav{
   height:55px
 }
-
-.header{
-  background: #559C5E;
-  border-bottom:white solid 3px ;
-}
-
 
 
