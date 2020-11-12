@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-menu-button',
@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu-button.component.css']
 })
 export class MenuButtonComponent implements OnInit {
+  @Input() text: string;
+  @Input() image_path: string;
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit(): void {
   }
