@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "This is the API of CICBO - CICBO is a Corona Business Optimizer. \nBy Deborah Djon and Ferdinand Koenig for Web Engineering 2 at Cooperative State University Stuttgart (DHBW Stuttgart) \nLecturer: Danny Amor (DXC)"
-  version: "1.4"
+  version: "2.0"
   title: "CICBO"
   termsOfService: "https://github.com/lipilli/CICBO"
   contact:
@@ -233,6 +233,7 @@ paths:
               $ref: "#/definitions/StaffwId"
         "400":
           description: "Invalid status value"
+  
   /staff/{staffId}:
     get:
       tags:
@@ -304,6 +305,67 @@ paths:
           description: "Invalid ID supplied"
         "404":
           description: "Staff member not found"
+          
+  /staff/{staffId}/shift:
+    post:
+      tags:
+      - "staff"
+      summary: "Add a new shift to staff member"
+      description: ""
+      operationId: "addShift"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "staffId"
+        in: "path"
+        description: "ID of staff member"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "staff"
+        description: "New shift object"
+        required: true
+        schema:
+          $ref: "#/definitions/StaffShift"
+      responses:
+        "201":
+          description: "Shift added"
+        "400":
+          description: "Invalid input"
+        "404":
+          description: "Staff member not found"
+    put:
+      tags:
+      - "staff"
+      summary: "Replaces all shift items of staff member"
+      description: ""
+      operationId: "replaceShift"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "staffId"
+        in: "path"
+        description: "ID of staff member"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "staff"
+        description: "Array of shift objects / replacement"
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/StaffShift"
+      responses:
+        "201":
+          description: "Shifts replaced"
+        "400":
+          description: "Invalid input"
+        "404":
+          description: "Staff member not found"
+      
         
   /room:
     post:
@@ -454,27 +516,16 @@ definitions:
             type: "string"
         address:
             type: "string"
-        arrivedAt:
-            type: "string"
-            pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
-            example: "2020-10-22 04:20"
-        leftAt:
-            type: "string"
-            pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
-            example: "2020-10-22 04:20"
-        rooms:
-            type: "array"
-            items:
-              $ref: "#/definitions/Room"
+        shifts:
+          type: "array"
+          items:
+            $ref: "#/definitions/StaffShift"
   Staff:
     type: "object"
     description: "Staff-object in querry"
     required:
     - "name"
     - "firstName"
-    - "arrivedAt"
-    - "leftAt"
-    - "room"
     properties:
         firstName:
             type: "string"
@@ -490,18 +541,26 @@ definitions:
             type: "string"
         address:
             type: "string"
-        arrivedAt:
-            type: "string"
-            pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
-            example: "2020-10-22 04:20"
-        leftAt:
-            type: "string"
-            pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
-            example: "2020-10-22 04:20"
-        rooms:
-            type: "array"
-            items:
-              $ref: "#/definitions/RoomIdentifier"
+  StaffShift:
+    type: "object"
+    description: "Staff-object in querry"
+    required:
+    - "arrivedAt"
+    - "leftAt"
+    - "rooms"
+    properties:
+      arrivedAt:
+          type: "string"
+          pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+          example: "2020-10-22 04:20"
+      leftAt:
+          type: "string"
+          pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+          example: "2020-10-22 04:20"
+      rooms:
+          type: "array"
+          items:
+            $ref: "#/definitions/RoomIdentifier"
   GuestwId:
     type: "object"
     description: "Guest-object in response"
@@ -638,3 +697,4 @@ definitions:
 externalDocs:
   description: "Repository on Github"
   url: "https://github.com/lipilli/CICBO"
+  
