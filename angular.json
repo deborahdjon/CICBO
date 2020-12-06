@@ -134,5 +134,10 @@
   "defaultProject": "CICBO",
   "cli": {
     "analytics": false
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "less"
+    }
   }
 }

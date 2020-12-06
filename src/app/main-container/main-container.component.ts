@@ -5,7 +5,7 @@ import { NavElementComponent} from "../nav-element/nav-element.component";
 @Component({
   selector: 'app-main-container',
   templateUrl: './main-container.component.html',
-  styleUrls: ['./main-container.component.css']
+  styleUrls: ['./main-container.component.less']
 })
 export class MainContainerComponent implements OnInit {
 
