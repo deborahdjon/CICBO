@@ -9,6 +9,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { MenuButtonComponent } from './menu-button/menu-button.component';
 import { MainContainerComponent } from './main-container/main-container.component';
 import { NavElementComponent } from './nav-element/nav-element.component';
+import { SmallButtonComponent } from './small-button/small-button.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { NavElementComponent } from './nav-element/nav-element.component';
     MenuButtonComponent,
     MainContainerComponent,
     NavElementComponent,
+    SmallButtonComponent,
   ],
   exports:[NavigationComponent],
   imports:[
