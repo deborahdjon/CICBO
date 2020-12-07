@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "This is the API of CICBO - CICBO is a Corona Business Optimizer. \nBy Deborah Djon and Ferdinand Koenig for Web Engineering 2 at Cooperative State University Stuttgart (DHBW Stuttgart) \nLecturer: Danny Amor (DXC)"
-  version: "2.0"
+  version: "2.1"
   title: "CICBO"
   termsOfService: "https://github.com/lipilli/CICBO"
   contact:
@@ -519,7 +519,7 @@ definitions:
         shifts:
           type: "array"
           items:
-            $ref: "#/definitions/StaffShift"
+            $ref: "#/definitions/StaffShiftWithResolvedRoom"
   Staff:
     type: "object"
     description: "Staff-object in querry"
@@ -561,6 +561,26 @@ definitions:
           type: "array"
           items:
             $ref: "#/definitions/RoomIdentifier"
+  StaffShiftWithResolvedRoom:
+    type: "object"
+    description: "Staff-object in querry"
+    required:
+    - "arrivedAt"
+    - "leftAt"
+    - "rooms"
+    properties:
+      arrivedAt:
+          type: "string"
+          pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+          example: "2020-10-22 04:20"
+      leftAt:
+          type: "string"
+          pattern: /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/
+          example: "2020-10-22 04:20"
+      rooms:
+          type: "array"
+          items:
+            $ref: "#/definitions/Room"
   GuestwId:
     type: "object"
     description: "Guest-object in response"
