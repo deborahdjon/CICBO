@@ -14,7 +14,6 @@ import { ViewComponent } from './layout/view/view.component';
 import { PageHomeComponent } from './page-home/page-home.component';
 import { HomeComponent } from './pages/home/home.component';
 import { GuestsComponent } from './pages/guests/guests.component';
-import { EmployeesComponent } from './pages/employees/employees.component';
 import { RoomsComponent } from './pages/rooms/rooms.component';
 import { AboutComponent } from './pages/about/about.component';
 import { LegalNoticeComponent } from './pages/legal-notice/legal-notice.component';
@@ -37,7 +36,6 @@ import { AlarmComponent } from './pages/alarm/alarm.component';
     PageHomeComponent,
     HomeComponent,
     GuestsComponent,
-    EmployeesComponent,
     RoomsComponent,
     AboutComponent,
     LegalNoticeComponent,

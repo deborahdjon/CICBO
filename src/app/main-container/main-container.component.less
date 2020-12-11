@@ -6,16 +6,25 @@
   flex-wrap: wrap;
   height: 100vh;
   width: 100vw;
-
+  background-color: yellow;
 }
 /*contains Header and page top, middle, and bottom */
 .view{
   display: flex;
   flex-direction: column;
+  background-color: purple;
   height: 92vh;
   width: 100vw;
 }
 
+.navigation-container{
+  display: flex; /*TODO: change to flex*/
+  width: @navigation-width;
+  flex-direction: column;
+  background-color:  @cicbo-green;
+  position: absolute;
+  z-index: 1;
+}
 
 /*Page divisions*/
 
@@ -27,6 +36,7 @@
 
 .page-bottom{
   align-self: flex-end;
+  background-color: red;
   width: 100vw;
   height: 55px;
 }
@@ -42,13 +52,14 @@
 /*Page top*/
 .page-title{
   width: 100vw;
-  font-family: Arial;
+  background-color: #00B7FF;
+  font-family: @cicbo-font;
   display: flex;
   align-content: center;
   align-self: flex-start;
-  padding-left: 40px;
+  padding-left: 10px;
   font-size: 45px;
-  color: #colors[green];
+  color: @cicbo-green;
   height: 55px;
 }
 
@@ -57,23 +68,11 @@
 }
 
 
+
 /*Page middle*/
 .information{
+  background-color: antiquewhite;
   width: @navigation-width;
-  padding: 5px 80px 0 60px;
-}
-
-.page-description{
-  font-family: Arial;
-  font-size: 25px;
-  color: #colors[gray-green];
-  text-align: justify;
-  height: 50%;
-}
-
-.favorite-page-links{
-  display: flex;
-  flex-direction: column;
 }
 
 .menu-container{
@@ -81,7 +80,7 @@
   flex-grow: 1;
   flex-direction: column;
   justify-content: space-evenly;
+  background-color: orange;
 }
-
 
 
