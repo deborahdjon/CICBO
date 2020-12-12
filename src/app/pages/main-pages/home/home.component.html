@@ -1,5 +1,5 @@
-<app-page-content text="Welcome">
-  <app-content-fixed-size>
+<app-page-content text="Welcome" >
+  <app-content-fixed-size >
     <div class="page-description">
       <p class="regular-text">
         CICBO is a Corona Business
@@ -11,11 +11,20 @@
       </p>
     </div>
 
-    <div class="favorite-page-links d-flex row">
-      <app-small-button text="New Guest" routingLink="\new-guest"></app-small-button>
-      <app-small-button text="New Employee" routingLink="\new-employee"></app-small-button>
-      <app-small-button text="New Room" routingLink="\new-employee"></app-small-button>
+    <div class="favorite-page-links d-flex ">
+      <app-small-button text="New Guest" routingLink="/new-guest"></app-small-button>
+      <app-small-button text="New Staff" routingLink="/new-staff"></app-small-button>
+      <app-small-button text="New Room" routingLink="/new-room"></app-small-button>
     </div>
   </app-content-fixed-size>
+
+  <div class="d-flex">
+    <div class="container p-0 menu-container col ">
+      <app-menu-button routingLink="/alarm" imagePath="./assets/images/info_s.png" text="Alarm"></app-menu-button>
+      <app-menu-button routingLink="/guests" imagePath="./assets/images/guests.png" text="Guest"></app-menu-button>
+      <app-menu-button routingLink="/staff" imagePath="./assets/images/staff.png" text="Staff"></app-menu-button>
+      <app-menu-button routingLink="/rooms" imagePath="./assets/images/door.png" text="Rooms"></app-menu-button>
+    </div>
+  </div>
 
 </app-page-content>

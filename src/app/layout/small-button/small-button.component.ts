@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class SmallButtonComponent implements OnInit {
   @Input() text: string;
   @Input() link: string;
+  @Input() routingLink: string;
 
   constructor() { }
 

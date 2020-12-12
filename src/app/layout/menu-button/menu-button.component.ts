@@ -7,7 +7,8 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class MenuButtonComponent implements OnInit {
   @Input() text: string;
-  @Input() image_path: string;
+  @Input() imagePath: string;
+  @Input() routingLink: string;
 
   constructor() {
 
