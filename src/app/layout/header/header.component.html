@@ -15,8 +15,8 @@
     <h1 class="title">CICBO</h1>
   </div>
 
-  <div class="container p-0 navigation-container" *ngIf="showNav" [@slideInOut]>
-    <app-navigation></app-navigation>
+  <div class="container p-0 navigation-container"  *ngIf="showNav" [@navSlideInOut]  >
+    <app-navigation  (hideNav)="onHideNav()"></app-navigation>
   </div>
 
 </div>

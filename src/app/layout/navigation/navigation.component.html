@@ -1,9 +1,12 @@
-<div class="d-flex flex-column cicbo-navigation  "  > <!--TODO onclick remove nav-->
-  <a routerLink="/"><div class="nav-element">Home</div></a>
-  <a routerLink="/alarm"><div class="nav-element">Alarm</div></a>
-  <a routerLink="/guests"><div class="nav-element">Guests</div></a>
-  <a routerLink="/staff"><div class="nav-element">Saff</div></a>
-  <a routerLink="/rooms"><div class="nav-element">Rooms</div></a>
-  <a routerLink="/gdpr"><div class="nav-element">GDPR</div></a>
-  <a routerLink="/legal-notice"><div class="nav-element">Legal Notice</div></a>
+<div class="d-flex flex-column cicbo-navigation" > <!--TODO onclick remove nav-->
+  <app-nav-element routerLink="/" text="Home"></app-nav-element>
+  <app-nav-element routerLink="/alarm" text="Alarm"></app-nav-element>
+  <app-nav-element routerLink="/staff" text="Staff"></app-nav-element>
+  <app-nav-element routerLink="/rooms" text="Rooms"></app-nav-element>
+  <app-nav-element routerLink="/about" text="About"></app-nav-element>
+  <app-nav-element routerLink="/gdpr" text="GDPR"></app-nav-element>
+  <app-nav-element routerLink="/Legal Notice" text="Legal Notice"></app-nav-element>
 </div>
+
+<!--Todo routing animation to hide nav (hideNav)="onHideNav()"-->
+

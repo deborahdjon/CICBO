@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-nav-element',
@@ -8,10 +8,16 @@ import {Component, Input, OnInit} from '@angular/core';
 export class NavElementComponent implements OnInit {
   @Input() link: string;
   @Input() text: string;
+  @Output() hideNav: EventEmitter<any> = new EventEmitter();
+
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onClick(){
+    this.hideNav.emit();
   }
 
 }
