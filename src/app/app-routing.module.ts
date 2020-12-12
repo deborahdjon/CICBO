@@ -12,19 +12,13 @@ import {NewGuestComponent} from "./pages/new-guest/new-guest.component";
 import {NewStaffComponent} from "./pages/new-staff/new-staff.component";
 import {NewRoomComponent} from "./pages/new-room/new-room.component";
 import {FindGuestsComponent} from "./pages/find-guests/find-guests.component";
+import {FindStaffComponent} from "./pages/find-staff/find-staff.component";
 
 
 const routes: Routes = [
   // Navigation
   { path: '', component: HomeComponent },
-  { path: 'alarm',
-    component: AlarmComponent,
-    children: [
-      {
-        path: 'find-guest',
-        component: FindGuestsComponent,
-      }
-    ]},
+  { path: 'alarm', component: AlarmComponent },
   { path: 'guests', component: GuestsComponent },
   { path: 'staff', component: StaffComponent },
   { path: 'rooms', component: RoomsComponent },
@@ -32,11 +26,12 @@ const routes: Routes = [
   { path: 'gdpr', component: GdprComponent },
   { path: 'legal-notice', component: LegalNoticeComponent },
 
+  { path: 'alarm/find-guest', component: FindGuestsComponent },
+  { path: 'alarm/find-staff', component: FindStaffComponent},
+
   { path: 'new-guest', component: NewGuestComponent },
   { path: 'new-staff', component: NewStaffComponent },
   { path: 'new-room', component: NewRoomComponent }
-  // { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page TODO 404 Page
-
 ];
 
 @NgModule({

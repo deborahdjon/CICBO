@@ -32,6 +32,8 @@ import { FindStaffComponent } from './pages/find-staff/find-staff.component';
 import { ContactListComponent } from './pages/contact-list/contact-list.component';
 import { InspectEmployeeComponent } from './pages/inspect-employee/inspect-employee.component';
 import { InspectGuestComponent } from './pages/inspect-guest/inspect-guest.component';
+import { FormInputFieldComponent } from './layout/form-input-field/form-input-field.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -62,14 +64,16 @@ import { InspectGuestComponent } from './pages/inspect-guest/inspect-guest.compo
     ContactListComponent,
     InspectEmployeeComponent,
     InspectGuestComponent,
+    FormInputFieldComponent,
   ],
   exports:[NavigationComponent],
-  imports:[
+  imports: [
     BrowserModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     RouterModule,
     AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
