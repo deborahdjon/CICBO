@@ -1,1 +1,33 @@
-<app-page-content text="Add Guest"></app-page-content>
+<app-page-content text="Add Guest">
+
+
+
+
+
+  <form class="form" (ngSubmit)="onSubmit()">
+    <app-form-input-field>
+      <input type="text" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
+    </app-form-input-field>
+
+    <input type="text" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+
+    <input type="time" name="fromTime" [(ngModel)]="fromTime" placeholder="From">
+    <input type="time" name="toTime" [(ngModel)]="toTime" placeholder="To">
+    <input type="date" name="firsName" [(ngModel)]="date" placeholder="Date">
+    <input type="number" name="roomNumber" [(ngModel)]="roomNumber" placeholder="Room number">
+
+    <input type="tel" name="phoneNumber" [(ngModel)]="phoneNumber" placeholder="Phone number">
+    <input type="email" name="email" [(ngModel)]="emailAddress" placeholder="Email">
+
+    <input type="text" name="street" [(ngModel)]="street" placeholder="Street">
+    <input type="number" name="houseNumber" [(ngModel)]="houseNumber" placeholder="No.">
+    <input type="text" name="county" [(ngModel)]="county" County="County">
+    <input type="number" name="zipCode" [(ngModel)]="zipCode" placeholder="Zip code">
+    <input type="text" name="country" [(ngModel)]="country" placeholder="Country">
+
+
+    <input type="submit" value="Submit" class="btn">
+  </form>
+
+
+</app-page-content>
