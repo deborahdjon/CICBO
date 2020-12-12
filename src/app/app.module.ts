@@ -12,16 +12,26 @@ import { NavElementComponent } from './layout/nav-element/nav-element.component'
 import { SmallButtonComponent } from './layout/small-button/small-button.component';
 import { ViewComponent } from './layout/view/view.component';
 import { PageHomeComponent } from './page-home/page-home.component';
-import { HomeComponent } from './pages/home/home.component';
-import { GuestsComponent } from './pages/guests/guests.component';
-import { RoomsComponent } from './pages/rooms/rooms.component';
-import { AboutComponent } from './pages/about/about.component';
-import { LegalNoticeComponent } from './pages/legal-notice/legal-notice.component';
+import { HomeComponent } from './pages/main-pages/home/home.component';
+import { GuestsComponent } from './pages/main-pages/guests/guests.component';
+import { RoomsComponent } from './pages/main-pages/rooms/rooms.component';
+import { AboutComponent } from './pages/main-pages/about/about.component';
+import { LegalNoticeComponent } from './pages/main-pages/legal-notice/legal-notice.component';
 import { RouterModule, Routes } from '@angular/router';
-import { GdprComponent } from './pages/gdpr/gdpr.component'
-import {AppRoutingModule} from "./app-routing.module";
-import { StaffComponent } from './pages/staff/staff.component';
-import { AlarmComponent } from './pages/alarm/alarm.component';
+import { GdprComponent } from './pages/main-pages/gdpr/gdpr.component'
+import { AppRoutingModule } from "./app-routing.module"; //TODO delete?
+import { StaffComponent } from './pages/main-pages/staff/staff.component';
+import { AlarmComponent } from './pages/main-pages/alarm/alarm.component';
+import { PageContentComponent } from './layout/page-content/page-content.component';
+import { ContentFixedSizeComponent } from './layout/content-fixed-size/content-fixed-size.component';
+import { NewGuestComponent } from './pages/new-guest/new-guest.component';
+import { NewStaffComponent } from './pages/new-staff/new-staff.component';
+import { NewRoomComponent } from './pages/new-room/new-room.component';
+import { FindGuestsComponent } from './pages/find-guests/find-guests.component';
+import { FindStaffComponent } from './pages/find-staff/find-staff.component';
+import { ContactListComponent } from './pages/contact-list/contact-list.component';
+import { InspectEmployeeComponent } from './pages/inspect-employee/inspect-employee.component';
+import { InspectGuestComponent } from './pages/inspect-guest/inspect-guest.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +52,16 @@ import { AlarmComponent } from './pages/alarm/alarm.component';
     GdprComponent,
     StaffComponent,
     AlarmComponent,
+    PageContentComponent,
+    ContentFixedSizeComponent,
+    NewGuestComponent,
+    NewStaffComponent,
+    NewRoomComponent,
+    FindGuestsComponent,
+    FindStaffComponent,
+    ContactListComponent,
+    InspectEmployeeComponent,
+    InspectGuestComponent,
   ],
   exports:[NavigationComponent],
   imports:[
