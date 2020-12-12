@@ -33,7 +33,10 @@ import { ContactListComponent } from './pages/contact-list/contact-list.componen
 import { InspectEmployeeComponent } from './pages/inspect-employee/inspect-employee.component';
 import { InspectGuestComponent } from './pages/inspect-guest/inspect-guest.component';
 import { FormInputFieldComponent } from './layout/form-input-field/form-input-field.component';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
+import {ApplicationModule} from "@angular/core";
+import {AlarmService, GuestService, RoomService, StaffService} from "../typescript-angular-client-generated";
 
 @NgModule({
   declarations: [
@@ -74,8 +77,15 @@ import {FormsModule} from "@angular/forms";
     RouterModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
+    ApplicationModule
   ],
-  providers: [],
+  providers: [
+    AlarmService,
+    GuestService,
+    RoomService,
+    StaffService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

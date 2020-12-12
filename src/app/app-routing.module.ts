@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'alarm/find-staff', component: FindStaffComponent},
 
   { path: 'new-guest', component: NewGuestComponent },
-  { path: 'new-staff', component: NewStaffComponent },
+  { path: 'new-staff', component: NewStaffComponent, },
   { path: 'new-room', component: NewRoomComponent }
 ];
 

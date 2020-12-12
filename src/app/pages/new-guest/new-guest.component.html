@@ -5,9 +5,8 @@
 
 
   <form class="form" (ngSubmit)="onSubmit()">
-    <app-form-input-field>
-      <input type="text" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
-    </app-form-input-field>
+
+    <input type="text" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
 
     <input type="text" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
 
@@ -21,7 +20,7 @@
 
     <input type="text" name="street" [(ngModel)]="street" placeholder="Street">
     <input type="number" name="houseNumber" [(ngModel)]="houseNumber" placeholder="No.">
-    <input type="text" name="county" [(ngModel)]="county" County="County">
+    <input type="text" name="county" [(ngModel)]="county" placeholder="County">
     <input type="number" name="zipCode" [(ngModel)]="zipCode" placeholder="Zip code">
     <input type="text" name="country" [(ngModel)]="country" placeholder="Country">
 
