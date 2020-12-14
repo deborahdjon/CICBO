@@ -28,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class AlarmService {
 
-    protected basePath = 'https://localhost';
+    protected basePath = 'http://localhost:3000';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -59,7 +59,7 @@ export class AlarmService {
 
     /**
      * Creates contact list with potential contaminated persons
-     * 
+     *
      * @param searchFilter Alarm query object
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

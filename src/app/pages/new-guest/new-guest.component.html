@@ -1,32 +1,51 @@
+
+
 <app-page-content text="Add Guest">
-
-
-
 
 
   <form class="form" (ngSubmit)="onSubmit()">
 
-    <input type="text" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
+    <label for="firstName">First name</label>
+    <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
 
-    <input type="text" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+    <label for="lastName">Last name</label>
+    <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
 
-    <input type="time" name="fromTime" [(ngModel)]="fromTime" placeholder="From">
-    <input type="time" name="toTime" [(ngModel)]="toTime" placeholder="To">
-    <input type="date" name="firsName" [(ngModel)]="date" placeholder="Date">
-    <input type="number" name="roomNumber" [(ngModel)]="roomNumber" placeholder="Room number">
+    <label for="fromTime">From</label>
+    <input type="time" id="fromTime" name="fromTime" [(ngModel)]="fromTime" placeholder="From">
 
-    <input type="tel" name="phoneNumber" [(ngModel)]="phoneNumber" placeholder="Phone number">
-    <input type="email" name="email" [(ngModel)]="emailAddress" placeholder="Email">
+    <label for="toTime">To</label>
+    <input type="time" id="toTime" name="toTime" [(ngModel)]="toTime" placeholder="To">
 
-    <input type="text" name="street" [(ngModel)]="street" placeholder="Street">
-    <input type="number" name="houseNumber" [(ngModel)]="houseNumber" placeholder="No.">
-    <input type="text" name="county" [(ngModel)]="county" placeholder="County">
-    <input type="number" name="zipCode" [(ngModel)]="zipCode" placeholder="Zip code">
-    <input type="text" name="country" [(ngModel)]="country" placeholder="Country">
+    <label for="roomNumber"Room Number></label>
+    <input type="number" id="roomNumber" name="roomNumber" [(ngModel)]="roomNumber" placeholder="Room number">
 
+    <label for="phoneNumber"> Phone</label>
+    <input type="string" id="phoneNumber"name="phoneNumber" [(ngModel)]="phoneNumber" placeholder="Phone number">
+
+    <label for="email">Email</label>
+    <input type="email" id="email"name="email" [(ngModel)]="emailAddress" placeholder="Email">
+
+    <label for="street">Street</label>
+    <input type="text" id="street" name="street" [(ngModel)]="street" placeholder="Street">
+
+    <label for="houseNumber">House No.</label>
+    <input type="number" id="houseNumber" name="houseNumber" [(ngModel)]="houseNumber" placeholder="No.">
+
+    <label for="county">County</label>
+    <input type="text" id="county"name="county" [(ngModel)]="county" placeholder="County">
+
+    <label for="zipCode">Zip code</label>
+    <input type="number" id="zipCode"name="zipCode" [(ngModel)]="zipCode" placeholder="Zip code">
+
+    <label for="country">Country</label>
+    <input type="text" id="country" name="country" [(ngModel)]="country" placeholder="Country">
 
     <input type="submit" value="Submit" class="btn">
+
   </form>
+
+
 
 
 </app-page-content>

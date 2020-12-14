@@ -29,7 +29,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class GuestService {
 
-    protected basePath = 'https://localhost:3000';
+    protected basePath = 'http://localhost:3000';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -100,8 +100,10 @@ export class GuestService {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
-                reportProgress: reportProgress
+                reportProgress: reportProgress,
+
             }
+
         );
     }
 

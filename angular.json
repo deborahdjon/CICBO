@@ -33,9 +33,12 @@
               "./node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
               "src/styles.css"
             ],
+
+
             "scripts": [
               "./node_modules/chart.js/dist/Chart.js",
-              "./node_modules/hammerjs/hammer.min.js"
+              "./node_modules/hammerjs/hammer.min.js",
+              "node_modules/screenfull/dist/screenfull.js"
             ]
           },
           "configurations": {

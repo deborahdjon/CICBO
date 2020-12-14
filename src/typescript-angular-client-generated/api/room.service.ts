@@ -28,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class RoomService {
 
-    protected basePath = 'https://localhost';
+    protected basePath = 'http://localhost:3000';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -59,7 +59,7 @@ export class RoomService {
 
     /**
      * Add a new room
-     * 
+     *
      * @param room Room object that needs to be added to the room list
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -146,7 +146,7 @@ export class RoomService {
 
     /**
      * List all rooms
-     * 
+     *
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

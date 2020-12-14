@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,NO_ERRORS_SCHEMA  } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MDBBootstrapModule, ModalModule} from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { MenuButtonComponent } from './layout/menu-button/menu-button.component';
@@ -37,6 +37,9 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import {ApplicationModule} from "@angular/core";
 import {AlarmService, GuestService, RoomService, StaffService} from "../typescript-angular-client-generated";
+import { TableDetailsComponent } from './table-details/table-details.component';
+import {ApiModule, BASE_PATH, Configuration, ConfigurationParameters} from "../typescript-angular-client-generated";
+
 
 @NgModule({
   declarations: [
@@ -68,6 +71,7 @@ import {AlarmService, GuestService, RoomService, StaffService} from "../typescri
     InspectEmployeeComponent,
     InspectGuestComponent,
     FormInputFieldComponent,
+    TableDetailsComponent,
   ],
   exports:[NavigationComponent],
   imports: [
@@ -78,14 +82,21 @@ import {AlarmService, GuestService, RoomService, StaffService} from "../typescri
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ApplicationModule
+    ApplicationModule,
+    ApiModule,
+    ModalModule.forRoot()
+
   ],
   providers: [
     AlarmService,
     GuestService,
     RoomService,
-    StaffService
+    StaffService,
+    {provide: BASE_PATH, useValue: 'http://localhost:3000'}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ NO_ERRORS_SCHEMA ],
 })
 export class AppModule { }
+
+

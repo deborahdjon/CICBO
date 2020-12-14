@@ -30,7 +30,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class StaffService {
 
-    protected basePath = 'https://localhost';
+    protected basePath = 'http://localhost:3000';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -61,7 +61,7 @@ export class StaffService {
 
     /**
      * Add a new shift to staff member
-     * 
+     *
      * @param staffId ID of staff member
      * @param staff New shift object
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -112,7 +112,7 @@ export class StaffService {
 
     /**
      * Add a new staff member
-     * 
+     *
      * @param staff Staff object that needs to be added to the staff list
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -159,7 +159,7 @@ export class StaffService {
 
     /**
      * Deletes a staff member
-     * 
+     *
      * @param staffId staff id to delete
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -199,7 +199,7 @@ export class StaffService {
 
     /**
      * Finds staff members
-     * 
+     *
      * @param searchFilter Search filter object
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -285,7 +285,7 @@ export class StaffService {
 
     /**
      * List all staff members
-     * 
+     *
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -321,7 +321,7 @@ export class StaffService {
 
     /**
      * Replaces all shift items of staff member
-     * 
+     *
      * @param staffId ID of staff member
      * @param staff Array of shift objects / replacement
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -372,7 +372,7 @@ export class StaffService {
 
     /**
      * Updates a staff member
-     * 
+     *
      * @param staffId staff id to update
      * @param staff Updated staff
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

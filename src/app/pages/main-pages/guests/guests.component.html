@@ -1,1 +1,119 @@
-<app-page-content text="Guests"></app-page-content>
+
+<app-page-content text="Guests">
+
+  <app-content-fixed-size>
+
+    <form class="form" (ngSubmit)="onSubmit()">
+
+      <label for="firstName">First name</label>
+      <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
+
+      <label for="lastName">Last name</label>
+      <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+
+      <label for="fromDate">From</label>
+      <input type="time" id="fromDate" name="fromTime" [(ngModel)]="fromDate" placeholder="From">
+
+      <label for="toDate">To</label>
+      <input type="time" id="toDate" name="toDate" [(ngModel)]="toDate" placeholder="To">
+
+      <input type="submit" value="Find Guest" class="btn">
+
+    </form>
+
+  </app-content-fixed-size>
+
+  <div>
+    <table>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Date</th>
+      </tr>
+
+      <tr *ngFor="let guest of guests">
+        <td>{{guest.firstName}}</td>
+        <td>{{guest.name}}</td>
+        <td>{{guest.arrivedAt}}</td>
+        <td><button (click)="onEdit(guest.id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">Edit</button></td>
+      </tr>
+
+    </table>
+  </div>
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
+    Launch demo modal
+  </button>
+
+
+  <!-- Modal bootstrap -->
+  <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+<!--       -->
+<!--            &lt;!&ndash; Guest form&ndash;&gt;-->
+<!--            <form class="form" (ngSubmit)="onSubmit()">-->
+
+<!--              <label for="firstName">First name</label>-->
+<!--              <input type="text"  id="firstName2" name="firstName" [(ngModel)]="firstName2" placeholder="First name" required="">-->
+
+<!--              <label for="lastName">Last name</label>-->
+<!--              <input type="text" id="lastName2" name="lastName" [(ngModel)]="lastName2" placeholder="Last name">-->
+
+<!--              <label for="fromTime">From</label>-->
+<!--              <input type="time" id="fromTime" name="fromTime" [(ngModel)]="fromTime" placeholder="From">-->
+
+<!--              <label for="toTime">To</label>-->
+<!--              <input type="time" id="toTime" name="toTime" [(ngModel)]="toTime" placeholder="To">-->
+
+<!--              <label for="roomNumber"Room Number></label>-->
+<!--              <input type="number" id="roomNumber" name="roomNumber" [(ngModel)]="roomNumber" placeholder="Room number">-->
+
+<!--              <label for="phoneNumber"> Phone</label>-->
+<!--              <input type="string" id="phoneNumber"name="phoneNumber" [(ngModel)]="phoneNumber" placeholder="Phone number">-->
+
+<!--              <label for="email">Email</label>-->
+<!--              <input type="email" id="email"name="email" [(ngModel)]="emailAddress" placeholder="Email">-->
+
+<!--              <label for="street">Street</label>-->
+<!--              <input type="text" id="street" name="street" [(ngModel)]="street" placeholder="Street">-->
+
+<!--              <label for="houseNumber">House No.</label>-->
+<!--              <input type="number" id="houseNumber" name="houseNumber" [(ngModel)]="houseNumber" placeholder="No.">-->
+
+<!--              <label for="county">County</label>-->
+<!--              <input type="text" id="county"name="county" [(ngModel)]="county" placeholder="County">-->
+
+<!--              <label for="zipCode">Zip code</label>-->
+<!--              <input type="number" id="zipCode"name="zipCode" [(ngModel)]="zipCode" placeholder="Zip code">-->
+
+<!--              <label for="country">Country</label>-->
+<!--              <input type="text" id="country" name="country" [(ngModel)]="country" placeholder="Country">-->
+
+<!--              <input type="submit" value="Submit" class="btn">-->
+
+<!--            </form>-->
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</app-page-content>
+
