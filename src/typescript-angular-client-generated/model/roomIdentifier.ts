@@ -11,6 +11,6 @@
  */
 
 
-export interface RoomIdentifier { 
+export interface RoomIdentifier {
     number: number;
 }

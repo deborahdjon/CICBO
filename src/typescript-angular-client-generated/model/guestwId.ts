@@ -15,7 +15,7 @@ import { Room } from './room';
 /**
  * Guest-object in response
  */
-export interface GuestwId { 
+export interface GuestwId {
     id: number;
     firstName: string;
     name: string;

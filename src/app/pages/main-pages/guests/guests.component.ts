@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Guest, GuestService, GuestwId, SearchObject} from "../../../../typescript-angular-client-generated/";
+import {Guest, GuestService, GuestwId, SearchObject} from "../../../../typescript-angular-client-generated";
 
 @Component({
   selector: 'app-guests',

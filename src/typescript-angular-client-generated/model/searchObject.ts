@@ -14,7 +14,7 @@
 /**
  * Subset of attributes to filter the search
  */
-export interface SearchObject { 
+export interface SearchObject {
     sortByName: boolean;
     firstName?: string;
     name?: string;

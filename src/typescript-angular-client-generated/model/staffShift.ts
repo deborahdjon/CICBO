@@ -15,7 +15,7 @@ import { RoomIdentifier } from './roomIdentifier';
 /**
  * Staff-object in querry
  */
-export interface StaffShift { 
+export interface StaffShift {
     arrivedAt: string;
     leftAt: string;
     rooms: Array<RoomIdentifier>;

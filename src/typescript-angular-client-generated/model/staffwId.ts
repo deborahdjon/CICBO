@@ -15,7 +15,7 @@ import { StaffShiftWithResolvedRoom } from './staffShiftWithResolvedRoom';
 /**
  * Staff-object in response
  */
-export interface StaffwId { 
+export interface StaffwId {
     id: number;
     firstName: string;
     name: string;
