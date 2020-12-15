@@ -1,4 +1,39 @@
 <app-page-content text="Find Guest">
 
+  <form class="form" (ngSubmit)="onSubmit()">
 
+    <label for="firstName">First name</label>
+    <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
+
+    <label for="lastName">Last name</label>
+    <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+
+    <label for="fromDate">From</label>
+    <input type="date" id="fromDate" name="fromTime" [(ngModel)]="fromDate" placeholder="From">
+
+    <label for="toDate">To</label>
+    <input type="date" id="toDate" name="toDate" [(ngModel)]="toDate" placeholder="To">
+
+    <input type="submit" value="Find Guest" class="btn">
+
+  </form>
+
+
+  <div>
+    <table>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Date</th>
+      </tr>
+
+      <tr *ngFor="let guest of guests">
+        <td>{{guest.firstName}}</td>
+        <td>{{guest.name}}</td>
+        <td>{{guest.arrivedAt}}</td>
+        <td><button (click)="onEdit(guest.id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">Edit</button></td>
+      </tr>
+
+    </table>
+  </div>
 </app-page-content>

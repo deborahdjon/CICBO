@@ -3,8 +3,6 @@ import {GuestService, Room, RoomService} from "../../../typescript-angular-clien
 
 import { Guest } from "../../../typescript-angular-client-generated"
 
-import {SearchObject} from "../../models/searchObject";
-import {Form} from "@angular/forms";
 import {Router} from "@angular/router";
 
 @Component({
