@@ -1,6 +1,7 @@
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
 import { Configuration } from './configuration';
-import  {HttpClient} from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
+
 
 import { AlarmService } from './api/alarm.service';
 import { GuestService } from './api/guest.service';
@@ -18,7 +19,7 @@ import { StaffService } from './api/staff.service';
     StaffService ]
 })
 export class ApiModule {
-    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {
+    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<any> {
         return {
             ngModule: ApiModule,
             providers: [ { provide: Configuration, useFactory: configurationFactory } ]

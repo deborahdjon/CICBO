@@ -1,27 +1,50 @@
-#colors() {
+// Colors
+@green: #559C5E;
+@light-green :#E6EBE8;
+@gray-green : #5D6A5E;
+
+#colors(){
   green: #559C5E;
   light-green :#E6EBE8;
   gray-green : #5D6A5E;
+
 }
 
-#font-sizes() {
-  extra-large: 55px;
-  large:  45px;
-  medium: 30px;
-  small: 20px;
-  extra-small:15px;
+// Font
+//-- Fontsize
+@extra-large: 55px;
+@large:  45px;
+@medium: 25px;
+@small: 20px;
+@extra-small:15px;
+
+//--Font "weight"
+@thin: "Arial Rounded MT Light";
+@thick: "Arial Rounded MT";
+
+
+.font(@fontWeight, @fontSize, @color) {
+  font-family: @fontWeight, sans-serif;
+  font-size: @fontSize;
+  color: @color;
 }
 
-.font(@fontWeight) {
-  font-family: "Arial Rounded MT", sans-serif;
-  font-weight: 25;
-  line-height: 30px;
-  line-height: @fontWeight;
-}
-
+// Dimensions
 @cicbo-green: green;
 @cicbo-light-green: #cdfca9;
 @cicbo-dark-green: #2d3429;
 @cicbo-font: Arial;
-@navigation-width: 500px;
+
 @width-1: 500px;
+@header-height:10vh;
+
+@navigation-width: 500px;
+
+@pad-lr: 25px;
+@space-1: 25px;
+
+
+.padding-lr{
+  padding-left: @space-1;
+  padding-right: @space-1;
+}

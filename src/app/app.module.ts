@@ -39,6 +39,8 @@ import {ApplicationModule} from "@angular/core";
 import {AlarmService, GuestService, RoomService, StaffService} from "../typescript-angular-client-generated";
 import { TableDetailsComponent } from './table-details/table-details.component';
 import {ApiModule, BASE_PATH, Configuration, ConfigurationParameters} from "../typescript-angular-client-generated";
+import {BreadcrumbModule} from "angular-crumbs";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -84,7 +86,9 @@ import {ApiModule, BASE_PATH, Configuration, ConfigurationParameters} from "../t
     HttpClientModule,
     ApplicationModule,
     ApiModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BreadcrumbModule,
+    NgbModule
 
   ],
   providers: [

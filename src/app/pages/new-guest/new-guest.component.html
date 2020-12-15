@@ -6,10 +6,13 @@
   <form class="form" (ngSubmit)="onSubmit()">
 
     <label for="firstName">First name</label>
-    <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
+    <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="">
 
     <label for="lastName">Last name</label>
-    <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+    <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="">
+
+    <label for="date">Date</label>
+    <input type="date" id="date" name="date" [(ngModel)]="date" placeholder="dd/mm/yyyy">
 
     <label for="fromTime">From</label>
     <input type="time" id="fromTime" name="fromTime" [(ngModel)]="fromTime" placeholder="From">
@@ -32,11 +35,12 @@
     <label for="houseNumber">House No.</label>
     <input type="number" id="houseNumber" name="houseNumber" [(ngModel)]="houseNumber" placeholder="No.">
 
-    <label for="county">County</label>
-    <input type="text" id="county"name="county" [(ngModel)]="county" placeholder="County">
 
     <label for="zipCode">Zip code</label>
     <input type="number" id="zipCode"name="zipCode" [(ngModel)]="zipCode" placeholder="Zip code">
+
+    <label for="county">County</label>
+    <input type="text" id="county"name="county" [(ngModel)]="county" placeholder="County">
 
     <label for="country">Country</label>
     <input type="text" id="country" name="country" [(ngModel)]="country" placeholder="Country">
@@ -44,6 +48,8 @@
     <input type="submit" value="Submit" class="btn">
 
   </form>
+
+
 
 
 

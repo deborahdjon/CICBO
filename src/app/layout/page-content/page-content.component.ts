@@ -11,6 +11,7 @@ export class PageContentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }
