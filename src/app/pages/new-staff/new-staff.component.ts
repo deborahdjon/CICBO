@@ -1,27 +1,22 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Staff, StaffService} from "../../../typescript-angular-client-generated";
-declare var $: any;
-
 
 @Component({
   selector: 'app-new-staff',
   templateUrl: './new-staff.component.html',
-  styleUrls: ['./new-staff.component.less']
+  styleUrls: ['./new-staff.component.css']
 })
 export class NewStaffComponent implements OnInit {
   @Input() firstName: string;
   @Input() lastName: string;
   @Input() date: string;
-  @Input() phoneNumber: string;
+  @Input() phoneNumber: number;
   @Input() emailAddress: string;
   @Input() street: string;
-  @Input() houseNumber: string;
+  @Input() houseNumber: number;
   @Input() county: string;
   @Input() zipCode: number;
   @Input() country: string;
-  myDiv: ElementRef<HTMLElement>;
-  modalContent: string;
-  $ : any;
 
   constructor(private staffService:StaffService) { }
 
@@ -29,13 +24,11 @@ export class NewStaffComponent implements OnInit {
   }
 
   onSubmit(){
-
-
     const staff:Staff = {
       "firstName": this.firstName,
       "name": this.lastName,
       "mail": this.emailAddress,
-      "phone": this.phoneNumber,
+      "phone": this.phoneNumber.toString(),
       "address": "address",
     }
 
@@ -47,8 +40,6 @@ export class NewStaffComponent implements OnInit {
     });
 
   }
-
-
 
 
 
