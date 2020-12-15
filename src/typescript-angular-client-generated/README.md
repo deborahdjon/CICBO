@@ -1,4 +1,4 @@
-## @6.14.6
+## @
 
 ### Building
 
@@ -19,7 +19,7 @@ Navigate to the folder of your consuming project and run one of next commands.
 _published:_
 
 ```
-npm install @6.14.6 --save
+npm install @ --save
 ```
 
 _without publishing (not recommended):_

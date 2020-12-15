@@ -39,7 +39,13 @@ export class NewStaffComponent implements OnInit {
       "address": "address",
     }
 
-    this.staffService.addStaff(staff).subscribe(staff => console.log(staff));
+    this.staffService.addStaff(staff).subscribe(res => {
+      this.modalContent = res;
+      $('#exampleModal').modal(); //TODO fix this
+
+
+    });
+
   }
 
 

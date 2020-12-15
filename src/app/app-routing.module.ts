@@ -17,21 +17,21 @@ import {FindStaffComponent} from "./pages/find-staff/find-staff.component";
 
 const routes: Routes = [
   // Navigation
-  { path: '', component: HomeComponent },
-  { path: 'alarm', component: AlarmComponent },
-  { path: 'guests', component: GuestsComponent },
-  { path: 'staff', component: StaffComponent },
-  { path: 'rooms', component: RoomsComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'gdpr', component: GdprComponent },
-  { path: 'legal-notice', component: LegalNoticeComponent },
+  { path: '', component: HomeComponent, data: { breadcrumb:"Home"} },
+  { path: 'alarm', component: AlarmComponent, data: { breadcrumb:"Alarm"} },
+  { path: 'guests', component: GuestsComponent, data: { breadcrumb:"Guests"} },
+  { path: 'staff', component: StaffComponent, data: { breadcrumb:"Staff"} },
+  { path: 'rooms', component: RoomsComponent, data: { breadcrumb:"Rooms"} },
+  { path: 'about', component: AboutComponent, data: { breadcrumb:"About"} },
+  { path: 'gdpr', component: GdprComponent, data: { breadcrumb:"GDPR"} },
+  { path: 'legal-notice', component: LegalNoticeComponent, data: { breadcrumb:"Legal Notice"} },
 
-  { path: 'alarm/find-guest', component: FindGuestsComponent },
-  { path: 'alarm/find-staff', component: FindStaffComponent},
+  { path: 'alarm/find-guest', component: FindGuestsComponent, data: { breadcrumb:"Find Guest"} },
+  { path: 'alarm/find-staff', component: FindStaffComponent, data: { breadcrumb:"Find Staff"}},
 
-  { path: 'new-guest', component: NewGuestComponent },
-  { path: 'new-staff', component: NewStaffComponent, },
-  { path: 'new-room', component: NewRoomComponent }
+  { path: 'new-guest', component: NewGuestComponent, data: { breadcrumb:"New Guest"} },
+  { path: 'new-staff', component: NewStaffComponent, data: { breadcrumb:"New Staff"} },
+  { path: 'new-room', component: NewRoomComponent, data: { breadcrumb:"New Room"} }
 ];
 
 @NgModule({

@@ -21,6 +21,8 @@ export class NewRoomComponent implements OnInit {
       "number": this.roomNumber,
       "name": this.roomName
     }
-    this.roomService.addRoom(room).subscribe(room => console.log(room));
+    this.roomService.addRoom(room).subscribe(res =>{
+      alert(res);
+    });
   }
 }

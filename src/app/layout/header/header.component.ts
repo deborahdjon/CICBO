@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
+import {NavigationEnd, Router} from "@angular/router";
 
 
 @Component({
@@ -21,14 +22,6 @@ import { trigger, style, animate, transition } from '@angular/animations';
       ]),
     ]),
 
-    // trigger(
-    //   'disappear', [
-    //   transition(':leave',[
-    //     style({ transform: 'translateX(0%)' }),
-    //     animate('.3s', style({ transform: 'translateX(-100%)' }))
-    //   ]),
-    // ]),
-
 
    ]
 
@@ -36,26 +29,37 @@ import { trigger, style, animate, transition } from '@angular/animations';
 export class HeaderComponent implements OnInit {
   @Output() hideNav: EventEmitter<any> = new EventEmitter();
   showNav: boolean = false;
-  disappearNav: boolean = false;
+  navigationClicked: boolean = false;
 
+  /**
+   * Ensures navigation is hidden when page is pages are routed to through the navigation.
+   * @param router
+   */
+  constructor(private router:Router) {
+    router.events.subscribe((event)=>{
+      if (event instanceof NavigationEnd && this.navigationClicked){
+        this.showNav = !this.showNav;
+        this.navigationClicked = false;
+      }
+    })
+
+  }
+
+  /**
+   * Toggles the navigation to slide in and out when the button is pressed.
+   */
   toggleNav(){
     this.showNav = !this.showNav;
-    console.log("triggered");
-
   }
 
+  /**
+   * Ensures the Navigation hides when a navigation button was clicked.
+   */
   onHideNav(){
-    this.showNav = false;
-    console.log("triggered");
-    // if(this.showNav){
-    //   this.disappearNav = true;
-    //   this.disappearNav = false;
-    // }
+    this.navigationClicked = true;
   }
 
-  hideNavigation(){
 
-  }
 
   ngOnInit(): void {
 

@@ -1,9 +1,9 @@
 @import "src/app/less/global_style";
 
 .navigation-container{
-  top: 8vh;
+  top: 10vh;
   display: flex;
-  width: @navigation-width;
+  width: @width-1;
   flex-direction: column;
   background-color:  #colors[green];
   position: absolute;
@@ -12,26 +12,26 @@
 
 .header{
   display: flex;
+  justify-content: space-between;
   width: 100vw;
-  height: 8vh;
+  height: 10vh;
+  align-items: center;
   background: #colors[green];
-  border-bottom:white solid 3px ;
+  border-bottom:white solid 3px;
 }
 
 .title{
-  font-size: 45px;
-  color: white;
-  .font(0);
-  margin-right: 60px;
+  padding-right: @pad-lr;
+  .font(@thick, @large, white);
 }
 
 .nav-button{
-  padding-left: 40px;
+  padding-left: @pad-lr;
 }
 
 .img-nav{
   max-height: 8vh;
-  height:55px
+  height:50px;
 }
 
 
