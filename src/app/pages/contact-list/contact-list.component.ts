@@ -13,10 +13,10 @@ import {
   styleUrls: ['./contact-list.component.less']
 })
 export class ContactListComponent implements OnInit {
-  private guests: GuestwId[] = [];
-  private staff: StaffwId[] = [];
+  public guests: GuestwId[] = [];
+  public staff: StaffwId[] = [];
   @Input() allCheckBoxes: false;
-  private sthiftDate: string;
+  public sthiftDate: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private contactListService:ContactListService,
