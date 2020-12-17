@@ -1,6 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Guest, GuestService, GuestwId} from "../../../typescript-angular-client-generated";
-import {SearchObject} from "../../../typescript-angular-client-generated/model/searchObject";
+import {
+  AlarmQueryObject,
+  AlarmService,
+  GuestService,
+  GuestwId,
+  StaffwId
+} from "../../../typescript-angular-client-generated";
+import {SearchObject} from "../../../typescript-angular-client-generated";
+
+import {Router} from "@angular/router";
+import {ContactListService} from "../../services/contact-list/contact-list.service";
 
 @Component({
   selector: 'app-find-guests',
@@ -13,40 +22,119 @@ export class FindGuestsComponent implements OnInit {
   @Input() fromDate: string;
   @Input() toDate: string;
 
-  guests: GuestwId[];
+  public guestContacts:GuestwId[] = [];
+  private staffContacts:StaffwId[] = [];
 
-  constructor(private guestService: GuestService) { }
 
-  ngOnInit(): void {
-  }
+  guests:GuestwId[];
+  protected guestsMap:Map<number,GuestwId> = new Map;
+  protected selectedGuests:Map<number,boolean> = new Map;
+  public allCheckBoxes:boolean;
 
-  onSubmit(){
-    console.log(this.firstName);
-    console.log(this.lastName);
-    console.log(this.fromDate);
-    console.log(this.toDate);
+
+
+  constructor(private guestService: GuestService, private alarmService: AlarmService, public router:Router,  private contactListService:ContactListService) { }
+
+  ngOnInit(): void {return}
+
+  onSubmit(): void{
 
     const searchGuest:SearchObject = {
-      "sortByName": true,
-      "name": this.firstName
+      "sortByName":true,
+      "firstName":this.firstName,
+      "name": this.lastName
     }
 
-    console.log(JSON.stringify(searchGuest));
-
-    // this.guestService.findGuests(searchGuest).subscribe(res =>{
-    //   console.log(res);
-    // })
-
-   this.guestService.listGuests().subscribe(res =>{
-     this.guests = res;
-     console.log(this.guests);
+    this.guestService.findGuests(searchGuest).subscribe(res =>{
+      this.guests = res;
+      res.forEach(guest =>{
+        this.guestsMap.set(guest.id, guest);
+        this.selectedGuests.set(guest.id, false);
+      });
     });
-
-
   }
 
-  onEdit(id:number){
 
+  /**
+   * Keeps track of the selection property of each guest
+   * @param id guest ID.
+   */
+  toggleSelectedGuest(id:number): void{
+    this.selectedGuests.set(id , !this.selectedGuests.get(id));
+  }
+
+  /**
+   * Bulk selects/deselects all checkboxes when select-all button is clicked.
+   */
+  selectAllToggle(): void{
+    let flag = true;
+
+    for (const value of Object.entries(this.selectedGuests).values()) {
+        flag = value ? flag : false;
+      }
+
+
+    //Select all
+    if (!flag){
+      this.allCheckBoxes = true;
+      Object.keys(this.selectedGuests).forEach( (key)=> {
+        this.selectedGuests[key] = true;
+      });
+
+    //Deselect all
+    }else{
+      this.allCheckBoxes = false;
+      Object.keys(this.selectedGuests).forEach( (key)=> {
+        this.selectedGuests[key] = false;
+      });
+      }
+    }
+
+
+  /**
+   * Returns a list of contacts of the infected person.
+   */
+  async getContacts(): Promise<void>{
+    const alarmQueries:AlarmQueryObject[] = await this.createQueryObjects();
+    await this.getContactList(alarmQueries);
+    await this.contactListService.addContacts(this.guestContacts, this.staffContacts)
+    await this.router.navigateByUrl('alarm/find-guest/contacts');
+  }
+
+  /**
+   * Creates  query objects from selected guests.
+   */
+  createQueryObjects(): AlarmQueryObject[]{
+    const alarmQueries:AlarmQueryObject[] = [];
+    let alarmQuery:AlarmQueryObject;
+
+    for (const [key, value] of this.selectedGuests) {
+      if(value){
+        alarmQuery = {
+          "type": "guest",
+          "sortByName": true ,
+          "firstName": this.guestsMap.get(key).firstName,
+          "name": this.guestsMap.get(key).name,
+          "arrivedAt": this.guestsMap.get(key).arrivedAt,
+          "leftAt": this.guestsMap.get(key).leftAt
+        }
+        alarmQueries.push(alarmQuery);
+      }
+    }
+    return alarmQueries;
+  }
+
+  /**
+   * Generates the contact list.
+   * @param alarmQueries
+   */
+  getContactList(alarmQueries:AlarmQueryObject[]): void{
+    alarmQueries.forEach(query=>{
+      this.alarmService.createContactList(query).subscribe(res =>{ //TODO make search and create contact list work
+        this.guestContacts = this.guestContacts.concat(res.guests);
+        this.staffContacts = this.staffContacts.concat(res.staffMembers);
+      });
+    });
   }
 
 }

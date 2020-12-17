@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GuestService, Room, RoomService} from "../../../typescript-angular-client-generated";
+import {GuestService} from "../../../typescript-angular-client-generated";
 
 import { Guest } from "../../../typescript-angular-client-generated"
 
@@ -13,14 +13,14 @@ import {Router} from "@angular/router";
 export class NewGuestComponent implements OnInit {
   @Input() firstName: string;
   @Input() lastName: string; //TODO Remove these
-  @Input() fromTime: string = "22:30";
-  @Input() toTime: string = "23:30";
-  @Input() date: string = "2020-12-10";
-  @Input() roomNumber: string = "1";
-  @Input() phoneNumber: string = "1";
+  @Input() fromTime = "22:30";
+  @Input() toTime = "23:30";
+  @Input() date = "2020-12-10";
+  @Input() roomNumber = "1";
+  @Input() phoneNumber = "1";
   @Input() emailAddress: string;
   @Input() street: string;
-  @Input() houseNumber: string = "1";
+  @Input() houseNumber = "1";
   @Input() county: string;
   @Input() zipCode: string;
   @Input() country: string;
@@ -51,15 +51,11 @@ export class NewGuestComponent implements OnInit {
         "number": parseInt(this.roomNumber)
       }
     }
+//TODO: Ask jonas abput form validation
 
-
-    this.guestService.addGuest(guest,"response").subscribe(res => {
-      if(res.status === 201 && res.type ===4 ){
-        alert(res.statusText);
-      }else{
-        alert("Something went wrong...")
-      }
-    });
+    this.guestService.addGuest(guest).subscribe(res => {
+      console.table(res);
+     });
 
   }
 }

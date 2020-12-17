@@ -1,1 +1,56 @@
-<p>contact-list works!</p>
+<app-page-content text="Contacts">
+<!--  <app-small-button text="Send E-Mail" (click)="selectAllToggle()"></app-small-button>-->
+<!--  <app-small-button text="Export" (click)="getContacts()"></app-small-button>-->
+
+  <div>
+    <h2>Guests</h2>
+    <table>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>E-Mail</th>
+        <th>Telephone</th>
+        <th>Address</th>
+        <th>Arrived At</th>
+        <th>Left At</th>
+        <th>Select</th>
+      </tr>
+
+      <tr *ngFor="let guest of guests">
+        <td>{{guest.firstName}}</td>
+        <td>{{guest.name}}</td>
+        <td>{{guest.mail}}</td>
+        <td>{{guest.phone}}</td>
+        <td>{{guest.arrivedAt}}</td>
+        <td>{{guest.leftAt}}</td>
+        <td><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelectedGuest(guest.id)"></td>
+      </tr>
+    </table>
+
+    <h2>Staff</h2>
+    <table>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>E-Mail</th>
+        <th>Telephone</th>
+        <th>Address</th>
+        <th>Shift Date</th>
+        <th>Select</th>
+
+      </tr>
+
+      <tr *ngFor="let staffMember of staff">
+        <td>{{staffMember.firstName}}</td>
+        <td>{{staffMember.name}}</td>
+        <td>{{staffMember.mail}}</td>
+        <td>{{staffMember.phone}}</td>
+        <td>{{staffMember.address}}</td>
+        <td>{{staffMember.shifts}}</td>
+        <td>{{sthiftDate}}</td>
+        <td><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelectedStaff(staffMember.id)"></td>
+      </tr>
+    </table>
+  </div>
+
+</app-page-content>e

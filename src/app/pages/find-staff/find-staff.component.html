@@ -1,4 +1,45 @@
 <app-page-content text="Find Staff">
 
+  <form class="form" (ngSubmit)="onSubmit()">
+
+    <label for="firstName">First name</label>
+    <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" >
+
+    <label for="lastName">Last name</label>
+    <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+
+    <label for="fromDate">From</label>
+    <input type="date" id="fromDate" name="fromTime" [(ngModel)]="fromDate" placeholder="From">
+
+    <label for="toDate">To</label>
+    <input type="date" id="toDate" name="toDate" [(ngModel)]="toDate" placeholder="To">
+
+    <input type="submit" value="Find Staff" class="btn">
+
+  </form>
+
+  <app-small-button text="Get contact list" (click)="getContacts()"></app-small-button>
+  <app-small-button text="Select all" (click)="selectAllToggle()"></app-small-button>
+
+  <div>
+    <table>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Shifts</th>
+      </tr>
+
+      <tr *ngFor="let staffMember of staff">
+        <td>{{staffMember.firstName}}</td>
+        <td>{{staffMember.name}}</td>
+        <td>{{staffMember.shifts.toString()}}</td>
+        <td><input type="checkbox" name="selectStaff" [checked]="checks" (change)="toggleSelectedStaff(staffMember.id)"></td>
+      </tr>
+
+
+    </table>
+  </div>
+
+
 
 </app-page-content>

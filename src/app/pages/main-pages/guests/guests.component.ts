@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Guest, GuestService, GuestwId, SearchObject} from "../../../../typescript-angular-client-generated";
+import {GuestService, GuestwId, SearchObject} from "../../../../typescript-angular-client-generated";
 
 @Component({
   selector: 'app-guests',
@@ -7,11 +7,17 @@ import {Guest, GuestService, GuestwId, SearchObject} from "../../../../typescrip
   styleUrls: ['./guests.component.css']
 })
 export class GuestsComponent implements OnInit {
+  /**
+   * Find guest form.
+   */
   @Input() firstName:string;
   @Input() lastName:string;
   @Input() fromDate: string;
   @Input() toDate: string;
 
+  /**
+   * Edit guest form.
+   */
   @Input() firstName2: string;
   @Input() lastName2: string;
   @Input() fromTime: string;
@@ -32,25 +38,24 @@ export class GuestsComponent implements OnInit {
 
   constructor(private guestService:GuestService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {return}
 
 
-  onSubmit(){
+  onSubmit(): void{
     const searchObject: SearchObject = {
       sortByName: false,
       firstName: this.firstName,
       name: this.lastName,
 
     }
-    // this.guestService.findGuests(searchObject).subscribe(guests=>console.log(guests)); // TODO can't get guests
+    this.guestService.findGuests(searchObject).subscribe(guests=>console.log(guests)); // TODO can't get guests
 
     this.guestService.listGuests().subscribe(guest => this.guests = guest);
     console.log(this.guests[0].address);
   }
 
-  onEdit(guestId:number){
-
+  onEdit(guestId:number): void{
+  return
   }
 
 }

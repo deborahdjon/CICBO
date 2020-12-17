@@ -41,7 +41,8 @@ export class NewStaffComponent implements OnInit {
 
     this.staffService.addStaff(staff).subscribe(res => {
       this.modalContent = res;
-      $('#exampleModal').modal();
+      console.log(res);
+      // $('#exampleModal').modal();
 
     });
 

@@ -41,6 +41,7 @@ import { TableDetailsComponent } from './table-details/table-details.component';
 import {ApiModule, BASE_PATH, Configuration, ConfigurationParameters} from "../typescript-angular-client-generated";
 import {BreadcrumbModule} from "angular-crumbs";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ContactListService} from "./services/contact-list/contact-list.service";
 
 
 @NgModule({
@@ -96,6 +97,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     GuestService,
     RoomService,
     StaffService,
+    ContactListService,
+
     {provide: BASE_PATH, useValue: 'http://localhost:3000'}
   ],
   bootstrap: [AppComponent],

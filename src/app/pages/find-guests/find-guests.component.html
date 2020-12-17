@@ -3,7 +3,7 @@
   <form class="form" (ngSubmit)="onSubmit()">
 
     <label for="firstName">First name</label>
-    <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
+    <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" >
 
     <label for="lastName">Last name</label>
     <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
@@ -18,6 +18,8 @@
 
   </form>
 
+  <app-small-button text="Select all" (click)="selectAllToggle()"></app-small-button>
+  <app-small-button text="Get contact list" (click)="getContacts()"></app-small-button>
 
   <div>
     <table>
@@ -31,9 +33,13 @@
         <td>{{guest.firstName}}</td>
         <td>{{guest.name}}</td>
         <td>{{guest.arrivedAt}}</td>
-        <td><button (click)="onEdit(guest.id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">Edit</button></td>
+        <td><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelectedGuest(guest.id)"></td>
       </tr>
+
 
     </table>
   </div>
+
+
+
 </app-page-content>
