@@ -6,10 +6,59 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./staff.component.less']
 })
 export class StaffComponent implements OnInit {
+  staff: any;
+  allCheckBoxes: any;
+  date: any;
+  fromTime: any;
+  toTime: any;
+  roomNumbers: any;
+  selectedStaff: any;
+  selectetStaffRooms: any;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  edit(id: any) {
+
+  }
+
+  showShifts(id: any) {
+
+  }
+
+  submitStaff() {
+
+  }
+
+  submitShifts() {
+
+  }
+
+  toggleSelectedStaff(id: any) {
+
+  }
+
+
+
+  toggleSelectedShifts(id: any) {
+
+  }
+
+  selectAllStaffToggle() {
+
+  }
+
+  showAllStaff() {
+
+  }
+
+  deleteShift(selectedStaffId:number) {
+
+  }
+
+  deleteStaff(selectedStaffId:number) {
+
+  }
 }
