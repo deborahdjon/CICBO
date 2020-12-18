@@ -52,6 +52,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.2",
     "gulp": "^4.0.2",
+    "gulp-eslint": "^6.0.0",
     "gulp-flatten": "^0.4.0",
     "gulp-replace-file": "^1.1.0",
     "jasmine-core": "~3.6.0",
