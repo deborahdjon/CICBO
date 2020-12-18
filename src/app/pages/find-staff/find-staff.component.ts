@@ -34,15 +34,9 @@ export class FindStaffComponent implements OnInit {
       "firstName":"Jane"
     }
 
-    // this.staffService.findStaffMembers(searchStaff).subscribe(res =>{
-    //   console.log(res);
-    // });
-
-    this.staffService.listStaff().subscribe(res =>{
+    this.staffService.findStaffMembers(searchStaff).subscribe(res =>{
       this.staff = res;
-      console.log(res);
     });
-
 
     /**
      * fill the selected staff with dummy values
@@ -66,9 +60,7 @@ export class FindStaffComponent implements OnInit {
     if(!this.selectedStaff[id]){
       this.selectAll = true; // Ensure toggle deselect all
     }
-    console.log(this.selectedStaff);
-    console.log("this.selectAll");
-    console.log(this.selectAll);
+
   }
 
   selectAllToggle(){

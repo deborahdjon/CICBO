@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GuestService, GuestwId, SearchObject} from "../../../../typescript-angular-client-generated";
+import {Guest, GuestService, GuestwId, SearchObject} from "../../../../typescript-angular-client-generated";
 import {stringify} from "querystring";
 
 @Component({
@@ -24,13 +24,14 @@ export class GuestsComponent implements OnInit {
   @Input() phoneNumber: number;
   @Input() emailAddress: string;
   @Input() street: string;
-  @Input() houseNumber: number;
+  @Input() houseNumber: string;
   @Input() county: string;
   @Input() zipCode: number;
   @Input() country: string;
 
 
   guests:GuestwId[];
+  selectedGuestID:number;
   protected guestsMap:Map<number,GuestwId> = new Map;
   protected selectedGuests:Map<number,boolean> = new Map;
   public allCheckBoxes:boolean;
@@ -41,15 +42,15 @@ export class GuestsComponent implements OnInit {
   ngOnInit(): void {return}
 
 
-  onSubmit(sorted:boolean): void{
+  onSubmitFind(): void{ //todo: sorted:boolean
     const searchObject: SearchObject = {
-      "sortByName": sorted,
+      "sortByName": true,
       "firstName": this.firstName,
       "name": this.lastName,
-
     }
     this.guestService.findGuests(searchObject).subscribe(res=>{
       this.guests = res;
+      console.log(res)
       res.forEach(guest =>{
         this.guestsMap.set(guest.id, guest);
         this.selectedGuests.set(guest.id, false);
@@ -68,10 +69,9 @@ export class GuestsComponent implements OnInit {
   }
 
   onEdit(guestId:number):void{
+    this.selectedGuestID = guestId;
     this.guestService.getGuestById(guestId).subscribe(res =>{
-       console.log(res);
-       console.log(typeof res);
-       console.log(typeof res.firstName);
+      this.prefillEditForm(res);
     });
   }
 
@@ -85,10 +85,30 @@ export class GuestsComponent implements OnInit {
     this.phoneNumber = parseInt(guest.phone);
     this.emailAddress = guest.mail;
     this.street = "test";
-    this.houseNumber = 1;
+    this.houseNumber = stringify(1);
     this.county = "test";
     this.zipCode = 2;
     this.country = "chamany";
+  }
+
+  onSubmitEdit(guestId:number){
+    const address = this.street +' ' + this.houseNumber + ', ' + this.zipCode+ ' ' + this.county + ', ' + this.country
+
+    const guest:Guest = {
+      "firstName": this.firstName2,
+      "name": this.lastName2,
+      "mail": this.emailAddress,
+      "phone": stringify(this.phoneNumber),
+      "address": address,
+      "arrivedAt": this.date+' '+this.fromTime,
+      "leftAt":  this.date+' '+this.toTime,
+      "room": {
+        "number": this.roomNumber
+      }
+    }
+    this.guestService.updateGuestWithForm(guestId, guest).subscribe(res => {
+      alert(res);
+    });
   }
 
   /**
@@ -104,7 +124,6 @@ export class GuestsComponent implements OnInit {
    */
   selectAllToggle(): void{
     let flag = true;
-
     for (const value of Object.entries(this.selectedGuests).values()) {
       flag = value ? flag : false;
     }

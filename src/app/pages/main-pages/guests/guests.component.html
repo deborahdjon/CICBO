@@ -2,7 +2,7 @@
 
   <app-content-fixed-size>
 
-    <form class="form" (ngSubmit)="onSubmit(true)">
+    <form class="form" (ngSubmit)="onSubmitFind()">
 
       <label for="firstName">First name</label>
       <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
@@ -60,7 +60,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form class="form" (ngSubmit)="onSubmit()" id="editGuestForm">
+          <form class="form" (ngSubmit)="onSubmitEdit(this.selectedGuestID)" id="editGuestForm">
 
               <label for="firstName">First name</label>
               <input type="text"  id="firstName2" name="firstName" [(ngModel)]="firstName2" placeholder="First name" required="">
@@ -101,8 +101,7 @@
             </form>
         </div>
         <div class="modal-footer">
-          <input type="submit" value="Submit" class="btn btn-secondary" form data-dismiss="modal">
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <input type="submit" value="Save changes" class="btn btn-secondary" form="editGuestForm"> <!--Todo make modal disappear-->
         </div>
       </div>
     </div>

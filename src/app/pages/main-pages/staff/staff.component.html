@@ -1,6 +1,22 @@
 <app-page-content text="Staff">
+
+  <app-content-fixed-size>
+
+    <form class="form" (ngSubmit)="onSubmitFind()">
+
+      <label for="firstName">First name</label>
+      <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
+
+      <label for="lastName">Last name</label>
+      <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+
+      <input type="submit" value="Find Staff" class="btn">
+
+    </form>
+
+  </app-content-fixed-size>
   <app-small-button text="Select all" (click)="selectAllStaffToggle()"></app-small-button>
-  <app-small-button text="Show all guests" (click)="showAllStaff()"></app-small-button>
+  <app-small-button text="Show all staff" (click)="showAllStaff()"></app-small-button>
   <app-small-button text="Delete" (click)="deleteStaff()"></app-small-button>
 
 
@@ -17,39 +33,86 @@
         <td>{{staffMember.firstName}}</td>
         <td>{{staffMember.name}}</td>
         <td>{{staffMember.mail}}</td>
-        <td><button (click)="edit(staffMember.id)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
-        <td><button (click)="showShifts(staffMember.id)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Shifts</button></td>
-        <td><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelectedStaff(staffMember.id)"></td>
+        <td><button (click)="onEdit(staffMember.id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editStaffModal">Edit</button></td>
+        <td><button (click)="showShifts(staffMember.id)"type="button" class="btn btn-primary">Shifts</button></td>
       </tr>
     </table>
 
-    <app-small-button text="Select all" (click)="selectAllStaffToggle()"></app-small-button>
-    <app-small-button text="Show all guests" (click)="showAllStaff()"></app-small-button>
-    <app-small-button text="Delete" (click)="deleteShift()"></app-small-button>
+  </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editStaffModal" tabindex="-1" role="dialog" aria-labelledby="editStaffModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="form" (ngSubmit)="onSubmitEdit(selectedStaffMember.id)" id="editStaffForm">
+
+              <label for="firstName2">First name</label>
+              <input type="text"  id="firstName2" name="firstName" [(ngModel)]="firstName2" placeholder="First name" required="">
+
+              <label for="lastName2">Last name</label>
+              <input type="text" id="lastName2" name="lastName" [(ngModel)]="lastName2" placeholder="Last name">
+
+              <label for="roomNumbers"Room Number></label>
+              <input type="number" id="roomNumbers" name="roomNumber" [(ngModel)]="roomNumber" placeholder="Room numbers">
+
+              <label for="phoneNumber"> Phone</label>
+              <input type="string" id="phoneNumber"name="phoneNumber" [(ngModel)]="phoneNumber" placeholder="Phone number">
+
+              <label for="email">Email</label>
+              <input type="email" id="email"name="email" [(ngModel)]="emailAddress" placeholder="Email">
+
+              <label for="streetNo">Street and No.</label>
+              <input type="text" id="streetNo" name="streetNo" [(ngModel)]="streetNo" placeholder="Example Street 1">
+
+              <label for="county">County</label>
+              <input type="text" id="county"name="county" [(ngModel)]="county" placeholder="County">
+
+              <label for="zipCode">Zip code</label>
+              <input type="number" id="zipCode"name="zipCode" [(ngModel)]="zipCode" placeholder="Zip code">
+
+              <label for="country">Country</label>
+              <input type="text" id="country" name="country" [(ngModel)]="country" placeholder="Country">
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" value="Update Staff" class="btn btn-secondary" form="editStaffForm"> <!--TODO: dismis modal-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <app-small-button text="Select all shifts" (click)="selectAllShiftsToggle()"></app-small-button>
+    <app-small-button text="Delete shifts" (click)="deleteShift(selectedStaffMember.id)"></app-small-button>
+    <form class="form" (ngSubmit)="submitShifts()">
+
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" [(ngModel)]="date" placeholder="dd/mm/yyyy">
+
+      <label for="fromTime">From</label>
+      <input type="time" id="fromTime" name="fromTime" [(ngModel)]="fromTime" placeholder="From">
+
+      <label for="toTime">To</label>
+      <input type="time" id="toTime" name="toTime" [(ngModel)]="toTime" placeholder="To">
+
+      <label for="roomNumbers"Room Numbers></label>
+      <input type="text" id="roomNumbers" name="roomNumbers" [(ngModel)]="roomNumbers" placeholder="Room numbers">
+
+
+      <input type="submit" value="Add Shift" class="btn">
+
+    </form>
 
     <table>
       <title>Shifts</title>
-      <tr>
-        <form class="form" (ngSubmit)="submitShifts()">
-
-          <label for="date">Date</label>
-          <input type="date" id="date" name="date" [(ngModel)]="date" placeholder="dd/mm/yyyy">
-
-          <label for="fromTime">From</label>
-          <input type="time" id="fromTime" name="fromTime" [(ngModel)]="fromTime" placeholder="From">
-
-          <label for="toTime">To</label>
-          <input type="time" id="toTime" name="toTime" [(ngModel)]="toTime" placeholder="To">
-
-          <label for="roomNumber"Room Numbers></label>
-          <input type="text" id="roomNumber" name="roomNumber" [(ngModel)]="roomNumbers" placeholder="Room number">
-
-
-          <input type="submit" value="Add Shift" class="btn">
-
-        </form>
-      </tr>
-
 
       <tr>
         <th>Arrived At</th>
@@ -58,20 +121,21 @@
         <th>Date</th>
       </tr>
 
-      <tr *ngFor="let shift of selectedStaff">
-        <td>{{shift.arrivedAt}}</td>
-        <td>{{shift.leftAt}}</td>
-        <td>{{selectetStaffRooms}}</td>
-        <td><button (click)="deleteShift(selectedStaff.id)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
-        <td><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelectedShifts(selectedStaff.id)"></td>
-      </tr>
+<!--      <tr *ngFor="let shift of this.selectedStaffMember.shifts">-->
+<!--        <td>{{shift.arrivedAt}}</td>-->
+<!--        <td>{{shift.leftAt}}</td>-->
+<!--        <td>{{getShiftRooms(shift)}}</td>-->
+<!--        <td><button (click)="deleteShift(selectedStaffMember.id)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit</button></td>-->
+<!--        <td><input type="checkbox" name="selectstaff" [checked]="checks" (change)="toggleSelectedShifts(selectedStaff.id)"></td>-->
+<!--      </tr>-->
+
     </table>
 
 
 
 
 
-  </div>
+
 
 
 </app-page-content>

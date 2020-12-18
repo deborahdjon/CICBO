@@ -16,7 +16,7 @@ export class NewRoomComponent implements OnInit {
 
 
 
-  onSubmit(){
+  onSubmit():void{
     const room:Room ={
       "number": this.roomNumber,
       "name": this.roomName

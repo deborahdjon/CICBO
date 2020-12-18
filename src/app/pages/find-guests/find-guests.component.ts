@@ -67,6 +67,8 @@ export class FindGuestsComponent implements OnInit {
    * Bulk selects/deselects all checkboxes when select-all button is clicked.
    */
   selectAllToggle(): void{
+    this.allCheckBoxes = true;
+
     let flag = true;
 
     for (const value of Object.entries(this.selectedGuests).values()) {

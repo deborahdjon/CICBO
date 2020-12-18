@@ -6,6 +6,11 @@ gulp.task('copyCss', (resolve)=>{
   var files = fs.readdirSync('./src/assets/css_from_less');
   files.forEach(function (file){
 
+    /**
+     * Build
+     * minify
+     *
+     */
 
 
 
