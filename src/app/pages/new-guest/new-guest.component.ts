@@ -34,7 +34,7 @@ export class NewGuestComponent implements OnInit {
   }
 
 
-  onSubmit() {
+  onSubmit():void {
 
     const address = this.street +' ' + this.houseNumber + ', ' + this.zipCode+ ' ' + this.county + ', ' + this.country
 
@@ -51,11 +51,9 @@ export class NewGuestComponent implements OnInit {
         "number": parseInt(this.roomNumber)
       }
     }
-//TODO: Ask jonas abput form validation
-
     this.guestService.addGuest(guest).subscribe(res => {
       console.table(res);
      });
-
   }
+
 }

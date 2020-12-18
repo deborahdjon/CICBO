@@ -22,7 +22,7 @@ export class FindGuestsComponent implements OnInit {
   @Input() fromDate: string;
   @Input() toDate: string;
 
-  public guestContacts:GuestwId[] = [];
+  private guestContacts:GuestwId[] = [];
   private staffContacts:StaffwId[] = [];
 
 
