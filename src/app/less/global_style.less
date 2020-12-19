@@ -1,4 +1,4 @@
-// Colors
+// Colors -----------------------------------------------------
 @green: #559C5E;
 @light-green :#E6EBE8;
 @gray-green : #5D6A5E;
@@ -9,7 +9,7 @@
   gray-green : #5D6A5E;
 }
 
-// Font
+// Font-----------------------------------------------------
 //-- Fontsize
 @extra-large: 55px;
 @large:  45px;
@@ -28,7 +28,8 @@
   color: @color;
 }
 
-// Dimensions
+// Dimensions -----------------------------------------------------
+
 @cicbo-green: green;
 @cicbo-light-green: #cdfca9;
 @cicbo-dark-green: #2d3429;
@@ -49,6 +50,42 @@
   padding-left: @space-1;
   padding-right: @space-1;
 }
+
+// Buttons and links -----------------------------------------------------
+.small-button{
+  background-color: @green;
+  .font(@thick, @small, white);
+  border-radius: 30px;
+  border-color:@green;
+  margin: 10px;
+}
+
+a:hover, a:visited, a:link, a:active{
+  color: white;
+  text-decoration: none;
+}
+
+// Forms -----------------------------------------------------
+input{
+  background-color: @light-green;
+  border-radius: 20px;
+  padding: 5px 15px 5px 15px;
+  .font(@thin, @small, @gray-green);
+  border-style: none;
+}
+label{
+  margin-right: 20px;
+  .font(@thin, @small, @gray-green);
+}
+.input-wrap{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 15px 0;
+}
+
+// Tables -----------------------------------------------------
+
+
 
 //.page-content(@flex-direction){
 //  display: flex;

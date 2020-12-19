@@ -1,16 +1,16 @@
 @import "src/app/less/global_style";
 
 .menu-button{
-  background: #colors[light-green];
+  background: @green;
   border-radius: 90px 0 0 90px;
-  font-size: 45px;
-  color: #colors[gray-green];
+  .font(@thick, @large, @light-green);
+  color: @gray-green;
   padding-right: 60px;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.16);
 }
 
 .img-menu{
-  height: 120px;
+  height: 180px;
   width: auto;
   margin-left: 15px;
 }

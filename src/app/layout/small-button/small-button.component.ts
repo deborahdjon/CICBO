@@ -1,18 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-small-button',
   templateUrl: './small-button.component.html',
   styleUrls: ['./small-button.component.less']
 })
-export class SmallButtonComponent implements OnInit {
+export class SmallButtonComponent {
   @Input() text: string;
   @Input() link: string;
   @Input() routingLink: string;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  @Input() type: string;
+  @Input() form: string;
 }

@@ -1,43 +1,63 @@
 <app-page-content text="Find Guest">
 
-  <form class="form" (ngSubmit)="onSubmit()">
+  <div class="page-div-1">
 
-    <label for="firstName">First name</label>
-    <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" >
+    <form class="form" (ngSubmit)="onSubmit()">
 
-    <label for="lastName">Last name</label>
-    <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
 
-    <label for="fromDate">From</label>
-    <input type="date" id="fromDate" name="fromTime" [(ngModel)]="fromDate" placeholder="From">
+      <div class="input-wrap">
+        <label for="firstName" class="">First name</label>
+        <input type="text"  id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" >
+      </div>
 
-    <label for="toDate">To</label>
-    <input type="date" id="toDate" name="toDate" [(ngModel)]="toDate" placeholder="To">
+      <div class="input-wrap">
+        <label for="lastName">Last name</label>
+        <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+      </div>
 
-    <input type="submit" value="Find Guest" class="btn">
+      <div class="input-wrap">
+        <label for="fromDate">From</label>
+        <input type="date" id="fromDate" name="fromTime" [(ngModel)]="fromDate" placeholder="From">
+      </div>
 
-  </form>
+      <div class="input-wrap">
+        <label for="toDate">To</label>
+        <input type="date" id="toDate" name="toDate" [(ngModel)]="toDate" placeholder="To">
+      </div>
 
-  <app-small-button text="Select all" (click)="selectAllToggle()"></app-small-button>
-  <app-small-button text="Get contact list" (click)="getContacts()"></app-small-button>
+      <button type="submit" class="small-button btn btn-success">Find Guest</button>
 
-  <div>
+    </form>
+
+    <app-small-button text="Select all" (click)="selectAllToggle()"></app-small-button>
+    <app-small-button text="Get contact list" (click)="getContacts()"></app-small-button>
+
+  </div>
+
+
+  <div class="page-div-2">
     <table>
+      <thead>
       <tr>
-        <th>First Name</th>
+        <th>divFirst Name</th>
         <th>Last Name</th>
+        <th>Email</th>
         <th>Date</th>
+        <th>X</th>
       </tr>
+      </thead>
 
+    <tbody>
       <tr *ngFor="let guest of guests">
         <td>{{guest.firstName}}</td>
         <td>{{guest.name}}</td>
+        <td>{{guest.mail}}</td>
         <td>{{guest.arrivedAt}}</td>
         <td><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelectedGuest(guest.id)"></td>
       </tr>
-
-
+    </tbody>
     </table>
+
   </div>
 
 
