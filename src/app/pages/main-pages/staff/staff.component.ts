@@ -134,6 +134,10 @@ export class StaffComponent implements OnInit {
     })
   }
 
+  /**
+   * Set the values of the search object.
+   * @private
+   */
   private determineSearchObject(): SearchObject{
     let searchStaff:SearchObject;
     if(!(this.firstName || this.lastName)){
@@ -162,6 +166,7 @@ export class StaffComponent implements OnInit {
     this.lastSearch=searchStaff;
     return searchStaff;
   }
+
   /**
    * Finds populates the list of currently viewed staff to all staff found in the search.
    */

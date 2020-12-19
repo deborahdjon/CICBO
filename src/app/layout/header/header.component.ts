@@ -26,8 +26,8 @@ import {NavigationEnd, Router} from "@angular/router";
 
 export class HeaderComponent {
   @Output() hideNav: EventEmitter<void> = new EventEmitter();
-  showNav = false;
-  navigationClicked = false;
+  public showNav = false;
+  public navigationClicked = false;
 
   /**
    * Ensures navigation is hidden when page is pages are routed to through the navigation.

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-navigation',
@@ -6,16 +6,13 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./navigation.component.less'],
 
 })
-export class NavigationComponent implements OnInit {
-  @Output() hideNav: EventEmitter<any> = new EventEmitter();
+export class NavigationComponent {
+  @Output() hideNav: EventEmitter<void> = new EventEmitter();
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-
-  onHideNav() {
+  /**
+   * Emits an event to the navigation, which will open or close accordingly.
+   */
+  onHideNav():void {
     this.hideNav.emit();
   }
 

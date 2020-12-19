@@ -15,35 +15,23 @@ import {
 export class ContactListComponent implements OnInit {
   public guests: GuestwId[] = [];
   public staff: StaffwId[] = [];
+
   @Input() allCheckBoxes: false;
-  public sthiftDate: string;
+  public shiftDate: string;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private contactListService:ContactListService,
-              private guestService:GuestService,
-              private staffService:StaffService) {}
+              private contactListService:ContactListService) {}
 
+  /**
+   * Initialize guest and staff contact lists.
+    */
   ngOnInit(): void {
-//    this.guests = this.contactListService.getGuests();
-  //  this.staff = this.contactListService.getStaff();
+   this.guests = this.contactListService.getGuests();
+   this.staff = this.contactListService.getStaff();
     console.log(this.contactListService.getStaff());
     console.log(this.contactListService.getGuests());
 
-    // Dummy Populate
-    this.guestService.listGuests().subscribe(res =>{
-      this.guests = res;
-    });
-
-    this.staffService.listStaff().subscribe((res =>{
-      this.staff = res;
-    }))
   }
 
-  toggleSelectedGuest(id: number) {
-
-  }
-
-  toggleSelectedStaff(id: number) {
-
-  }
+  //TODO Toggle staff und guest
 }

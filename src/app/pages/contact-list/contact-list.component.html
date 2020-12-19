@@ -16,7 +16,7 @@
         <th>Select</th>
       </tr>
 
-      <tr *ngFor="let guest of guests">
+      <tr *ngFor="let guest of guests" [ngClass]="setClasses()">
         <td>{{guest.firstName}}</td>
         <td>{{guest.name}}</td>
         <td>{{guest.mail}}</td>
@@ -47,7 +47,7 @@
         <td>{{staffMember.phone}}</td>
         <td>{{staffMember.address}}</td>
         <td>{{staffMember.shifts}}</td>
-        <td>{{sthiftDate}}</td>
+        <td>{{shiftDate}}</td>
         <td><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelectedStaff(staffMember.id)"></td>
       </tr>
     </table>

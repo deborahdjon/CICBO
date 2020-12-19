@@ -28,7 +28,11 @@ export class FindStaffComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(){
+  /**
+   *
+   */
+  onSubmit(): void{
+
     const searchStaff:SearchObject = {
       "sortByName":true,
       "firstName":"Jane"
@@ -38,16 +42,40 @@ export class FindStaffComponent implements OnInit {
       this.staff = res;
     });
 
-    /**
-     * fill the selected staff with dummy values
-     */
-    const test_keys = Array.from(Array(50).keys())
-    test_keys.forEach(key =>{
-      this.selectedStaff[key] = false;
-    });
-
-
   }
+
+  /**
+   * Set the values of the search object.
+   * @private
+   */
+  private determineSearchObject(): SearchObject{
+    let searchStaff:SearchObject;
+    if(!(this.firstName || this.lastName)){
+      alert("Please enter a name");
+    }else{
+      if(this.firstName && this.lastName){
+        searchStaff = {
+          "sortByName":true,
+          "firstName":this.firstName,
+          "name": this.lastName
+        }
+      }else{
+        if(this.firstName){
+          searchStaff = {
+            "sortByName":true,
+            "firstName":this.firstName,
+          }
+        }else{
+          searchStaff = {
+            "sortByName":true,
+            "name":this.lastName,
+          }
+        }
+      }
+    }
+    return searchStaff;
+  }
+
 
 
 
@@ -63,7 +91,7 @@ export class FindStaffComponent implements OnInit {
 
   }
 
-  selectAllToggle(){
+  selectAllToggle(): void{
     //Select all
     if (this.selectAll){
       this.selectAll = false;
@@ -83,6 +111,7 @@ export class FindStaffComponent implements OnInit {
     }
 
   }
+
 
   /**
    * Returns a list of contacts of the infected person.
