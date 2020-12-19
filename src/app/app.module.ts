@@ -26,19 +26,17 @@ import { PageContentComponent } from './layout/page-content/page-content.compone
 import { ContentFixedSizeComponent } from './layout/content-fixed-size/content-fixed-size.component';
 import { NewGuestComponent } from './pages/new-guest/new-guest.component';
 import { NewStaffComponent } from './pages/new-staff/new-staff.component';
-import { NewRoomComponent } from './pages/new-room/new-room.component';
 import { FindGuestsComponent } from './pages/find-guests/find-guests.component';
 import { FindStaffComponent } from './pages/find-staff/find-staff.component';
 import { ContactListComponent } from './pages/contact-list/contact-list.component';
 import { InspectEmployeeComponent } from './pages/inspect-employee/inspect-employee.component';
 import { InspectGuestComponent } from './pages/inspect-guest/inspect-guest.component';
-import { FormInputFieldComponent } from './layout/form-input-field/form-input-field.component';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import {ApplicationModule} from "@angular/core";
 import {AlarmService, GuestService, RoomService, StaffService} from "../typescript-angular-client-generated";
 import { TableDetailsComponent } from './table-details/table-details.component';
-import {ApiModule, BASE_PATH, Configuration, ConfigurationParameters} from "../typescript-angular-client-generated";
+import {ApiModule, BASE_PATH} from "../typescript-angular-client-generated";
 import {BreadcrumbModule} from "angular-crumbs";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ContactListService} from "./services/contact-list/contact-list.service";
@@ -67,13 +65,11 @@ import {ContactListService} from "./services/contact-list/contact-list.service";
     ContentFixedSizeComponent,
     NewGuestComponent,
     NewStaffComponent,
-    NewRoomComponent,
     FindGuestsComponent,
     FindStaffComponent,
     ContactListComponent,
     InspectEmployeeComponent,
     InspectGuestComponent,
-    FormInputFieldComponent,
     TableDetailsComponent,
   ],
   exports:[NavigationComponent],

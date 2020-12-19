@@ -5,48 +5,42 @@
 .view{
   display: flex;
   flex-direction: column;
-  height: 92vh;
+  height:calc(@page-content-height + @header-height);
   width: 100vw;
   overflow: scroll;
 }
 
-
-/*Page divisions*/
+.content{
+  display: flex;
+  flex-direction: row;
+  height: calc(@page-content-height);
+  //align-items:stretch;
+  flex-wrap: wrap;
+  //flex-grow: 1;
+  background-color: purple;
+}
 
 .page-top{
-  flex-wrap: wrap;
-  flex-direction: column;
-  flex-shrink: 2;
+  display: flex;
+  height: @header-height;
+  background-color: red;
 }
 
-.page-bottom{
-  align-self: flex-end;
-  width: 100vw;
-  height: 55px;
-}
-
-.page-middle{
-  flex-wrap: wrap;
-  flex-grow: 1;
-  flex-direction: row;
-  align-content: stretch;
-}
+//.page-bottom{
+//  width: 100vw;
+//  height: 55px;
+//  background-color: #00B7FF;
+//}
 
 
 /*Page top*/
 .page-title{
-  width: 100vw;
   display: flex;
-  align-content: center;
-  align-self: flex-start;
+  width: 100vw;
   padding: @pad-lr;
-  font-size: 45px;
-  height: 55px;
+  .font(@thick, @extra-large, @green);
+  align-items: center;
 }
 
-
-/*Page middle*/
-.information{
-}
 
 

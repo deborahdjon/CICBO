@@ -322,7 +322,7 @@ export class StaffComponent implements OnInit {
   /**
    * Delete staff member.
    */
-  async deleteStaff(): void {
+  deleteStaff(): void {
     this.staffService.deleteStaffMember(this.selectedStaffMember.id).subscribe(data=>{
       console.log(data);
     });

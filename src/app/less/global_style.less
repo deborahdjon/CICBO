@@ -7,7 +7,6 @@
   green: #559C5E;
   light-green :#E6EBE8;
   gray-green : #5D6A5E;
-
 }
 
 // Font
@@ -19,12 +18,12 @@
 @extra-small:15px;
 
 //--Font "weight"
-@thin: "Arial Rounded MT Light";
-@thick: "Arial Rounded MT";
+@thin: Arial Rounded MT;
+@thick: Arial Rounded MT;
 
 
-.font(@fontWeight, @fontSize, @color) {
-  font-family: @fontWeight, sans-serif;
+.font(@fontFace, @fontSize, @color) {
+  font-family: @fontFace, sans-serif;
   font-size: @fontSize;
   color: @color;
 }
@@ -36,7 +35,9 @@
 @cicbo-font: Arial;
 
 @width-1: 500px;
-@header-height:10vh;
+@header-height:75px;
+@page-content-height:calc(100vh - 2*@header-height);
+
 
 @navigation-width: 500px;
 
@@ -47,4 +48,12 @@
 .padding-lr{
   padding-left: @space-1;
   padding-right: @space-1;
+}
+
+.page-content(@flex-direction){
+  display: flex;
+  flex-direction: @flex-direction;
+  height: calc(@page-content-height);
+  flex-wrap: wrap;
+  background-color: purple;
 }

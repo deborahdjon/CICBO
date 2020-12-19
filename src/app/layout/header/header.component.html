@@ -1,21 +1,19 @@
-<div class="d-flex p-0 header">
+<div class="d-flex header">
 
+  <!-- Navigation-->
+  <div class="container navigation-container"  *ngIf="showNav" [@navSlideInOut]>
+    <app-navigation  (hideNav)="onHideNav()"></app-navigation>
+  </div>
 
+  <!-- Navigation Toggle-->
   <div class="d-flex d-inline-flex align-self-center">
-    <!-- Menu toggle button-->
     <a  type="button" (click)="toggleNav()" class="nav-button">
       <img src="../../../assets/images/menu_s.png" alt="Navigation toggle button" class="img-nav img-fluid rounded-circle">
     </a>
-
   </div>
 
   <!-- Title-->
   <div class="d-flex align-self-center" id="title">
     <h1 class="title">CICBO</h1>
   </div>
-
-  <div class="container p-0 navigation-container"  *ngIf="showNav" [@navSlideInOut]  >
-    <app-navigation  (hideNav)="onHideNav()"></app-navigation>
-  </div>
-
 </div>

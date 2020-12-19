@@ -1,18 +1,12 @@
-<div class="view flex-1">
-
-
-  <div class="page-top d-flex">
-<!--TODO Breadcrumb? -->
-
-
-    <div class="page-title d-flex align-self-center text">
+<div class="view">
+  <div class="page-top">
+    <div class="page-title">
       <h1>{{text}}</h1>
     </div>
   </div>
 
-
-  <ng-content></ng-content>
-
-  <div class="page-bottom"></div>
-
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+  <!-- TODO: Bottom needed in view?  <div class="page-bottom d-flex align-self-end"> . </div>-->
 </div>
