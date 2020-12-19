@@ -33,7 +33,7 @@
         <td>{{guest.firstName}}</td>
         <td>{{guest.name}}</td>
         <td>{{guest.arrivedAt}}</td>
-        <td><input type="checkbox" name="selectGuest" [checked]="checks" (change)="toggleSelectedGuest(guest.id)"></td>
+        <td><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelectedGuest(guest.id)"></td>
       </tr>
 
 

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {
+  RoomIdentifier,
   SearchObject,
   Staff,
   StaffService, StaffShift,
@@ -14,21 +15,27 @@ import {stringify} from "querystring";
 })
 export class StaffComponent implements OnInit {
   public staff:StaffwId[];
-  public staffMap: Map<number, StaffwId>
-  public selectedStaff: Map<number, boolean>
+  public staffMap: Map<number, StaffwId> = new Map<number, StaffwId>();
+
+  //public selectedStaff: Map<number, boolean> = new Map<number, boolean>();
 
   public selectedStaffMember: StaffwId;
-
+  public selectedStaffMemberShifts: Map<number, StaffShift> = new Map<number, StaffShift>();
+  public selectedStaffMemberShiftsChecked: Map<number, boolean> = new Map<number, boolean>();
+  private selectAllShifts=false;
   public checks: boolean;
+
+  private lastFetchMethod:string;
+  private lastSearch:SearchObject;
   // Find staff form
-  @Input() firstName: any;
-  @Input() lastName: any;
+  @Input() firstName: string;
+  @Input() lastName: string;
 
   // Shifts
   @Input() date: string;
   @Input() fromTime: string;
   @Input() toTime: string;
-  @Input() roomNumbers: string;
+  @Input() roomNumbersShift: string;
   @Input() selectedStaffRooms: string;
 
   // Edit staff form
@@ -44,16 +51,27 @@ export class StaffComponent implements OnInit {
   @Input() country: string;
   @Input() streetNo: string;
 
-  // @Input() fromTime2: string;
-  // @Input() toTime2: string;
-  // @Input() date2: string;
-  //
 
   constructor(private staffService:StaffService) { }
 
+  /**
+   * Initialize selected staff.
+   */
   ngOnInit(): void {
+    this.selectedStaffMember = {
+      "id" : null,
+      "firstName": "",
+      "name": "",
+      "mail": "",
+      "phone": "",
+      "address": "",
+    }
   }
 
+  /**
+   * Update selected staff member.
+   * @param id
+   */
   onEdit(id: number): void {
     this.staffService.getStaffMemberById(id).subscribe(res =>{
       this.selectedStaffMember = res;
@@ -63,7 +81,7 @@ export class StaffComponent implements OnInit {
 
   /**
    * Prefills the edit staff form.
-   * @param staff
+   * @param staff: staff that contains updated data.
    * @private
    */
   private prefillEditForm(staff:StaffwId){
@@ -78,6 +96,10 @@ export class StaffComponent implements OnInit {
     this.country = "chamany";
   }
 
+  /**
+   * Submit an update of a staff member.
+   * @param staffId
+   */
   onSubmitEdit(staffId:number):void{
     const address = this.street +' ' + this.houseNumber + ', ' + this.zipCode+ ' ' + this.county + ', ' + this.country
 
@@ -97,13 +119,22 @@ export class StaffComponent implements OnInit {
     }
   }
 
+  /**
+   * Sets the list of displayed staff to all staff currently in the database.
+   */
   showAllStaff(): void {
+    this.lastFetchMethod="get all";
     this.staffService.listStaff().subscribe(res =>{
       this.staff = res;
+      this.selectedStaffMember = res[0];
+      this.staff.forEach(staff =>{
+        // this.selectedStaff.set(staff.id, false);
+        this.staffMap.set(staff.id, staff);
+      });
     })
   }
 
-  onSubmitFind(): void {
+  private determineSearchObject(): SearchObject{
     let searchStaff:SearchObject;
     if(!(this.firstName || this.lastName)){
       alert("Please enter a name");
@@ -119,63 +150,80 @@ export class StaffComponent implements OnInit {
           searchStaff = {
             "sortByName":true,
             "firstName":this.firstName,
-           }
+          }
         }else{
           searchStaff = {
             "sortByName":true,
             "name":this.lastName,
-            }
           }
+        }
       }
     }
-
+    this.lastSearch=searchStaff;
+    return searchStaff;
+  }
+  /**
+   * Finds populates the list of currently viewed staff to all staff found in the search.
+   */
+  findStaff(triggeredBySubmit:boolean): void {
+    this.lastFetchMethod="find";
+    let searchObject:SearchObject;
+    if(triggeredBySubmit){
+      searchObject = this.determineSearchObject();
+    }else{
+      searchObject = this.lastSearch;
+    }
     try{
-      this.staffService.findStaffMembers(searchStaff).subscribe(res=>{
+      this.staffService.findStaffMembers(searchObject).subscribe(res=>{
         this.staff = res;
         this.selectedStaffMember = res[0];
         this.staff.forEach(staff =>{
-          this.selectedStaff.set(staff.id, false);
           this.staffMap.set(staff.id, staff);
         });
       });
     }catch(e){
       alert(e.message);
     }
-
   }
 
-  toggleSelectedShift(id: any): void {
-    this.selectedStaff.set(id, !this.selectedStaff.get(id));
-  }
-
-  selectAllStaffToggle(): void{
-    let flag = true;
-    for (const value of Object.entries(this.selectedStaff).values()) {
-      flag = value ? flag : false;
+  /**
+   * Selects a staff and sets the
+   * @param id Id of staff to select.
+   */
+  selectStaff(id: number): void {
+    this.selectedStaffMemberShifts.clear();
+    this.selectedStaffMember = this.staffMap.get(id);
+    for(let i=0; i++;i<this.selectedStaffMember.shifts.length){
+      const shift = this.selectedStaffMember.shifts[i];
+      this.selectedStaffMemberShifts.set(i,shift);
     }
+  }
 
-    //Select all
-    if (!flag){
-      //Frontend
+  /**
+   * Selects or deselects all shifts.
+   */
+  selectAllShiftsToggle(): void{
+    if (this.selectAllShifts){
+      this.selectAllShifts = false;
       this.checks = true;
-
-      //Backend
-      Object.keys(this.selectedStaff).forEach( (key)=> {
-        this.selectedStaff.set(parseInt(key),true);
-      });
-
-      //Deselect all
-    }else{
-      //Frontend
+      Object.keys(this.selectedStaffMemberShifts).forEach(key=>{
+        this.selectedStaffMemberShifts[key]=true;
+      })
+    }else { //Deselect all
+      this.selectAllShifts = true;
       this.checks = false;
-      //Backend
-      Object.keys(this.selectedStaff).forEach( (key)=> {
-        this.selectedStaff.set(parseInt(key),false);
+      Object.keys(this.selectedStaffMemberShifts).forEach( (key)=> {
+        this.selectedStaffMemberShifts[key] = false;
       });
     }
   }
 
 
+  /**
+   * Converts the rooms in a shift to a string.
+   * @param shift
+   * @return string representation of rooms in the shift.
+   */
   getShiftRooms(shift:StaffShift): string{
     let rooms = "";
     shift.rooms.forEach(room =>{
@@ -184,31 +232,100 @@ export class StaffComponent implements OnInit {
     return rooms
   }
 
-  shoowShifts(id: number){
+  /**
+   * Populates the shifts table with shifts of the selected staff member.
+   * @param id Id of selected staff.
+   */
+  showShifts(id: number): void{
+    console.log(this.selectedStaffMember);
     this.selectedStaffMember = this.staffMap.get(id);
   }
 
-  submitShifts(): void {
+  /**
+   * Adds a shift to the selected staff member.
+   */
+  submitShift(): void {
+    const rooms:RoomIdentifier[] = [];
+    const roomNumbersStrings: string[]= this.roomNumbersShift.split(',');
+    try{
+      roomNumbersStrings.forEach(num =>{
+        const roomId:RoomIdentifier ={
+          "number": parseInt(num),
+        }
+        rooms.push(roomId)
+      })
+    }catch (e){
+      alert("Please enter the room numbers in the format: number1,number2,...")
+    }
+
+    const shift:StaffShift = {
+      "arrivedAt": this.date+' '+this.fromTime,
+      "leftAt": this.date+' '+this.toTime,
+      "rooms": rooms
+    }
+    try{
+      this.staffService.addShift(this.selectedStaffMember.id, shift).subscribe(res=>{
+        console.log(res)}, error => {alert(error.message)});
+    }catch (e){
+      alert(e);
+    }
+
 
   }
 
-
-
-
-  toggleSelectedShifts(id: any): void {
-
-  }
-
-  deleteShift(selectedStaffId:number): void {
-
-  }
-
-  deleteStaff(): void {
-
+  /**
+   * Changes the background color of the row of the selected staff.
+   * @param staffMemberId Id of staff member to select.
+   */
+  checkSelection(staffMemberId:number): string{
+    if(staffMemberId === this.selectedStaffMember.id){
+      return "marked-table-cell"
+    }else{return "table-cell"}
   }
 
 
-  selectAllShiftsToggle() {
+  /**
+   * Toggles all shifts as selected or not
+   * @param id
+   */
+  toggleSelectedShifts(id: number): void {
+    const value = this.selectedStaffMemberShiftsChecked.get(id);
+    this.selectedStaffMemberShiftsChecked.set(id,!value);
+  }
 
+  /**
+   * Delets all selected shifts from selected staff member.
+   */
+  deleteShift(): void {
+    const newShifts: StaffShift[] =[];
+    for(const [key,value] of this.selectedStaffMemberShiftsChecked){
+      if(!value){newShifts.push(this.selectedStaffMemberShifts.get(key))}
+    }
+    this.staffService.replaceShift(this.selectedStaffMember.id, newShifts).subscribe(res=>{
+      console.log(res)
+    });
+    this.reloadStaff();
+  }
+
+  /**
+   * Fetches updated version of staff.
+   * @private
+   */
+  private reloadStaff(){
+    if(this.lastFetchMethod==="get all"){
+      this.showAllStaff()
+    }else{
+      this.findStaff(false);
+    }
+  }
+
+  /**
+   * Delete staff member.
+   */
+  async deleteStaff(): void {
+    this.staffService.deleteStaffMember(this.selectedStaffMember.id).subscribe(data=>{
+      console.log(data);
+    });
+    this.reloadStaff();
   }
 }

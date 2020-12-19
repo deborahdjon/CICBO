@@ -81,11 +81,6 @@ export class FindStaffComponent implements OnInit {
     }
 
     }
-    console.log(this.selectedStaff);
-    console.log("this.selectAll");
-    console.log(this.selectAll);
-
-
 
   }
 
