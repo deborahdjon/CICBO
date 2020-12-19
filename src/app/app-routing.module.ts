@@ -10,7 +10,6 @@ import { StaffComponent} from "./pages/main-pages/staff/staff.component";
 import {AlarmComponent} from "./pages/main-pages/alarm/alarm.component";
 import {NewGuestComponent} from "./pages/new-guest/new-guest.component";
 import {NewStaffComponent} from "./pages/new-staff/new-staff.component";
-import {NewRoomComponent} from "./pages/new-room/new-room.component";
 import {FindGuestsComponent} from "./pages/find-guests/find-guests.component";
 import {FindStaffComponent} from "./pages/find-staff/find-staff.component";
 import {ContactListComponent} from "./pages/contact-list/contact-list.component";
@@ -34,7 +33,6 @@ const routes: Routes = [ //TODO rm breadcrumbs
 
   { path: 'new-guest', component: NewGuestComponent, data: { breadcrumb:"New Guest"} },
   { path: 'new-staff', component: NewStaffComponent, data: { breadcrumb:"New Staff"} },
-  { path: 'new-room', component: NewRoomComponent, data: { breadcrumb:"New Room"} }
 ];
 
 @NgModule({
