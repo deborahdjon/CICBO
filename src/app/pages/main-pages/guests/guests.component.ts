@@ -26,6 +26,7 @@ export class GuestsComponent implements OnInit {
   @Input() street: string;
   @Input() houseNumber: string;
   @Input() county: string;
+  @Input() city: string;
   @Input() zipCode: number;
   @Input() country: string;
 
@@ -92,7 +93,7 @@ export class GuestsComponent implements OnInit {
   }
 
   onSubmitEdit(guestId:number){
-    const address = this.street +' ' + this.houseNumber + ', ' + this.zipCode+ ' ' + this.county + ', ' + this.country
+    const address = this.street +' ' + this.houseNumber + ', ' + this.zipCode+ ' ' +  this.city + ', ' + this.county + ', ' + this.country
 
     const guest:Guest = {
       "firstName": this.firstName2,

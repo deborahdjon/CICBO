@@ -1,57 +1,120 @@
-
-
 <app-page-content text="Add Guest">
 
 
   <form class="form" (ngSubmit)="onSubmit()">
 
-    <label for="firstName">First name</label>
-    <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="">
+    <div class="masterCol">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <div class="input-wrap">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="">
+          </div>
+        </div>
 
-    <label for="lastName">Last name</label>
-    <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="">
+        <div class="col-sm-12 col-md-6">
+          <div class="input-wrap">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="">
+          </div>
+        </div>
 
-    <label for="date">Date</label>
-    <input type="date" id="date" name="date" [(ngModel)]="date" placeholder="dd/mm/yyyy">
+        <div class="col-sm-12 col-md-6">
+          <div class="input-wrap">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" [(ngModel)]="date" placeholder="dd/mm/yyyy">
+          </div>
+        </div>
 
-    <label for="fromTime">From</label>
-    <input type="time" id="fromTime" name="fromTime" [(ngModel)]="fromTime" placeholder="From">
+        <div class="col-sm-12 col-md-6">
+        </div>
 
-    <label for="toTime">To</label>
-    <input type="time" id="toTime" name="toTime" [(ngModel)]="toTime" placeholder="To">
+        <div class="col-12 col-sm-6 col-md-6">
+          <div class="input-wrap">
+            <label for="fromTime">From</label>
+            <input type="time" id="fromTime" name="fromTime" [(ngModel)]="fromTime" placeholder="From">
+          </div>
+        </div>
 
-    <label for="roomNumber"Room Number></label>
-    <input type="number" id="roomNumber" name="roomNumber" [(ngModel)]="roomNumber" placeholder="Room number">
+        <div class="col-12 col-sm-6 col-md-6">
+          <div class="input-wrap">
+            <label for="toTime">To</label>
+            <input type="time" id="toTime" name="toTime" [(ngModel)]="toTime" placeholder="To">
+          </div>
+        </div>
 
-    <label for="phoneNumber"> Phone</label>
-    <input type="string" id="phoneNumber"name="phoneNumber" [(ngModel)]="phoneNumber" placeholder="Phone number">
+        <div class="col-sm-12 col-md-6">
+          <div class="input-wrap">
+            <label for="roomNumber">Room Number</label>
+            <input type="number" id="roomNumber" name="roomNumber" [(ngModel)]="roomNumber" placeholder="Room number">
+          </div>
+        </div>
 
-    <label for="email">Email</label>
-    <input type="email" id="email"name="email" [(ngModel)]="emailAddress" placeholder="Email">
+        <div class="col-sm-12 col-md-6">
+          <div class="input-wrap">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" [(ngModel)]="emailAddress" placeholder="Email">
+          </div>
+        </div>
 
-    <label for="street">Street</label>
-    <input type="text" id="street" name="street" [(ngModel)]="street" placeholder="Street">
+        <div class="col-sm-12 col-md-6">
+          <div class="input-wrap">
+            <label for="phoneNumber"> Phone</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)]="phoneNumber" placeholder="Phone number">
+          </div>
+        </div>
 
-    <label for="houseNumber">House No.</label>
-    <input type="number" id="houseNumber" name="houseNumber" [(ngModel)]="houseNumber" placeholder="No.">
+        <div class="col-sm-12 col-md-6">
+        </div>
 
+        <div class="col-sm-12 col-md-6">
+          <div class="input-wrap">
+            <label for="street">Street</label>
+            <input type="text" id="street" name="street" [(ngModel)]="street" placeholder="Street">
+          </div>
+        </div>
 
-    <label for="zipCode">Zip code</label>
-    <input type="number" id="zipCode"name="zipCode" [(ngModel)]="zipCode" placeholder="Zip code">
+        <div class="col-sm-12 col-md-6">
+          <div class="input-wrap">
+            <label for="houseNumber">House No.</label>
+            <input type="number" id="houseNumber" name="houseNumber" [(ngModel)]="houseNumber" placeholder="No.">
+          </div>
+        </div>
 
-    <label for="county">County</label>
-    <input type="text" id="county"name="county" [(ngModel)]="county" placeholder="County">
+        <div class="col-sm-12 col-md-6">
+          <div class="input-wrap">
+            <label for="zipCode">Zip code</label>
+            <input type="number" id="zipCode" name="zipCode" [(ngModel)]="zipCode" placeholder="Zip code">
+          </div>
+        </div>
 
-    <label for="country">Country</label>
-    <input type="text" id="country" name="country" [(ngModel)]="country" placeholder="Country">
+        <div class="col-sm-12 col-md-6">
+          <div class="input-wrap">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" [(ngModel)]="city" placeholder="City">
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+          <div class="input-wrap">
+            <label for="county">County</label>
+            <input type="text" id="county" name="county" [(ngModel)]="county" placeholder="County">
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+          <div class="input-wrap">
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" [(ngModel)]="country" placeholder="Country">
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <input type="submit" value="Submit" class="btn">
 
   </form>
-
-
-
-
 
 
 </app-page-content>
