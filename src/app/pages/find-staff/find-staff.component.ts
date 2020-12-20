@@ -11,7 +11,6 @@ import {
 } from '../../../typescript-angular-client-generated';
 import {ContactListService} from '../../services/contact-list/contact-list.service';
 import {Router} from '@angular/router';
-import {combineAll} from 'rxjs/operators';
 
 @Component({
   selector: 'app-find-staff',
@@ -35,9 +34,6 @@ export class FindStaffComponent implements OnInit{
   private selectAllShifts=false;
 
 
-  protected selectAll = true;
-  // protected selectedStaff:Map<number, StaffwId> = new Map;
-  protected toggleAfterSelectAll = false;
   public checks:boolean;
 
   constructor(private staffService:StaffService,
@@ -123,14 +119,7 @@ export class FindStaffComponent implements OnInit{
     this.updateShifts();
 
 
-   //  this.selectedStaffMemberShifts.clear()
-   //
-   //  for(let i=0;i<this.selectedStaffMember.shifts.length; i++){
-   //    const shift = this.selectedStaffMember.shifts[i];
-   //    this.selectedStaffMemberShifts.set(i,shift);
-   //  }
-   //
-   // this.showShifts(id);
+
   }
 
   updateShifts(): void{
@@ -162,17 +151,6 @@ export class FindStaffComponent implements OnInit{
   }
 
 
-  //
-  // /** TODO delete
-  //  * Keeps track of the selection property of each guest
-  //  * @param id guest ID.
-  //  */
-  // toggleSelectedStaff(id:number): void{
-  //   this.selectedStaff[id] = !this.selectedStaff[id];
-  //   if(!this.selectedStaff[id]){
-  //     this.selectAll = true; // Ensure toggle deselect all
-  //   }
-  // }
 
   /**
    * Changes the background color of the row of the selected staff.
@@ -194,31 +172,6 @@ export class FindStaffComponent implements OnInit{
     this.selectedStaffMemberShiftsChecked.set(id,!value);
   }
 
-
-  //
-  // /** TODO delete
-  //  * Keeps track of the selection property of each guest
-  //  * @param id guest ID.
-  //  */
-  // selectAllToggle(): void{
-  //   //Select all
-  //   if (this.selectAll){
-  //     this.selectAll = false;
-  //     this.checks = true;
-  //     Object.keys(this.selectedStaff).forEach( (key)=> {
-  //       this.selectedStaff[key] = true;
-  //     });
-  //
-  //   } else {if(!this.selectAll && !this.toggleAfterSelectAll){ //Deselect all
-  //     this.selectAll = true;
-  //     this.checks = false;
-  //     Object.keys(this.selectedStaff).forEach( (key)=> {
-  //       this.selectedStaff[key] = false;
-  //     });
-  //   }
-  //   }
-  // }
-  //
 
 
 
@@ -263,7 +216,7 @@ export class FindStaffComponent implements OnInit{
     this.contactListService.currentContacts.subscribe(r=>{
       console.log("current contact");
       console.log(r)});
-    this.router.navigateByUrl('alarm/find-staff/contacts');
+    this.router.navigateByUrl('notify/find-staff/contacts');
   }
 
 

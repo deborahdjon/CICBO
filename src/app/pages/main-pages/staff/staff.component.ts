@@ -51,13 +51,6 @@ export class StaffComponent implements OnInit {
   @Input() country: string;
   @Input() streetNo: string;
 
-//TODO for toggle select all
-
-  // protected selectAll = true;
-  // protected selectedStaff:Map<number, StaffwId> = new Map;
-  // protected toggleAfterSelectAll = false;
-  // public checks:boolean;
-
 
   /**
    * Create service instances.
@@ -101,11 +94,11 @@ export class StaffComponent implements OnInit {
     this.lastName2 = staff.name;
     this.phoneNumber = parseInt(staff.phone);
     this.emailAddress = staff.mail;
-    this.street = "test";
+    this.street = "";
     this.houseNumber = stringify(1);
-    this.county = "test";
+    this.county = "";
     this.zipCode = 2;
-    this.country = "chamany";
+    this.country = "";
   }
 
   /**
@@ -343,7 +336,7 @@ export class StaffComponent implements OnInit {
   }
 
   /**
-   * Delets all selected shifts from selected staff member.
+   * Deletes all selected shifts from selected staff member.
    */
   deleteShift(): void {
     const newShifts: StaffShift[] =[];

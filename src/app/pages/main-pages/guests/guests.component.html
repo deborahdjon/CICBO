@@ -58,7 +58,7 @@
         <td>{{guest.name}}</td>
         <td>{{guest.mail}}</td>
         <td>{{guest.arrivedAt}}</td>
-        <td class="td-m"><button (click)="onEdit(guest.id)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
+        <td class="td-m"><button (click)="onEdit(guest.id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
         <td class="td-s"><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelectedGuest(guest.id)"></td>
 
       </tr>
@@ -94,11 +94,11 @@
               <label for="toTime">To</label>
               <input type="time" id="toTime" name="toTime" [(ngModel)]="toTime" placeholder="To">
 
-              <label for="roomNumber"Room Number></label>
+              <label for="roomNumber"> Room Number</label>
               <input type="number" id="roomNumber" name="roomNumber" [(ngModel)]="roomNumber" placeholder="Room number">
 
               <label for="phoneNumber"> Phone</label>
-              <input type="string" id="phoneNumber"name="phoneNumber" [(ngModel)]="phoneNumber" placeholder="Phone number">
+              <input type="number" id="phoneNumber"name="phoneNumber" [(ngModel)]="phoneNumber" placeholder="Phone number">
 
               <label for="email">Email</label>
               <input type="email" id="email"name="email" [(ngModel)]="emailAddress" placeholder="Email">
@@ -110,10 +110,10 @@
               <input type="number" id="houseNumber" name="houseNumber" [(ngModel)]="houseNumber" placeholder="No.">
 
               <label for="county">County</label>
-              <input type="text" id="county"name="county" [(ngModel)]="county" placeholder="County">
+              <input type="text" id="county" name="county" [(ngModel)]="county" placeholder="County">
 
               <label for="zipCode">Zip code</label>
-              <input type="number" id="zipCode"name="zipCode" [(ngModel)]="zipCode" placeholder="Zip code">
+              <input type="number" id="zipCode" name="zipCode" [(ngModel)]="zipCode" placeholder="Zip code">
 
               <label for="country">Country</label>
               <input type="text" id="country" name="country" [(ngModel)]="country" placeholder="Country">
@@ -121,7 +121,7 @@
             </form>
         </div>
         <div class="modal-footer">
-          <input type="submit" value="Save changes" class="btn btn-secondary" form="editGuestForm"> <!--Todo make modal disappear-->
+          <input type="submit" value="Save changes" class="btn btn-secondary" form="editGuestForm">
         </div>
       </div>
     </div>

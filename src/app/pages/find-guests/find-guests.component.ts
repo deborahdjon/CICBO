@@ -100,7 +100,7 @@ export class FindGuestsComponent implements OnInit {
     const alarmQueries:AlarmQueryObject[] = await this.createQueryObjects();
     await this.getContactList(alarmQueries);
     await this.contactListService.addContacts({staffMembers: this.staffContacts, guests:this.guestContacts})
-    await this.router.navigateByUrl('alarm/find-guest/contacts');
+    await this.router.navigateByUrl('notify/find-guest/contacts');
   }
 
   /**
@@ -132,7 +132,7 @@ export class FindGuestsComponent implements OnInit {
    */
   getContactList(alarmQueries:AlarmQueryObject[]): void{
     alarmQueries.forEach(query=>{
-      this.alarmService.createContactList(query).subscribe(res =>{ //TODO make search and create contact list work
+      this.alarmService.createContactList(query).subscribe(res =>{
         this.guestContacts = this.guestContacts.concat(res.guests);
         this.staffContacts = this.staffContacts.concat(res.staffMembers);
       });

@@ -1,26 +1,25 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {GuestService} from "../../../typescript-angular-client-generated";
 
 import { Guest } from "../../../typescript-angular-client-generated"
 
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-guest',
   templateUrl: './new-guest.component.html',
   styleUrls: ['./new-guest.component.less']
 })
-export class NewGuestComponent implements OnInit {
+export class NewGuestComponent {
   @Input() firstName: string;
-  @Input() lastName: string; //TODO Remove these
-  @Input() fromTime = "22:30";
-  @Input() toTime = "23:30";
-  @Input() date = "2020-12-10";
-  @Input() roomNumber = "1";
-  @Input() phoneNumber = "1";
+  @Input() lastName: string;
+  @Input() fromTime : string;
+  @Input() toTime: string;
+  @Input() date :string;
+  @Input() roomNumber: string;
+  @Input() phoneNumber:string;
   @Input() emailAddress: string;
   @Input() street: string;
-  @Input() houseNumber = "1";
+  @Input() houseNumber:string;
   @Input() county: string;
   @Input() zipCode: string;
   @Input() country: string;
@@ -28,10 +27,7 @@ export class NewGuestComponent implements OnInit {
   guest: Guest;
   guests: Guest[];
   form;
-  constructor(private guestService:GuestService, private router:Router) {  }
-
-  ngOnInit(): void {
-  }
+  constructor(private guestService:GuestService) {  }
 
 
   onSubmit():void {

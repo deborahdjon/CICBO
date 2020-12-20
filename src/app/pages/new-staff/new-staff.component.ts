@@ -1,7 +1,5 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
-import {Guest, GuestService, Staff, StaffService} from '../../../typescript-angular-client-generated';
-import {Router} from '@angular/router';
-declare let $: any;
+import {Component, Input} from '@angular/core';
+import {Staff, StaffService} from '../../../typescript-angular-client-generated';
 
 
 @Component({

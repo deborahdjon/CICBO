@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GuestwId, Room, RoomService} from "../../../../typescript-angular-client-generated";
+import { Room, RoomService} from "../../../../typescript-angular-client-generated";
 
 @Component({
   selector: 'app-rooms',
@@ -19,7 +19,7 @@ export class RoomsComponent implements OnInit {
 
   ngOnInit(): void {return}
 
-  onSubmit(){
+  onSubmit(): void{
     const room:Room ={
       "number": this.roomNumber,
       "name": this.roomName
@@ -29,7 +29,7 @@ export class RoomsComponent implements OnInit {
     });
   }
 
-  public toggleSelecteRoom(roomNumber:number){
+  public toggleSelecteRoom(roomNumber:number): void{
     this.selectedRooms.set(roomNumber , !this.selectedRooms.get(roomNumber));
   }
 

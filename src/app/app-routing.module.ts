@@ -15,21 +15,20 @@ import {FindStaffComponent} from "./pages/find-staff/find-staff.component";
 import {ContactListComponent} from "./pages/contact-list/contact-list.component";
 
 
-const routes: Routes = [ //TODO rm breadcrumbs
-  // Navigation
+const routes: Routes = [
   { path: '', component: HomeComponent, data: { breadcrumb:"Home"} },
-  { path: 'alarm', component: AlarmComponent, data: { breadcrumb:"Alarm"} },//TODO Umbenennen
+  { path: 'notify', component: AlarmComponent, data: { breadcrumb:"Alarm"} },
   { path: 'guests', component: GuestsComponent, data: { breadcrumb:"Guests"} },
-  { path: 'staff', component: StaffComponent, data: { breadcrumb:"Staff"} },//TODO Umbenennen
+  { path: 'employee', component: StaffComponent, data: { breadcrumb:"Staff"} },
   { path: 'rooms', component: RoomsComponent, data: { breadcrumb:"Rooms"} },
   { path: 'about', component: AboutComponent, data: { breadcrumb:"About"} },
   { path: 'gdpr', component: GdprComponent, data: { breadcrumb:"GDPR"} },
   { path: 'legal-notice', component: LegalNoticeComponent, data: { breadcrumb:"Legal Notice"} },
 
-  { path: 'alarm/find-guest', component: FindGuestsComponent, data: { breadcrumb:"Find Guest"} },
-  { path: 'alarm/find-staff', component: FindStaffComponent, data: { breadcrumb:"Find Staff"}},
-  { path: 'alarm/find-guest/contacts', component: ContactListComponent },
-  { path: 'alarm/find-staff/contacts', component: ContactListComponent },
+  { path: 'notify/find-guest', component: FindGuestsComponent, data: { breadcrumb:"Find Guest"} },
+  { path: 'notify/find-staff', component: FindStaffComponent, data: { breadcrumb:"Find Staff"}},
+  { path: 'notify/find-guest/contacts', component: ContactListComponent },
+  { path: 'notify/find-staff/contacts', component: ContactListComponent },
 
   { path: 'new-guest', component: NewGuestComponent, data: { breadcrumb:"New Guest"} },
   { path: 'new-staff', component: NewStaffComponent, data: { breadcrumb:"New Staff"} },

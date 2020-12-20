@@ -42,7 +42,7 @@ export class GuestsComponent implements OnInit {
   ngOnInit(): void {return}
 
 
-  onSubmitFind(): void{ //todo: sorted:boolean
+  onSubmitFind(): void{
     const searchObject: SearchObject = {
       "sortByName": true,
       "firstName": this.firstName,
@@ -91,7 +91,7 @@ export class GuestsComponent implements OnInit {
     this.country = "chamany";
   }
 
-  onSubmitEdit(guestId:number){
+  onSubmitEdit(guestId:number): void{
     const address = this.street +' ' + this.houseNumber + ', ' + this.zipCode+ ' ' + this.county + ', ' + this.country
 
     const guest:Guest = {
