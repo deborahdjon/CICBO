@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GuestService} from "../../../typescript-angular-client-generated";
+import {GuestService} from '../../../typescript-angular-client-generated';
 
-import { Guest } from "../../../typescript-angular-client-generated"
+import {Guest} from '../../../typescript-angular-client-generated';
 
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-guest',
@@ -12,15 +12,15 @@ import {Router} from "@angular/router";
 })
 export class NewGuestComponent implements OnInit {
   @Input() firstName: string;
-  @Input() lastName: string; //TODO Remove these
-  @Input() fromTime = "22:30";
-  @Input() toTime = "23:30";
-  @Input() date = "2020-12-10";
-  @Input() roomNumber = "1";
-  @Input() phoneNumber = "1";
+  @Input() lastName: string;
+  @Input() fromTime: string;
+  @Input() toTime: string;
+  @Input() date: string;
+  @Input() roomNumber: string;
+  @Input() phoneNumber: string;
   @Input() emailAddress: string;
   @Input() street: string;
-  @Input() houseNumber = "1";
+  @Input() houseNumber: string
   @Input() city: string;
   @Input() county: string;
   @Input() zipCode: string;
@@ -29,32 +29,34 @@ export class NewGuestComponent implements OnInit {
   guest: Guest;
   guests: Guest[];
   form;
-  constructor(private guestService:GuestService, private router:Router) {  }
+
+  constructor(private guestService: GuestService, private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
 
-  onSubmit():void {
+  onSubmit(): void {
 
-    const address = this.street +' ' + this.houseNumber + ', ' + this.zipCode+ ' '+ this.city+ ', ' + this.county + ', ' + this.country
+    const address = this.street + ' ' + this.houseNumber + ', ' + this.zipCode + ' ' + this.city + ', ' + this.county + ', ' + this.country;
 
 
-    const guest:Guest = {
-      "firstName": this.firstName,
-      "name": this.lastName,
-      "mail": this.emailAddress,
-      "phone": this.phoneNumber,
-      "address": address,
-      "arrivedAt": this.date+' '+this.fromTime,
-      "leftAt":  this.date+' '+this.toTime,
-      "room": {
-        "number": parseInt(this.roomNumber)
+    const guest: Guest = {
+      'firstName': this.firstName,
+      'name': this.lastName,
+      'mail': this.emailAddress,
+      'phone': this.phoneNumber,
+      'address': address,
+      'arrivedAt': this.date + ' ' + this.fromTime,
+      'leftAt': this.date + ' ' + this.toTime,
+      'room': {
+        'number': parseInt(this.roomNumber)
       }
-    }
+    };
     this.guestService.addGuest(guest).subscribe(res => {
       console.table(res);
-     });
+    });
   }
 
 }

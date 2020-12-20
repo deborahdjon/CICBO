@@ -127,6 +127,23 @@ td {
   .font(@thick, @small, @gray-green)
 }
 
+.masterCol {
+  background-color: #00B7FF;
+  .font(@thin, @small, @gray-green);
+  padding: @pad-lr;
+}
+
+@media screen and (max-width: 768px) {
+  .masterCol {
+    max-width: 500px;
+  }
+}
+
+.submitButtonWrapper {
+  display: flex;
+  justify-content: flex-end
+}
+
 
 //.page-content(@flex-direction){
 //  display: flex;
