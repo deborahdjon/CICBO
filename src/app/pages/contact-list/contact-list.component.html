@@ -16,7 +16,7 @@
         <th>Select</th>
       </tr>
 
-      <tr *ngFor="let guest of guests" [ngClass]="setClasses()">
+      <tr *ngFor="let guest of guests" >
         <td>{{guest.firstName}}</td>
         <td>{{guest.name}}</td>
         <td>{{guest.mail}}</td>

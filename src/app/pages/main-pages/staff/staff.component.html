@@ -36,7 +36,7 @@
         <td [class]="checkSelection(staffMember.id)">{{staffMember.mail}}</td>
         <td [class]="checkSelection(staffMember.id)">{{staffMember.phone}}</td>
         <td [class]="checkSelection(staffMember.id)">{{staffMember.address}}</td>
-        <td [class]="checkSelection(staffMember.id)"><button (click)="showShifts(staffMember.id)" type="button" class="btn btn-primary">Select</button></td>
+        <td [class]="checkSelection(staffMember.id)"><button (click)="selectStaff(staffMember.id)" type="button" class="btn btn-primary">Select</button></td>
       </tr>
     </table>
 
@@ -123,19 +123,16 @@
       <title>Shifts</title>
 
       <tr>
-        <th>No.</th>
         <th>Arrived At</th>
         <th>Left At</th>
         <th>Rooms</th>
-        <th>Date</th>
       </tr>
 
       <tr *ngFor="let shiftId of selectedStaffMemberShifts.keys()">
-        <td></td>
         <td>{{selectedStaffMemberShifts.get(shiftId).arrivedAt}}</td>
         <td>{{selectedStaffMemberShifts.get(shiftId).leftAt}}</td>
         <td>{{getShiftRooms(selectedStaffMemberShifts.get(shiftId))}}</td>
-        <td><button (click)="deleteShift()"type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
+        <td><button (click)="deleteShift()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
         <td><input type="checkbox" name="selectedShift" [checked]="checks" (change)="toggleSelectedShifts(shiftId)"></td>
       </tr>
 

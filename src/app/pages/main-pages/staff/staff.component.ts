@@ -51,7 +51,18 @@ export class StaffComponent implements OnInit {
   @Input() country: string;
   @Input() streetNo: string;
 
+//TODO for toggle select all
 
+  // protected selectAll = true;
+  // protected selectedStaff:Map<number, StaffwId> = new Map;
+  // protected toggleAfterSelectAll = false;
+  // public checks:boolean;
+
+
+  /**
+   * Create service instances.
+   * @param staffService
+   */
   constructor(private staffService:StaffService) { }
 
   /**
@@ -67,6 +78,7 @@ export class StaffComponent implements OnInit {
       "address": "",
     }
   }
+
 
   /**
    * Update selected staff member.
@@ -119,6 +131,8 @@ export class StaffComponent implements OnInit {
     }
   }
 
+
+
   /**
    * Sets the list of displayed staff to all staff currently in the database.
    */
@@ -133,6 +147,7 @@ export class StaffComponent implements OnInit {
       });
     })
   }
+
 
   /**
    * Set the values of the search object.
@@ -178,31 +193,71 @@ export class StaffComponent implements OnInit {
     }else{
       searchObject = this.lastSearch;
     }
+
     try{
       this.staffService.findStaffMembers(searchObject).subscribe(res=>{
+        if(res.length === 0){
+          alert("No staff member found.")
+        }else{
+
+
         this.staff = res;
         this.selectedStaffMember = res[0];
         this.staff.forEach(staff =>{
           this.staffMap.set(staff.id, staff);
         });
+        }
       });
     }catch(e){
       alert(e.message);
     }
   }
 
+
+
   /**
    * Selects a staff and sets the
    * @param id Id of staff to select.
    */
   selectStaff(id: number): void {
-    this.selectedStaffMemberShifts.clear();
     this.selectedStaffMember = this.staffMap.get(id);
-    for(let i=0; i++;i<this.selectedStaffMember.shifts.length){
-      const shift = this.selectedStaffMember.shifts[i];
-      this.selectedStaffMemberShifts.set(i,shift);
+    this.updateShifts();
     }
+
+  /**
+   * Changes the background color of the row of the selected staff.
+   * @param staffMemberId Id of staff member to select.
+   */
+  checkSelection(staffMemberId:number): string{
+    if(staffMemberId === this.selectedStaffMember.id){
+      return "marked-table-cell"
+    }else{return "table-cell"}
   }
+
+
+  /**
+   * Delete staff member.
+   */
+  async deleteStaff(): Promise<void> {
+    await this.staffService.deleteStaffMember(this.selectedStaffMember.id).subscribe(data=>{
+      console.log(data);
+    });
+    await this.reloadStaff();
+
+  }
+
+
+
+
+
+  updateShifts(): void{
+      this.selectedStaffMemberShifts.clear();
+      for(let i=0;i<this.selectedStaffMember.shifts.length; i++){
+        const shift = this.selectedStaffMember.shifts[i];
+        this.selectedStaffMemberShifts.set(i,shift);
+        console.log(this.selectedStaffMemberShifts)
+      }
+    }
 
   /**
    * Selects or deselects all shifts.
@@ -237,14 +292,13 @@ export class StaffComponent implements OnInit {
     return rooms
   }
 
-  /**
-   * Populates the shifts table with shifts of the selected staff member.
-   * @param id Id of selected staff.
-   */
-  showShifts(id: number): void{
-    console.log(this.selectedStaffMember);
-    this.selectedStaffMember = this.staffMap.get(id);
-  }
+  // /**
+  //  * Populates the shifts table with shifts of the selected staff member.
+  //  * @param id Id of selected staff.
+  //  */
+  // showShifts(id: number): void{
+  //   this.selectedStaffMember = this.staffMap.get(id);
+  // }
 
   /**
    * Adds a shift to the selected staff member.
@@ -278,16 +332,6 @@ export class StaffComponent implements OnInit {
 
   }
 
-  /**
-   * Changes the background color of the row of the selected staff.
-   * @param staffMemberId Id of staff member to select.
-   */
-  checkSelection(staffMemberId:number): string{
-    if(staffMemberId === this.selectedStaffMember.id){
-      return "marked-table-cell"
-    }else{return "table-cell"}
-  }
-
 
   /**
    * Toggles all shifts as selected or not
@@ -309,7 +353,7 @@ export class StaffComponent implements OnInit {
     this.staffService.replaceShift(this.selectedStaffMember.id, newShifts).subscribe(res=>{
       console.log(res)
     });
-    this.reloadStaff();
+    this.updateShifts();
   }
 
   /**
@@ -322,15 +366,7 @@ export class StaffComponent implements OnInit {
     }else{
       this.findStaff(false);
     }
+    this.selectStaff(this.selectedStaffMember.id);
   }
 
-  /**
-   * Delete staff member.
-   */
-  deleteStaff(): void {
-    this.staffService.deleteStaffMember(this.selectedStaffMember.id).subscribe(data=>{
-      console.log(data);
-    });
-    this.reloadStaff();
-  }
 }
