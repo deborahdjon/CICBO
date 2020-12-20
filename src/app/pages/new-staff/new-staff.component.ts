@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
-import {Staff, StaffService} from "../../../typescript-angular-client-generated";
+import {Staff, StaffService} from '../../../typescript-angular-client-generated';
 declare var $: any;
 
 
@@ -21,9 +21,9 @@ export class NewStaffComponent implements OnInit {
   @Input() country: string;
   myDiv: ElementRef<HTMLElement>;
   modalContent: string;
-  $ : any;
+  $: any;
 
-  constructor(private staffService:StaffService) { }
+  constructor(private staffService: StaffService) { }
 
   ngOnInit(): void {
   }
@@ -31,13 +31,13 @@ export class NewStaffComponent implements OnInit {
   onSubmit(){
 
 
-    const staff:Staff = {
-      "firstName": this.firstName,
-      "name": this.lastName,
-      "mail": this.emailAddress,
-      "phone": this.phoneNumber,
-      "address": "address",
-    }
+    const staff: Staff = {
+      firstName: this.firstName,
+      name: this.lastName,
+      mail: this.emailAddress,
+      phone: this.phoneNumber,
+      address: 'address',
+    };
 
     this.staffService.addStaff(staff).subscribe(res => {
       this.modalContent = res;

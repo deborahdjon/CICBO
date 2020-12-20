@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule,NO_ERRORS_SCHEMA  } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA  } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
@@ -18,8 +18,8 @@ import { RoomsComponent } from './pages/main-pages/rooms/rooms.component';
 import { AboutComponent } from './pages/main-pages/about/about.component';
 import { LegalNoticeComponent } from './pages/main-pages/legal-notice/legal-notice.component';
 import { RouterModule, Routes } from '@angular/router';
-import { GdprComponent } from './pages/main-pages/gdpr/gdpr.component'
-import { AppRoutingModule } from "./app-routing.module"; //TODO delete?
+import { GdprComponent } from './pages/main-pages/gdpr/gdpr.component';
+import { AppRoutingModule } from './app-routing.module'; // TODO delete?
 import { StaffComponent } from './pages/main-pages/staff/staff.component';
 import { AlarmComponent } from './pages/main-pages/alarm/alarm.component';
 import { PageContentComponent } from './layout/page-content/page-content.component';
@@ -31,15 +31,15 @@ import { FindStaffComponent } from './pages/find-staff/find-staff.component';
 import { ContactListComponent } from './pages/contact-list/contact-list.component';
 import { InspectEmployeeComponent } from './pages/inspect-employee/inspect-employee.component';
 import { InspectGuestComponent } from './pages/inspect-guest/inspect-guest.component';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {ApplicationModule} from "@angular/core";
-import {AlarmService, GuestService, RoomService, StaffService} from "../typescript-angular-client-generated";
+import {ApplicationModule} from '@angular/core';
+import {AlarmService, GuestService, RoomService, StaffService} from '../typescript-angular-client-generated';
 import { TableDetailsComponent } from './table-details/table-details.component';
-import {ApiModule, BASE_PATH} from "../typescript-angular-client-generated";
-import {BreadcrumbModule} from "angular-crumbs";
+import {ApiModule, BASE_PATH} from '../typescript-angular-client-generated';
+import {BreadcrumbModule} from 'angular-crumbs';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ContactListService} from "./services/contact-list/contact-list.service";
+import {ContactListService} from './services/contact-list/contact-list.service';
 
 
 @NgModule({
@@ -72,7 +72,7 @@ import {ContactListService} from "./services/contact-list/contact-list.service";
     InspectGuestComponent,
     TableDetailsComponent,
   ],
-  exports:[NavigationComponent],
+  exports: [NavigationComponent],
   imports: [
     BrowserModule,
     MDBBootstrapModule.forRoot(),

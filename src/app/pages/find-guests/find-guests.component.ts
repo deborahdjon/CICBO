@@ -5,11 +5,11 @@ import {
   GuestService,
   GuestwId,
   StaffwId
-} from "../../../typescript-angular-client-generated";
-import {SearchObject} from "../../../typescript-angular-client-generated";
+} from '../../../typescript-angular-client-generated';
+import {SearchObject} from '../../../typescript-angular-client-generated';
 
-import {Router} from "@angular/router";
-import {ContactListService} from "../../services/contact-list/contact-list.service";
+import {Router} from '@angular/router';
+import {ContactListService} from '../../services/contact-list/contact-list.service';
 
 @Component({
   selector: 'app-find-guests',
@@ -17,37 +17,37 @@ import {ContactListService} from "../../services/contact-list/contact-list.servi
   styleUrls: ['./find-guests.component.less']
 })
 export class FindGuestsComponent implements OnInit {
-  @Input() firstName:string;
-  @Input() lastName:string;
+  @Input() firstName: string;
+  @Input() lastName: string;
   @Input() fromDate: string;
   @Input() toDate: string;
 
-  private guestContacts:GuestwId[] = [];
-  private staffContacts:StaffwId[] = [];
+  private guestContacts: GuestwId[] = [];
+  private staffContacts: StaffwId[] = [];
 
 
-  guests:GuestwId[];
-  protected guestsMap:Map<number,GuestwId> = new Map;
-  protected selectedGuests:Map<number,boolean> = new Map;
-  public allCheckBoxes:boolean;
+  guests: GuestwId[];
+  protected guestsMap: Map<number, GuestwId> = new Map;
+  protected selectedGuests: Map<number, boolean> = new Map;
+  public allCheckBoxes: boolean;
 
 
 
-  constructor(private guestService: GuestService, private alarmService: AlarmService, public router:Router,  private contactListService:ContactListService) { }
+  constructor(private guestService: GuestService, private alarmService: AlarmService, public router: Router,  private contactListService: ContactListService) { }
 
-  ngOnInit(): void {return}
+  ngOnInit(): void {return; }
 
   onSubmit(): void{
 
-    const searchGuest:SearchObject = {
-      "sortByName":true,
-      "firstName":this.firstName,
-      "name": this.lastName
-    }
+    const searchGuest: SearchObject = {
+      sortByName: true,
+      firstName: this.firstName,
+      name: this.lastName
+    };
 
-    this.guestService.findGuests(searchGuest).subscribe(res =>{
+    this.guestService.findGuests(searchGuest).subscribe(res => {
       this.guests = res;
-      res.forEach(guest =>{
+      res.forEach(guest => {
         this.guestsMap.set(guest.id, guest);
         this.selectedGuests.set(guest.id, false);
       });
@@ -59,7 +59,7 @@ export class FindGuestsComponent implements OnInit {
    * Keeps track of the selection property of each guest
    * @param id guest ID.
    */
-  toggleSelectedGuest(id:number): void{
+  toggleSelectedGuest(id: number): void{
     this.selectedGuests.set(id , !this.selectedGuests.get(id));
   }
 
@@ -76,17 +76,17 @@ export class FindGuestsComponent implements OnInit {
       }
 
 
-    //Select all
+    // Select all
     if (!flag){
       this.allCheckBoxes = true;
-      Object.keys(this.selectedGuests).forEach( (key)=> {
+      Object.keys(this.selectedGuests).forEach( (key) => {
         this.selectedGuests[key] = true;
       });
 
-    //Deselect all
+    // Deselect all
     }else{
       this.allCheckBoxes = false;
-      Object.keys(this.selectedGuests).forEach( (key)=> {
+      Object.keys(this.selectedGuests).forEach( (key) => {
         this.selectedGuests[key] = false;
       });
       }
@@ -97,9 +97,9 @@ export class FindGuestsComponent implements OnInit {
    * Returns a list of contacts of the infected person.
    */
   async getContacts(): Promise<void>{
-    const alarmQueries:AlarmQueryObject[] = await this.createQueryObjects();
+    const alarmQueries: AlarmQueryObject[] = await this.createQueryObjects();
     await this.getContactList(alarmQueries);
-    await this.contactListService.addContacts(this.guestContacts, this.staffContacts)
+    await this.contactListService.addContacts(this.guestContacts, this.staffContacts);
     await this.router.navigateByUrl('alarm/find-guest/contacts');
   }
 
@@ -107,19 +107,19 @@ export class FindGuestsComponent implements OnInit {
    * Creates  query objects from selected guests.
    */
   createQueryObjects(): AlarmQueryObject[]{
-    const alarmQueries:AlarmQueryObject[] = [];
-    let alarmQuery:AlarmQueryObject;
+    const alarmQueries: AlarmQueryObject[] = [];
+    let alarmQuery: AlarmQueryObject;
 
     for (const [key, value] of this.selectedGuests) {
-      if(value){
+      if (value){
         alarmQuery = {
-          "type": "guest",
-          "sortByName": true ,
-          "firstName": this.guestsMap.get(key).firstName,
-          "name": this.guestsMap.get(key).name,
-          "arrivedAt": this.guestsMap.get(key).arrivedAt,
-          "leftAt": this.guestsMap.get(key).leftAt
-        }
+          type: 'guest',
+          sortByName: true ,
+          firstName: this.guestsMap.get(key).firstName,
+          name: this.guestsMap.get(key).name,
+          arrivedAt: this.guestsMap.get(key).arrivedAt,
+          leftAt: this.guestsMap.get(key).leftAt
+        };
         alarmQueries.push(alarmQuery);
       }
     }
@@ -130,9 +130,9 @@ export class FindGuestsComponent implements OnInit {
    * Generates the contact list.
    * @param alarmQueries
    */
-  getContactList(alarmQueries:AlarmQueryObject[]): void{
-    alarmQueries.forEach(query=>{
-      this.alarmService.createContactList(query).subscribe(res =>{ //TODO make search and create contact list work
+  getContactList(alarmQueries: AlarmQueryObject[]): void{
+    alarmQueries.forEach(query => {
+      this.alarmService.createContactList(query).subscribe(res => { // TODO make search and create contact list work
         this.guestContacts = this.guestContacts.concat(res.guests);
         this.staffContacts = this.staffContacts.concat(res.staffMembers);
       });

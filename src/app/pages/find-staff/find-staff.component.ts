@@ -5,25 +5,25 @@ import {
   StaffService,
   StaffwId,
   SearchObject
-} from "../../../typescript-angular-client-generated";
+} from '../../../typescript-angular-client-generated';
 @Component({
   selector: 'app-find-staff',
   templateUrl: './find-staff.component.html',
   styleUrls: ['./find-staff.component.css']
 })
 export class FindStaffComponent implements OnInit {
-  @Input() firstName:string;
-  @Input() lastName:string;
+  @Input() firstName: string;
+  @Input() lastName: string;
   @Input() fromDate: string;
   @Input() toDate: string;
 
   staff: StaffwId[];
-  protected selectedStaff:Map<number, StaffwId> = new Map;
+  protected selectedStaff: Map<number, StaffwId> = new Map;
   protected selectAll = true;
   protected toggleAfterSelectAll = false;
-  public checks:boolean;
+  public checks: boolean;
 
-  constructor(private staffService:StaffService, private alarmService:AlarmService) {}
+  constructor(private staffService: StaffService, private alarmService: AlarmService) {}
 
   ngOnInit(): void {
   }
@@ -33,12 +33,12 @@ export class FindStaffComponent implements OnInit {
    */
   onSubmit(): void{
 
-    const searchStaff:SearchObject = {
-      "sortByName":true,
-      "firstName":"Jane"
-    }
+    const searchStaff: SearchObject = {
+      sortByName: true,
+      firstName: 'Jane'
+    };
 
-    this.staffService.findStaffMembers(searchStaff).subscribe(res =>{
+    this.staffService.findStaffMembers(searchStaff).subscribe(res => {
       this.staff = res;
     });
 
@@ -49,27 +49,27 @@ export class FindStaffComponent implements OnInit {
    * @private
    */
   private determineSearchObject(): SearchObject{
-    let searchStaff:SearchObject;
-    if(!(this.firstName || this.lastName)){
-      alert("Please enter a name");
+    let searchStaff: SearchObject;
+    if (!(this.firstName || this.lastName)){
+      alert('Please enter a name');
     }else{
-      if(this.firstName && this.lastName){
+      if (this.firstName && this.lastName){
         searchStaff = {
-          "sortByName":true,
-          "firstName":this.firstName,
-          "name": this.lastName
-        }
+          sortByName: true,
+          firstName: this.firstName,
+          name: this.lastName
+        };
       }else{
-        if(this.firstName){
+        if (this.firstName){
           searchStaff = {
-            "sortByName":true,
-            "firstName":this.firstName,
-          }
+            sortByName: true,
+            firstName: this.firstName,
+          };
         }else{
           searchStaff = {
-            "sortByName":true,
-            "name":this.lastName,
-          }
+            sortByName: true,
+            name: this.lastName,
+          };
         }
       }
     }
@@ -83,27 +83,27 @@ export class FindStaffComponent implements OnInit {
    * Keeps track of the selection property of each guest
    * @param id guest ID.
    */
-  toggleSelectedStaff(id:number){
+  toggleSelectedStaff(id: number){
     this.selectedStaff[id] = !this.selectedStaff[id];
-    if(!this.selectedStaff[id]){
+    if (!this.selectedStaff[id]){
       this.selectAll = true; // Ensure toggle deselect all
     }
 
   }
 
   selectAllToggle(): void{
-    //Select all
+    // Select all
     if (this.selectAll){
       this.selectAll = false;
       this.checks = true;
-      Object.keys(this.selectedStaff).forEach( (key)=> {
+      Object.keys(this.selectedStaff).forEach( (key) => {
         this.selectedStaff[key] = true;
       });
 
-    } else {if(!this.selectAll && !this.toggleAfterSelectAll){ //Deselect all
+    } else {if (!this.selectAll && !this.toggleAfterSelectAll){ // Deselect all
       this.selectAll = true;
       this.checks = false;
-      Object.keys(this.selectedStaff).forEach( (key)=> {
+      Object.keys(this.selectedStaff).forEach( (key) => {
         this.selectedStaff[key] = false;
       });
     }
@@ -122,14 +122,14 @@ export class FindStaffComponent implements OnInit {
     //   console.log(guest);
     // })
 
-    const alarmQuery:AlarmQueryObject={
-      "type": "guest" ,
-      "sortByName": true ,
-      "firstName": "Jane",
-      "name": "Doe",
-      "arrivedAt": '',
-      "leftAt": ''
-    }
+    const alarmQuery: AlarmQueryObject = {
+      type: 'guest' ,
+      sortByName: true ,
+      firstName: 'Jane',
+      name: 'Doe',
+      arrivedAt: '',
+      leftAt: ''
+    };
 
     // this.alarmService.createContactList(alarmQuery).subscribe(res =>{ TODO make search and create contact list work
     //   console.log(res);
