@@ -84,6 +84,45 @@ label{
 }
 
 // Tables -----------------------------------------------------
+thead{
+  position: absolute;
+}
+
+th, td{
+  min-width:250px
+}
+
+.td-s{
+  min-width: 50px;
+  max-width:50px
+}
+.td-m{
+  min-width: 100px;
+  max-width:100px
+}
+
+.td-l{
+  width:450px
+}
+th{
+  background-color: @green;
+  padding: 10px;
+  border-style: solid;
+  border-color: white;
+  border-width: 3px;
+  .font(@thick, @small, @gray-green)
+}
+
+
+td{
+  background-color: @light-green;
+  padding: 10px;
+  border-style: solid;
+  border-color: white;
+  border-width: 3px;
+  .font(@thick, @small, @gray-green)
+}
+
 
 
 

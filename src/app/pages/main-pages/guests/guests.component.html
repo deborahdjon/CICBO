@@ -1,32 +1,48 @@
 <app-page-content text="Guests">
 
-  <app-content-fixed-size>
+  <div class="page-div-1">
 
     <form class="form" (ngSubmit)="onSubmitFind()">
 
-      <label for="firstName">First name</label>
-      <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
+      <div class="input-wrap">
+        <label for="firstName">First name</label>
+        <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
+      </div>
 
-      <label for="lastName">Last name</label>
-      <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+      <div class="input-wrap">
+        <label for="lastName">Last name</label>
+        <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+      </div>
+      <div class="input-wrap">
+        <label for="fromDate">From</label>
+        <input type="time" id="fromDate" name="fromTime" [(ngModel)]="fromDate" placeholder="From">
+      </div>
 
-      <label for="fromDate">From</label>
-      <input type="time" id="fromDate" name="fromTime" [(ngModel)]="fromDate" placeholder="From">
+      <div class="input-wrap">
+        <label for="toDate">To</label>
+        <input type="time" id="toDate" name="toDate" [(ngModel)]="toDate" placeholder="To">
+      </div>
 
-      <label for="toDate">To</label>
-      <input type="time" id="toDate" name="toDate" [(ngModel)]="toDate" placeholder="To">
-
-      <input type="submit" value="Find Guest" class="btn">
+      <button type="submit" class="small-button btn btn-success">Find Guest</button>
 
     </form>
 
-  </app-content-fixed-size>
+  </div>
 
-  <app-small-button text="Select all" (click)="selectAllToggle()"></app-small-button>
-  <app-small-button text="Show all guests" (click)="showAll()"></app-small-button>
-  <app-small-button text="Delete" (click)="delete()"></app-small-button>
+  <div class="page-div-2">
 
-  <div>
+
+  <div class="table-div">
+
+    <div class="top">
+      <app-small-button text="Select all" (click)="selectAllToggle()"></app-small-button>
+      <app-small-button text="Show all guests" (click)="showAll()"></app-small-button>
+      <app-small-button text="Delete" (click)="delete()"></app-small-button>
+    </div>
+
+    <div class="bottom">
+
+
     <table>
       <tr>
         <th>First Name</th>
@@ -46,8 +62,10 @@
       </tr>
 
     </table>
+    </div>
   </div>
 
+  </div>
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -106,12 +124,6 @@
       </div>
     </div>
   </div>
-
-
-<!--       -->
-<!--            &lt;!&ndash; Guest form&ndash;&gt;-->
-
-
 
 
 </app-page-content>

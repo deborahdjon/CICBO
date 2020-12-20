@@ -1,9 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {ContactListService} from "../../services/contact-list/contact-list.service";
 import {
-  GuestService,
-  GuestwId, StaffService,
+  GuestwId,
   StaffwId
 } from "../../../typescript-angular-client-generated";
 
@@ -20,18 +19,24 @@ export class ContactListComponent implements OnInit {
   public shiftDate: string;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private contactListService:ContactListService) {}
+              private contactListService:ContactListService,
+              private router:Router) {
+    router.events.subscribe((event)=>{
+      if (event instanceof NavigationEnd){
+        this.contactListService.currentGuests.subscribe(s=>console.log(s));
+        this.contactListService.currentStaff.subscribe(s=>console.log(s));
+      }
+    })
+  }
+
 
   /**
    * Initialize guest and staff contact lists.
     */
   ngOnInit(): void {
-   this.guests = this.contactListService.getGuests();
-   this.staff = this.contactListService.getStaff();
-    console.log(this.contactListService.getStaff());
-    console.log(this.contactListService.getGuests());
 
   }
+
 
   //TODO Toggle staff und guest
 }

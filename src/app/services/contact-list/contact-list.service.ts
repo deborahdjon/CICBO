@@ -1,33 +1,19 @@
 import { Injectable } from '@angular/core';
 import {GuestwId, StaffwId} from "../../../typescript-angular-client-generated";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactListService {
 
-  public guests: GuestwId[] = [];
-  public staff: StaffwId[] = [];
-
-  constructor() {return}
+  private guestsSource = new BehaviorSubject<GuestwId[]>([]);
+  public currentGuests = this.guestsSource.asObservable();
+  private staffSource = new BehaviorSubject<StaffwId[]>([]);
+  public currentStaff = this.staffSource.asObservable();
 
   addContacts(guests: GuestwId[], staff: StaffwId[]): void {
-    this.guests = guests;
-    this.staff = staff;
-    console.log(this.guests)
+    this.guestsSource.next(guests);
+    this.staffSource.next(staff);
   }
-
-  removeContacts(): void {
-    this.guests = [];
-    this.staff = [];
-  }
-
-  public getGuests(): GuestwId[] {
-    return this.guests;
-  }
-
-  public getStaff(): StaffwId[] {
-    return this.staff;
-  }
-
 }

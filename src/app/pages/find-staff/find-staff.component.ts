@@ -10,10 +10,11 @@ import {stringify} from "querystring";
 import {newArray} from "@angular/compiler/src/util";
 import {ContactListComponent} from "../contact-list/contact-list.component";
 import {ContactListService} from "../../services/contact-list/contact-list.service";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-find-staff',
   templateUrl: './find-staff.component.html',
-  styleUrls: ['./find-staff.component.css']
+  styleUrls: ['./find-staff.component.less']
 })
 export class FindStaffComponent implements OnInit{
 
@@ -37,7 +38,10 @@ export class FindStaffComponent implements OnInit{
   protected toggleAfterSelectAll = false;
   public checks:boolean;
 
-  constructor(private staffService:StaffService, private alarmService:AlarmService, private contactListService:ContactListService) {}
+  constructor(private staffService:StaffService,
+              private alarmService:AlarmService,
+              private contactListService:ContactListService,
+              private router:Router) {}
 
   /**
    * Initialize selected staff.
@@ -132,7 +136,6 @@ export class FindStaffComponent implements OnInit{
     for(let i=0;i<this.selectedStaffMember.shifts.length; i++){
       const shift = this.selectedStaffMember.shifts[i];
       this.selectedStaffMemberShifts.set(i,shift);
-      console.log(this.selectedStaffMemberShifts)
     }
   }
 
@@ -216,6 +219,7 @@ export class FindStaffComponent implements OnInit{
   //
 
 
+
   createQueryObjects(): AlarmQueryObject[]{
     const queries:AlarmQueryObject[] = [];
 
@@ -237,28 +241,63 @@ export class FindStaffComponent implements OnInit{
       queries.push(query);
     });
 
-    console.log(queries);
     return queries
 
   }
 
+  /**
+   * Returns a list of contacts of the infected person.
+   */
+  async getContactList(): Promise<void>{
+    await this.getContacts();
+    //await this.router.navigateByUrl('alarm/find-staff/contacts');
+  }
 
-  getContacts(queryList:AlarmQueryObject[]):void{
+
+  async getContacts():Promise<void>{
+    const queryList:AlarmQueryObject[] = await this.createQueryObjects();
     let guestContacts:GuestwId[] = [];
     let staffContacts:StaffwId[] = [];
 
-    queryList.forEach(query=>{
-      this.alarmService.createContactList(query).subscribe(res =>{ //TODO make search and create contact list work
+    await queryList.forEach(query=>{
+      this.alarmService.createContactList(query).subscribe(res =>{
         guestContacts = guestContacts.concat(res.guests);
         staffContacts = staffContacts.concat(res.staffMembers);
+        console.log("contqact from q");
+        console.log(guestContacts);
+        console.log(staffContacts);
       });
     });
 
-    const guestSet = new Set(guestContacts);
-    const staffSet = new Set(staffContacts);
+    console.log("Contacts");
+    console.log(guestContacts);
+    console.log(staffContacts)
 
-    this.contactListService.addContacts( Array.from(guestSet), Array.from(staffSet));
-    console.log(this.contactListService.guests);
+    const guestSet = await this.uniqueGuests(guestContacts);
+    const staffSet = await this.uniqueStaff(staffContacts);
+    console.log("sets");
+    console.log(guestSet)
+    console.log(staffSet)
+
+    await this.contactListService.addContacts( Array.from(guestSet), Array.from(staffSet));
+    console.log("guests n staff in service")
+    await this.contactListService.currentStaff.subscribe(s=>console.log(s));
+    await this.contactListService.currentGuests.subscribe(s=>console.log(s));
   }
 
+  uniqueStaff(staff:StaffwId[]): StaffwId[]{
+    const uniqueStaffMap: Map<number,StaffwId> = new Map<number,StaffwId>();
+    staff.forEach(staff=>{
+      uniqueStaffMap.set(staff.id, staff);
+    })
+    return Array.from(uniqueStaffMap.values());
+  }
+
+  uniqueGuests(guests:GuestwId[]): GuestwId[]{
+    const uniqueGuestMap: Map<string, GuestwId> = new Map<string, GuestwId>();
+    guests.forEach(guest=>{
+      uniqueGuestMap.set(guest.mail, guest);
+    })
+    return Array.from(uniqueGuestMap.values());
+  }
 }

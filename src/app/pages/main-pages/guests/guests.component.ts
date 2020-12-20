@@ -5,7 +5,7 @@ import {stringify} from "querystring";
 @Component({
   selector: 'app-guests',
   templateUrl: './guests.component.html',
-  styleUrls: ['./guests.component.css']
+  styleUrls: ['./guests.component.less']
 })
 export class GuestsComponent implements OnInit {
   //Find guest Form

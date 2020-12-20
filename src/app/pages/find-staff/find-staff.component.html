@@ -1,5 +1,6 @@
 <app-page-content text="Find Staff">
 
+  <div class="page-div-1">
   <form class="form" (ngSubmit)="onSubmit()">
 
     <label for="firstName">First name</label>
@@ -8,59 +9,71 @@
     <label for="lastName">Last name</label>
     <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
 
-    <input type="submit" value="Find Staff" class="btn">
+    <button type="submit"  class="btn btn-primary small-button">Find Staff</button>
 
   </form>
 
-  <app-small-button text="Get contact list" (click)="getContacts()"></app-small-button>
-
-  <div>
-    <table>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-      </tr>
-
-      <tr *ngFor="let staffMember of staff">
-        <td>{{staffMember.firstName}}</td>
-        <td>{{staffMember.name}}</td>
-        <td>{{staffMember.mail}}</td>
-        <td [class]="checkSelection(staffMember.id)"><button (click)="selectStaff(staffMember.id)" type="button" class="btn btn-primary">Select</button></td>
-
-
-<!--        <td><input type="checkbox" name="selectStaff" [checked]="checks" (change)="toggleSelectedStaff(staffMember.id)"></td>-->
-      </tr>
-
-
-    </table>
   </div>
 
 
-  <div>
-    <h2>{{selectedStaffMember.firstName}} {{selectedStaffMember.name}}</h2>
-    <p></p>
+  <div class="page-div-2">
+
+    <div class="top">
+      <h2>Staff</h2>
+    </div>
+
+    <div class="bottom">
+      <table>
+
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th class="td-m">Select</th>
+        </tr>
+
+
+        <tr *ngFor="let staffMember of staff">
+          <td>{{staffMember.firstName}}</td>
+          <td>{{staffMember.name}}</td>
+          <td>{{staffMember.mail}}</td>
+          <td [class]="checkSelection(staffMember.id)+' td-m'"><button (click)="selectStaff(staffMember.id)" type="button" class="btn btn-primary">Select</button></td>
+        </tr>
+      </table>
+    </div>
 
   </div>
 
-  <table>
-    <title>Shifts</title>
 
-    <tr>
-      <th>No.</th>
-      <th>Arrived At</th>
-      <th>Left At</th>
-      <th>Date</th>
-    </tr>
 
-    <tr *ngFor="let shiftId of selectedStaffMemberShifts.keys()">
-      <td></td>
-      <td>{{selectedStaffMemberShifts.get(shiftId).arrivedAt}}</td>
-      <td>{{selectedStaffMemberShifts.get(shiftId).leftAt}}</td>
-      <td><input type="checkbox" name="selectedShift" [checked]="checks" (change)="toggleSelectedShifts(shiftId)"></td>
-    </tr>
 
-  </table>
+  <div class="page-div-3">
+    <div class="top">
+      <div>
+        <h2>Shifts</h2>
+        <h2>{{selectedStaffMember.firstName}} {{selectedStaffMember.name}}</h2>
+      </div>
+      <app-small-button text="Get contact list" (click)="getContactList()"></app-small-button>
+    </div>
 
+    <div class="bottom">
+      <table>
+        <thead>
+          <tr>
+            <th>Arrived At</th>
+            <th>Left At</th>
+            <th>Date</th>
+            <th class="td-s">X</th>
+          </tr>
+        </thead>
+        <tr *ngFor="let shiftId of selectedStaffMemberShifts.keys()">
+          <td>{{selectedStaffMemberShifts.get(shiftId).arrivedAt.split(' ')[1]}}</td>
+          <td>{{selectedStaffMemberShifts.get(shiftId).leftAt.split(' ')[1]}}</td>
+          <td>{{selectedStaffMemberShifts.get(shiftId).leftAt.split(' ')[0]}}</td>
+          <td class="td-s"><input type="checkbox" name="selectedShift" [checked]="checks" (change)="toggleSelectedShifts(shiftId)"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
 </app-page-content>
