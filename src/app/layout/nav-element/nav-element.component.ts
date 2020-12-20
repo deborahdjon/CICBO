@@ -5,6 +5,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   templateUrl: './nav-element.component.html',
   styleUrls: ['./nav-element.component.less']
 })
+
 export class NavElementComponent {
   @Input() link: string;
   @Input() text: string;

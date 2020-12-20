@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {ContactListService} from "../../services/contact-list/contact-list.service";
 import {
@@ -11,13 +11,23 @@ import {
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.less']
 })
-export class ContactListComponent implements OnInit {
+
+/**
+ * Contains all the potential contacts of the previous pages selection.
+ */
+export class ContactListComponent {
   public guests: GuestwId[] = [];
   public staff: StaffwId[] = [];
 
   @Input() allCheckBoxes: false;
   public shiftDate: string;
 
+  /**
+   * Incorporates the Services required by the class.
+   * @param activatedRoute
+   * @param contactListService Stores contacts provided from previous page.
+   * @param router Router.
+   */
   constructor(private activatedRoute: ActivatedRoute,
               private contactListService:ContactListService,
               private router:Router) {
@@ -26,24 +36,8 @@ export class ContactListComponent implements OnInit {
         this.contactListService.currentContacts.subscribe(res=>{
           this.staff = res.staffMembers;
           this.guests = res.guests;
-
-          console.log(res.staffMembers)
-          console.log(res.guests)
         });
       }
     });
-
-
   }
-
-
-  /**
-   * Initialize guest and staff contact lists.
-    */
-  ngOnInit(): void {
-
-  }
-
-
-  //TODO Toggle staff und guest
 }

@@ -1,7 +1,6 @@
 <app-page-content text="Contacts">
-<!--  <app-small-button text="Send E-Mail" (click)="selectAllToggle()"></app-small-button>-->
-<!--  <app-small-button text="Export" (click)="getContacts()"></app-small-button>-->
 
+<!--Guests contacts table-->
   <div>
     <h2>Guests</h2>
     <table>
@@ -23,10 +22,13 @@
         <td>{{guest.phone}}</td>
         <td>{{guest.arrivedAt}}</td>
         <td>{{guest.leftAt}}</td>
-        <td><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelectedGuest(guest.id)"></td>
       </tr>
     </table>
+  </div>
 
+<!--Staff contacts table-->
+
+  <div>
     <h2>Staff</h2>
     <table>
       <tr>
@@ -57,9 +59,8 @@
         <td>{{staffMember.address}}</td>
         <td>{{staffMember.shifts}}</td>
         <td>{{shiftDate}}</td>
-        <td><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelectedStaff(staffMember.id)"></td>
       </tr>
     </table>
   </div>
 
-</app-page-content>e
+</app-page-content>

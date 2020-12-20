@@ -5,6 +5,10 @@ import {Component, Input} from '@angular/core';
   templateUrl: './menu-button.component.html',
   styleUrls: ['./menu-button.component.less']
 })
+
+/**
+ * Big menu buttons.
+ */
 export class MenuButtonComponent  {
   @Input() text: string;
   @Input() imagePath: string;

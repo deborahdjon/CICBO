@@ -24,6 +24,9 @@ import {NavigationEnd, Router} from "@angular/router";
    ]
 })
 
+/**
+ * Header present on all pages.
+ */
 export class HeaderComponent {
   @Output() hideNav: EventEmitter<void> = new EventEmitter();
   public showNav = false;
