@@ -23,10 +23,17 @@ export class ContactListComponent implements OnInit {
               private router:Router) {
     router.events.subscribe((event)=>{
       if (event instanceof NavigationEnd){
-        this.contactListService.currentGuests.subscribe(s=>console.log(s));
-        this.contactListService.currentStaff.subscribe(s=>console.log(s));
+        this.contactListService.currentContacts.subscribe(res=>{
+          this.staff = res.staffMembers;
+          this.guests = res.guests;
+
+          console.log(res.staffMembers)
+          console.log(res.guests)
+        });
       }
-    })
+    });
+
+
   }
 
 

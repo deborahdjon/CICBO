@@ -2,15 +2,17 @@ import {Component, Input, OnInit} from '@angular/core';
 import {
   AlarmQueryObject,
   AlarmService,
+  ContactList,
+  GuestwId,
+  SearchObject,
   StaffService,
-  StaffwId,
-  SearchObject, StaffShift, GuestwId
-} from "../../../typescript-angular-client-generated";
-import {stringify} from "querystring";
-import {newArray} from "@angular/compiler/src/util";
-import {ContactListComponent} from "../contact-list/contact-list.component";
-import {ContactListService} from "../../services/contact-list/contact-list.service";
-import {Router} from "@angular/router";
+  StaffShift,
+  StaffwId
+} from '../../../typescript-angular-client-generated';
+import {ContactListService} from '../../services/contact-list/contact-list.service';
+import {Router} from '@angular/router';
+import {combineAll} from 'rxjs/operators';
+
 @Component({
   selector: 'app-find-staff',
   templateUrl: './find-staff.component.html',
@@ -249,55 +251,49 @@ export class FindStaffComponent implements OnInit{
    * Returns a list of contacts of the infected person.
    */
   async getContactList(): Promise<void>{
-    await this.getContacts();
-    //await this.router.navigateByUrl('alarm/find-staff/contacts');
+    const contacts = await this.getContacts();
+    console.log("contacts");
+    console.log(contacts);
+    const uniqueContacts = await this.uniqueContacts(contacts)
+    console.log("uniqueContacts");
+    console.log(uniqueContacts);
+    const result = await this.contactListService.addContacts(uniqueContacts);
+    console.log("result");
+    console.log(result);
+    this.contactListService.currentContacts.subscribe(r=>{
+      console.log("current contact");
+      console.log(r)});
+    this.router.navigateByUrl('alarm/find-staff/contacts');
   }
 
 
-  async getContacts():Promise<void>{
+  async getContacts():Promise<ContactList>{
+    //Promise.all
     const queryList:AlarmQueryObject[] = await this.createQueryObjects();
     let guestContacts:GuestwId[] = [];
     let staffContacts:StaffwId[] = [];
 
-    await queryList.forEach(query=>{
-      this.alarmService.createContactList(query).subscribe(res =>{
-        guestContacts = guestContacts.concat(res.guests);
-        staffContacts = staffContacts.concat(res.staffMembers);
-        console.log("contqact from q");
-        console.log(guestContacts);
-        console.log(staffContacts);
-      });
-    });
-
-    console.log("Contacts");
-    console.log(guestContacts);
-    console.log(staffContacts)
-
-    const guestSet = await this.uniqueGuests(guestContacts);
-    const staffSet = await this.uniqueStaff(staffContacts);
-    console.log("sets");
-    console.log(guestSet)
-    console.log(staffSet)
-
-    await this.contactListService.addContacts( Array.from(guestSet), Array.from(staffSet));
-    console.log("guests n staff in service")
-    await this.contactListService.currentStaff.subscribe(s=>console.log(s));
-    await this.contactListService.currentGuests.subscribe(s=>console.log(s));
+    for (const query of queryList){
+      const res:ContactList = await this.alarmService.createContactList(query).toPromise()
+      guestContacts = await guestContacts.concat(res.guests);
+      staffContacts = await staffContacts.concat(res.staffMembers);
+    }
+    return {staffMembers: staffContacts, guests: guestContacts};
   }
 
-  uniqueStaff(staff:StaffwId[]): StaffwId[]{
+
+  uniqueContacts(contacts:ContactList):ContactList{
     const uniqueStaffMap: Map<number,StaffwId> = new Map<number,StaffwId>();
-    staff.forEach(staff=>{
-      uniqueStaffMap.set(staff.id, staff);
-    })
-    return Array.from(uniqueStaffMap.values());
-  }
-
-  uniqueGuests(guests:GuestwId[]): GuestwId[]{
     const uniqueGuestMap: Map<string, GuestwId> = new Map<string, GuestwId>();
-    guests.forEach(guest=>{
+
+    contacts.staffMembers.forEach(staff=>{
+      uniqueStaffMap.set(staff.id, staff);
+    });
+    contacts.guests.forEach(guest=>{
       uniqueGuestMap.set(guest.mail, guest);
     })
-    return Array.from(uniqueGuestMap.values());
+    return {staffMembers: Array.from(uniqueStaffMap.values()), guests: Array.from(uniqueGuestMap.values())}
   }
+
+
 }

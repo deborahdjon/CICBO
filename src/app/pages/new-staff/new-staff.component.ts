@@ -1,6 +1,7 @@
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
-import {Staff, StaffService} from "../../../typescript-angular-client-generated";
-declare var $: any;
+import {Guest, GuestService, Staff, StaffService} from '../../../typescript-angular-client-generated';
+import {Router} from '@angular/router';
+declare let $: any;
 
 
 @Component({
@@ -8,7 +9,7 @@ declare var $: any;
   templateUrl: './new-staff.component.html',
   styleUrls: ['./new-staff.component.less']
 })
-export class NewStaffComponent implements OnInit {
+export class NewStaffComponent{
   @Input() firstName: string;
   @Input() lastName: string;
   @Input() date: string;
@@ -20,37 +21,29 @@ export class NewStaffComponent implements OnInit {
   @Input() zipCode: number;
   @Input() city: string;
   @Input() country: string;
-  myDiv: ElementRef<HTMLElement>;
-  modalContent: string;
-  $ : any;
+  modalContent;
 
   constructor(private staffService:StaffService) { }
 
-  ngOnInit(): void {
-  }
 
-  onSubmit(){
+
+  onSubmit():void {
+
+    const address = this.street +' ' + this.houseNumber + ', ' + this.zipCode+ ' ' + this.county + ', ' + this.country;
 
 
     const staff:Staff = {
-      "firstName": this.firstName,
-      "name": this.lastName,
-      "mail": this.emailAddress,
-      "phone": this.phoneNumber,
-      "address": "address",
+        "firstName": this.firstName,
+        "name": this.lastName,
+        "mail": this.emailAddress,
+        "phone": this.phoneNumber,
+        "address": address,
+      }
+
+      this.staffService.addStaff(staff).subscribe(res => {
+        this.modalContent = res;
+      });
     }
-
-    this.staffService.addStaff(staff).subscribe(res => {
-      this.modalContent = res;
-      console.log(res);
-      // $('#exampleModal').modal();
-
-    });
-
-  }
-
-
-
-
-
 }
+
+
