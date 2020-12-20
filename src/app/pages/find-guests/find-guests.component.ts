@@ -99,7 +99,7 @@ export class FindGuestsComponent implements OnInit {
   async getContacts(): Promise<void>{
     const alarmQueries:AlarmQueryObject[] = await this.createQueryObjects();
     await this.getContactList(alarmQueries);
-    await this.contactListService.addContacts(this.guestContacts, this.staffContacts)
+    await this.contactListService.addContacts({staffMembers: this.staffContacts, guests:this.guestContacts})
     await this.router.navigateByUrl('alarm/find-guest/contacts');
   }
 

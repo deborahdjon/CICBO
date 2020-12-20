@@ -49,6 +49,8 @@
         <th>Last Name</th>
         <th>Last Email address</th>
         <th>Date</th>
+        <th class="td-m">Edit</th>
+        <th class="td-s">X</th>
       </tr>
 
       <tr *ngFor="let guest of guests">
@@ -56,8 +58,8 @@
         <td>{{guest.name}}</td>
         <td>{{guest.mail}}</td>
         <td>{{guest.arrivedAt}}</td>
-        <td><button (click)="onEdit(guest.id)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
-        <td><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelectedGuest(guest.id)"></td>
+        <td class="td-m"><button (click)="onEdit(guest.id)"type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
+        <td class="td-s"><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelectedGuest(guest.id)"></td>
 
       </tr>
 
