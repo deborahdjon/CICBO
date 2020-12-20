@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Guest, GuestService, GuestwId, SearchObject} from "../../../../typescript-angular-client-generated";
-import {stringify} from "querystring";
+import {Guest, GuestService, GuestwId, SearchObject} from '../../../../typescript-angular-client-generated';
+import {stringify} from 'querystring';
 
 @Component({
   selector: 'app-guests',
@@ -8,9 +8,9 @@ import {stringify} from "querystring";
   styleUrls: ['./guests.component.css']
 })
 export class GuestsComponent implements OnInit {
-  //Find guest Form
-  @Input() firstName:string;
-  @Input() lastName:string;
+  // Find guest Form
+  @Input() firstName: string;
+  @Input() lastName: string;
   @Input() fromDate: string;
   @Input() toDate: string;
 
@@ -30,28 +30,28 @@ export class GuestsComponent implements OnInit {
   @Input() country: string;
 
 
-  guests:GuestwId[];
-  selectedGuestID:number;
-  protected guestsMap:Map<number,GuestwId> = new Map;
-  protected selectedGuests:Map<number,boolean> = new Map;
-  public allCheckBoxes:boolean;
+  guests: GuestwId[];
+  selectedGuestID: number;
+  protected guestsMap: Map<number, GuestwId> = new Map;
+  protected selectedGuests: Map<number, boolean> = new Map;
+  public allCheckBoxes: boolean;
 
 
-  constructor(private guestService:GuestService) { }
+  constructor(private guestService: GuestService) { }
 
-  ngOnInit(): void {return}
+  ngOnInit(): void {return; }
 
 
-  onSubmitFind(): void{ //todo: sorted:boolean
+  onSubmitFind(): void{ // todo: sorted:boolean
     const searchObject: SearchObject = {
-      "sortByName": true,
-      "firstName": this.firstName,
-      "name": this.lastName,
-    }
-    this.guestService.findGuests(searchObject).subscribe(res=>{
+      sortByName: true,
+      firstName: this.firstName,
+      name: this.lastName,
+    };
+    this.guestService.findGuests(searchObject).subscribe(res => {
       this.guests = res;
-      console.log(res)
-      res.forEach(guest =>{
+      console.log(res);
+      res.forEach(guest => {
         this.guestsMap.set(guest.id, guest);
         this.selectedGuests.set(guest.id, false);
       });
@@ -59,23 +59,23 @@ export class GuestsComponent implements OnInit {
   }
 
   showAll(): void{
-    this.guestService.listGuests().subscribe(res=>{
+    this.guestService.listGuests().subscribe(res => {
       this.guests = res;
-      res.forEach(guest =>{
+      res.forEach(guest => {
         this.guestsMap.set(guest.id, guest);
         this.selectedGuests.set(guest.id, false);
       });
     });
   }
 
-  onEdit(guestId:number):void{
+  onEdit(guestId: number): void{
     this.selectedGuestID = guestId;
-    this.guestService.getGuestById(guestId).subscribe(res =>{
+    this.guestService.getGuestById(guestId).subscribe(res => {
       this.prefillEditForm(res);
     });
   }
 
-  private prefillEditForm(guest:GuestwId){
+  private prefillEditForm(guest: GuestwId){
     this.firstName2 = guest.firstName;
     this.lastName2 = guest.name;
     this.fromTime = guest.arrivedAt.split(' ')[1];
@@ -84,28 +84,28 @@ export class GuestsComponent implements OnInit {
     this.roomNumber = guest.room.number;
     this.phoneNumber = parseInt(guest.phone);
     this.emailAddress = guest.mail;
-    this.street = "test";
+    this.street = 'test';
     this.houseNumber = stringify(1);
-    this.county = "test";
+    this.county = 'test';
     this.zipCode = 2;
-    this.country = "chamany";
+    this.country = 'chamany';
   }
 
-  onSubmitEdit(guestId:number){
-    const address = this.street +' ' + this.houseNumber + ', ' + this.zipCode+ ' ' + this.county + ', ' + this.country
+  onSubmitEdit(guestId: number){
+    const address = this.street + ' ' + this.houseNumber + ', ' + this.zipCode + ' ' + this.county + ', ' + this.country;
 
-    const guest:Guest = {
-      "firstName": this.firstName2,
-      "name": this.lastName2,
-      "mail": this.emailAddress,
-      "phone": stringify(this.phoneNumber),
-      "address": address,
-      "arrivedAt": this.date+' '+this.fromTime,
-      "leftAt":  this.date+' '+this.toTime,
-      "room": {
-        "number": this.roomNumber
+    const guest: Guest = {
+      firstName: this.firstName2,
+      name: this.lastName2,
+      mail: this.emailAddress,
+      phone: stringify(this.phoneNumber),
+      address,
+      arrivedAt: this.date + ' ' + this.fromTime,
+      leftAt:  this.date + ' ' + this.toTime,
+      room: {
+        number: this.roomNumber
       }
-    }
+    };
     this.guestService.updateGuestWithForm(guestId, guest).subscribe(res => {
       alert(res);
     });
@@ -115,7 +115,7 @@ export class GuestsComponent implements OnInit {
    * Keeps track of the selection property of each guest.
    * @param id guest ID.
    */
-  toggleSelectedGuest(id:number): void{
+  toggleSelectedGuest(id: number): void{
     this.selectedGuests.set(id , !this.selectedGuests.get(id));
   }
 
@@ -129,45 +129,45 @@ export class GuestsComponent implements OnInit {
     }
 
 
-    //Select all
+    // Select all
     if (!flag){
-      //Frontend
+      // Frontend
       this.allCheckBoxes = true;
 
-      //Backend
-      Object.keys(this.selectedGuests).forEach( (key)=> {
+      // Backend
+      Object.keys(this.selectedGuests).forEach( (key) => {
         this.selectedGuests[key] = true;
       });
 
-    //Deselect all
+    // Deselect all
     }else{
-      //Frontend
+      // Frontend
       this.allCheckBoxes = false;
-      //Backend
-      Object.keys(this.selectedGuests).forEach( (key)=> {
+      // Backend
+      Object.keys(this.selectedGuests).forEach( (key) => {
         this.selectedGuests[key] = false;
       });
     }
   }
 
-  delete():void{
+  delete(): void{
     let count = 0;
-    const toDelete:number[] = [];
+    const toDelete: number[] = [];
     for (const [key, value] of this.selectedGuests){
-      if(value){
+      if (value){
         count++;
         toDelete.push(key);
       }
     }
 
     if (confirm(`Do you want to delete ${count} guests?`)) {
-      toDelete.forEach(id =>{
-        this.guestService.deleteGuest(id).subscribe(res =>{
+      toDelete.forEach(id => {
+        this.guestService.deleteGuest(id).subscribe(res => {
           console.log(res);
         });
-      })
+      });
     } else {
-      alert("Guests are not removed.");
+      alert('Guests are not removed.');
     }
   }
 

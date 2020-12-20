@@ -13,7 +13,7 @@ import { GuestwId } from './guestwId';
 import { StaffwId } from './staffwId';
 
 
-export interface ContactList { 
+export interface ContactList {
     staffMembers?: Array<StaffwId>;
     guests?: Array<GuestwId>;
 }

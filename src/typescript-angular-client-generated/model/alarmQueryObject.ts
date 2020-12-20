@@ -11,7 +11,7 @@
  */
 
 
-export interface AlarmQueryObject { 
+export interface AlarmQueryObject {
     type: string;
     sortByName: boolean;
     firstName?: string;

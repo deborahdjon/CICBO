@@ -5,8 +5,8 @@ import {
   Staff,
   StaffService, StaffShift,
   StaffwId
-} from "../../../../typescript-angular-client-generated";
-import {stringify} from "querystring";
+} from '../../../../typescript-angular-client-generated';
+import {stringify} from 'querystring';
 
 @Component({
   selector: 'app-staff',
@@ -14,19 +14,19 @@ import {stringify} from "querystring";
   styleUrls: ['./staff.component.less']
 })
 export class StaffComponent implements OnInit {
-  public staff:StaffwId[];
+  public staff: StaffwId[];
   public staffMap: Map<number, StaffwId> = new Map<number, StaffwId>();
 
-  //public selectedStaff: Map<number, boolean> = new Map<number, boolean>();
+  // public selectedStaff: Map<number, boolean> = new Map<number, boolean>();
 
   public selectedStaffMember: StaffwId;
   public selectedStaffMemberShifts: Map<number, StaffShift> = new Map<number, StaffShift>();
   public selectedStaffMemberShiftsChecked: Map<number, boolean> = new Map<number, boolean>();
-  private selectAllShifts=false;
+  private selectAllShifts = false;
   public checks: boolean;
 
-  private lastFetchMethod:string;
-  private lastSearch:SearchObject;
+  private lastFetchMethod: string;
+  private lastSearch: SearchObject;
   // Find staff form
   @Input() firstName: string;
   @Input() lastName: string;
@@ -52,20 +52,20 @@ export class StaffComponent implements OnInit {
   @Input() streetNo: string;
 
 
-  constructor(private staffService:StaffService) { }
+  constructor(private staffService: StaffService) { }
 
   /**
    * Initialize selected staff.
    */
   ngOnInit(): void {
     this.selectedStaffMember = {
-      "id" : null,
-      "firstName": "",
-      "name": "",
-      "mail": "",
-      "phone": "",
-      "address": "",
-    }
+      id : null,
+      firstName: '',
+      name: '',
+      mail: '',
+      phone: '',
+      address: '',
+    };
   }
 
   /**
@@ -73,10 +73,10 @@ export class StaffComponent implements OnInit {
    * @param id
    */
   onEdit(id: number): void {
-    this.staffService.getStaffMemberById(id).subscribe(res =>{
+    this.staffService.getStaffMemberById(id).subscribe(res => {
       this.selectedStaffMember = res;
       this.prefillEditForm(res);
-    })
+    });
   }
 
   /**
@@ -84,37 +84,37 @@ export class StaffComponent implements OnInit {
    * @param staff: staff that contains updated data.
    * @private
    */
-  private prefillEditForm(staff:StaffwId){
+  private prefillEditForm(staff: StaffwId){
     this.firstName2 = staff.firstName;
     this.lastName2 = staff.name;
     this.phoneNumber = parseInt(staff.phone);
     this.emailAddress = staff.mail;
-    this.street = "test";
+    this.street = 'test';
     this.houseNumber = stringify(1);
-    this.county = "test";
+    this.county = 'test';
     this.zipCode = 2;
-    this.country = "chamany";
+    this.country = 'chamany';
   }
 
   /**
    * Submit an update of a staff member.
    * @param staffId
    */
-  onSubmitEdit(staffId:number):void{
-    const address = this.street +' ' + this.houseNumber + ', ' + this.zipCode+ ' ' + this.county + ', ' + this.country
+  onSubmitEdit(staffId: number): void{
+    const address = this.street + ' ' + this.houseNumber + ', ' + this.zipCode + ' ' + this.county + ', ' + this.country;
 
-    const staff:Staff = {
-      "firstName": this.firstName2,
-      "name": this.lastName2,
-      "mail": this.emailAddress,
-      "phone": stringify(this.phoneNumber),
-      "address": address,
-    }
+    const staff: Staff = {
+      firstName: this.firstName2,
+      name: this.lastName2,
+      mail: this.emailAddress,
+      phone: stringify(this.phoneNumber),
+      address,
+    };
     try{
       this.staffService.updateStaff(staffId, staff).subscribe(res => {
         alert(res);
       });
-    }catch(e){
+    }catch (e){
       console.log(e.message);
     }
   }
@@ -123,15 +123,15 @@ export class StaffComponent implements OnInit {
    * Sets the list of displayed staff to all staff currently in the database.
    */
   showAllStaff(): void {
-    this.lastFetchMethod="get all";
-    this.staffService.listStaff().subscribe(res =>{
+    this.lastFetchMethod = 'get all';
+    this.staffService.listStaff().subscribe(res => {
       this.staff = res;
       this.selectedStaffMember = res[0];
-      this.staff.forEach(staff =>{
+      this.staff.forEach(staff => {
         // this.selectedStaff.set(staff.id, false);
         this.staffMap.set(staff.id, staff);
       });
-    })
+    });
   }
 
   /**
@@ -139,54 +139,54 @@ export class StaffComponent implements OnInit {
    * @private
    */
   private determineSearchObject(): SearchObject{
-    let searchStaff:SearchObject;
-    if(!(this.firstName || this.lastName)){
-      alert("Please enter a name");
+    let searchStaff: SearchObject;
+    if (!(this.firstName || this.lastName)){
+      alert('Please enter a name');
     }else{
-      if(this.firstName && this.lastName){
+      if (this.firstName && this.lastName){
         searchStaff = {
-          "sortByName":true,
-          "firstName":this.firstName,
-          "name": this.lastName
-        }
+          sortByName: true,
+          firstName: this.firstName,
+          name: this.lastName
+        };
       }else{
-        if(this.firstName){
+        if (this.firstName){
           searchStaff = {
-            "sortByName":true,
-            "firstName":this.firstName,
-          }
+            sortByName: true,
+            firstName: this.firstName,
+          };
         }else{
           searchStaff = {
-            "sortByName":true,
-            "name":this.lastName,
-          }
+            sortByName: true,
+            name: this.lastName,
+          };
         }
       }
     }
-    this.lastSearch=searchStaff;
+    this.lastSearch = searchStaff;
     return searchStaff;
   }
 
   /**
    * Finds populates the list of currently viewed staff to all staff found in the search.
    */
-  findStaff(triggeredBySubmit:boolean): void {
-    this.lastFetchMethod="find";
-    let searchObject:SearchObject;
-    if(triggeredBySubmit){
+  findStaff(triggeredBySubmit: boolean): void {
+    this.lastFetchMethod = 'find';
+    let searchObject: SearchObject;
+    if (triggeredBySubmit){
       searchObject = this.determineSearchObject();
     }else{
       searchObject = this.lastSearch;
     }
     try{
-      this.staffService.findStaffMembers(searchObject).subscribe(res=>{
+      this.staffService.findStaffMembers(searchObject).subscribe(res => {
         this.staff = res;
         this.selectedStaffMember = res[0];
-        this.staff.forEach(staff =>{
+        this.staff.forEach(staff => {
           this.staffMap.set(staff.id, staff);
         });
       });
-    }catch(e){
+    }catch (e){
       alert(e.message);
     }
   }
@@ -198,9 +198,9 @@ export class StaffComponent implements OnInit {
   selectStaff(id: number): void {
     this.selectedStaffMemberShifts.clear();
     this.selectedStaffMember = this.staffMap.get(id);
-    for(let i=0; i++;i<this.selectedStaffMember.shifts.length){
+    for (let i = 0; i++; i < this.selectedStaffMember.shifts.length){
       const shift = this.selectedStaffMember.shifts[i];
-      this.selectedStaffMemberShifts.set(i,shift);
+      this.selectedStaffMemberShifts.set(i, shift);
     }
   }
 
@@ -211,13 +211,13 @@ export class StaffComponent implements OnInit {
     if (this.selectAllShifts){
       this.selectAllShifts = false;
       this.checks = true;
-      Object.keys(this.selectedStaffMemberShifts).forEach(key=>{
-        this.selectedStaffMemberShifts[key]=true;
-      })
-    }else { //Deselect all
+      Object.keys(this.selectedStaffMemberShifts).forEach(key => {
+        this.selectedStaffMemberShifts[key] = true;
+      });
+    }else { // Deselect all
       this.selectAllShifts = true;
       this.checks = false;
-      Object.keys(this.selectedStaffMemberShifts).forEach( (key)=> {
+      Object.keys(this.selectedStaffMemberShifts).forEach( (key) => {
         this.selectedStaffMemberShifts[key] = false;
       });
     }
@@ -229,12 +229,12 @@ export class StaffComponent implements OnInit {
    * @param shift
    * @return string representation of rooms in the shift.
    */
-  getShiftRooms(shift:StaffShift): string{
-    let rooms = "";
-    shift.rooms.forEach(room =>{
-      rooms = rooms + ", " + stringify(room.number);
-    })
-    return rooms
+  getShiftRooms(shift: StaffShift): string{
+    let rooms = '';
+    shift.rooms.forEach(room => {
+      rooms = rooms + ', ' + stringify(room.number);
+    });
+    return rooms;
   }
 
   /**
@@ -250,27 +250,27 @@ export class StaffComponent implements OnInit {
    * Adds a shift to the selected staff member.
    */
   submitShift(): void {
-    const rooms:RoomIdentifier[] = [];
-    const roomNumbersStrings: string[]= this.roomNumbersShift.split(',');
+    const rooms: RoomIdentifier[] = [];
+    const roomNumbersStrings: string[] = this.roomNumbersShift.split(',');
     try{
-      roomNumbersStrings.forEach(num =>{
-        const roomId:RoomIdentifier ={
-          "number": parseInt(num),
-        }
-        rooms.push(roomId)
-      })
+      roomNumbersStrings.forEach(num => {
+        const roomId: RoomIdentifier = {
+          number: parseInt(num),
+        };
+        rooms.push(roomId);
+      });
     }catch (e){
-      alert("Please enter the room numbers in the format: number1,number2,...")
+      alert('Please enter the room numbers in the format: number1,number2,...');
     }
 
-    const shift:StaffShift = {
-      "arrivedAt": this.date+' '+this.fromTime,
-      "leftAt": this.date+' '+this.toTime,
-      "rooms": rooms
-    }
+    const shift: StaffShift = {
+      arrivedAt: this.date + ' ' + this.fromTime,
+      leftAt: this.date + ' ' + this.toTime,
+      rooms
+    };
     try{
-      this.staffService.addShift(this.selectedStaffMember.id, shift).subscribe(res=>{
-        console.log(res)}, error => {alert(error.message)});
+      this.staffService.addShift(this.selectedStaffMember.id, shift).subscribe(res => {
+        console.log(res); }, error => {alert(error.message); });
     }catch (e){
       alert(e);
     }
@@ -282,10 +282,10 @@ export class StaffComponent implements OnInit {
    * Changes the background color of the row of the selected staff.
    * @param staffMemberId Id of staff member to select.
    */
-  checkSelection(staffMemberId:number): string{
-    if(staffMemberId === this.selectedStaffMember.id){
-      return "marked-table-cell"
-    }else{return "table-cell"}
+  checkSelection(staffMemberId: number): string{
+    if (staffMemberId === this.selectedStaffMember.id){
+      return 'marked-table-cell';
+    }else{return 'table-cell'; }
   }
 
 
@@ -295,19 +295,19 @@ export class StaffComponent implements OnInit {
    */
   toggleSelectedShifts(id: number): void {
     const value = this.selectedStaffMemberShiftsChecked.get(id);
-    this.selectedStaffMemberShiftsChecked.set(id,!value);
+    this.selectedStaffMemberShiftsChecked.set(id, !value);
   }
 
   /**
    * Delets all selected shifts from selected staff member.
    */
   deleteShift(): void {
-    const newShifts: StaffShift[] =[];
-    for(const [key,value] of this.selectedStaffMemberShiftsChecked){
-      if(!value){newShifts.push(this.selectedStaffMemberShifts.get(key))}
+    const newShifts: StaffShift[] = [];
+    for (const [key, value] of this.selectedStaffMemberShiftsChecked){
+      if (!value){newShifts.push(this.selectedStaffMemberShifts.get(key)); }
     }
-    this.staffService.replaceShift(this.selectedStaffMember.id, newShifts).subscribe(res=>{
-      console.log(res)
+    this.staffService.replaceShift(this.selectedStaffMember.id, newShifts).subscribe(res => {
+      console.log(res);
     });
     this.reloadStaff();
   }
@@ -317,8 +317,8 @@ export class StaffComponent implements OnInit {
    * @private
    */
   private reloadStaff(){
-    if(this.lastFetchMethod==="get all"){
-      this.showAllStaff()
+    if (this.lastFetchMethod === 'get all'){
+      this.showAllStaff();
     }else{
       this.findStaff(false);
     }
@@ -328,7 +328,7 @@ export class StaffComponent implements OnInit {
    * Delete staff member.
    */
   deleteStaff(): void {
-    this.staffService.deleteStaffMember(this.selectedStaffMember.id).subscribe(data=>{
+    this.staffService.deleteStaffMember(this.selectedStaffMember.id).subscribe(data => {
       console.log(data);
     });
     this.reloadStaff();

@@ -14,7 +14,7 @@ export class NavElementComponent {
   /**
    * Emits an event to the navigation, which will open or close accordingly.
    */
-  onClick():void{
+  onClick(): void{
     this.hideNav.emit();
   }
 
