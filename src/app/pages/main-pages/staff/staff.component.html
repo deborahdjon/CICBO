@@ -1,142 +1,181 @@
 <app-page-content text="Staff">
 
-  <app-content-fixed-size>
 
+  <div class="page-div-1">
     <form class="form" (ngSubmit)="findStaff(true)">
 
-      <label for="firstName">First name</label>
-      <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
+      <div class="input-wrap">
+        <label for="firstName">First name</label>
+        <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" required="">
+      </div>
 
-      <label for="lastName">Last name</label>
-      <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+      <div class="input-wrap">
+        <label for="lastName">Last name</label>
+        <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+      </div>
 
       <input type="submit" value="Find Staff" class="btn">
 
     </form>
-
-  </app-content-fixed-size>
-  <app-small-button text="Edit" (click)="onEdit(selectedStaffMember.id)"  data-toggle="modal" data-target="#editStaffModal"></app-small-button>
-  <app-small-button text="Show all staff" (click)="showAllStaff()"></app-small-button>
-  <app-small-button text="Delete" (click)="deleteStaff()"></app-small-button>
-
-
-  <div>
-    <table>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email/th>
-        <th>Phone</th>
-        <th>Address</th>
-      </tr>
-
-      <tr  *ngFor="let staffMember of staff" >
-        <td [class]="checkSelection(staffMember.id)">{{staffMember.firstName}}</td>
-        <td [class]="checkSelection(staffMember.id)">{{staffMember.name}}</td>
-        <td [class]="checkSelection(staffMember.id)">{{staffMember.mail}}</td>
-        <td [class]="checkSelection(staffMember.id)">{{staffMember.phone}}</td>
-        <td [class]="checkSelection(staffMember.id)">{{staffMember.address}}</td>
-        <td [class]="checkSelection(staffMember.id)"><button (click)="selectStaff(staffMember.id)" type="button" class="btn btn-primary">Select</button></td>
-      </tr>
-    </table>
-
   </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="editStaffModal" tabindex="-1" role="dialog" aria-labelledby="editStaffModal" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form class="form" (ngSubmit)="onSubmitEdit(selectedStaffMember.id)" id="editStaffForm">
+  <div class="page-div-2">
 
-              <label for="firstName2">First name</label>
-              <input type="text"  id="firstName2" name="firstName" [(ngModel)]="firstName2" placeholder="First name" required="">
 
-              <label for="lastName2">Last name</label>
-              <input type="text" id="lastName2" name="lastName" [(ngModel)]="lastName2" placeholder="Last name">
-
-              <label for="roomNumbers"Room Number></label>
-              <input type="number" id="roomNumbers" name="roomNumber" [(ngModel)]="roomNumber" placeholder="Room numbers">
-
-              <label for="phoneNumber"> Phone</label>
-              <input type="string" id="phoneNumber"name="phoneNumber" [(ngModel)]="phoneNumber" placeholder="Phone number">
-
-              <label for="email">Email</label>
-              <input type="email" id="email"name="email" [(ngModel)]="emailAddress" placeholder="Email">
-
-              <label for="streetNo">Street and No.</label>
-              <input type="text" id="streetNo" name="streetNo" [(ngModel)]="streetNo" placeholder="Example Street 1">
-
-              <label for="county">County</label>
-              <input type="text" id="county"name="county" [(ngModel)]="county" placeholder="County">
-
-              <label for="zipCode">Zip code</label>
-              <input type="number" id="zipCode"name="zipCode" [(ngModel)]="zipCode" placeholder="Zip code">
-
-              <label for="country">Country</label>
-              <input type="text" id="country" name="country" [(ngModel)]="country" placeholder="Country">
-
-            </form>
-          </div>
-          <div class="modal-footer">
-            <input type="submit" value="Update Staff" class="btn btn-secondary" form="editStaffForm"> <!--TODO: dismis modal-->
-          </div>
-        </div>
-      </div>
+    <div class="top">
+      <app-small-button text="Edit" (click)="onEdit(selectedStaffMember.id)" data-toggle="modal"
+                        data-target="#editStaffModal"></app-small-button>
+      <app-small-button text="Show all staff" (click)="showAllStaff()"></app-small-button>
+      <app-small-button text="Delete" (click)="deleteStaff()"></app-small-button>
+      <h2>Staff</h2>
     </div>
 
 
-    <app-small-button text="Select all shifts" (click)="selectAllShiftsToggle()"></app-small-button>
-    <app-small-button text="Delete shifts" (click)="deleteShift()"></app-small-button>
+    <div class="bottom">
+      <table>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email/th>
+          <th>Phone</th>
+          <th>Address</th>
+        </tr>
+
+        <tr *ngFor="let staffMember of staff">
+          <td [class]="checkSelection(staffMember.id)">{{staffMember.firstName}}</td>
+          <td [class]="checkSelection(staffMember.id)">{{staffMember.name}}</td>
+          <td [class]="checkSelection(staffMember.id)">{{staffMember.mail}}</td>
+          <td [class]="checkSelection(staffMember.id)">{{staffMember.phone}}</td>
+          <td [class]="checkSelection(staffMember.id)">{{staffMember.address}}</td>
+          <td [class]="checkSelection(staffMember.id)">
+            <button (click)="selectStaff(staffMember.id)" type="button" class="btn btn-primary">Select</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="editStaffModal" tabindex="-1" role="dialog" aria-labelledby="editStaffModal"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form" (ngSubmit)="onSubmitEdit(selectedStaffMember.id)" id="editStaffForm">
+
+            <label for="firstName2">First name</label>
+            <input type="text" id="firstName2" name="firstName" [(ngModel)]="firstName2" placeholder="First name"
+                   required="">
+
+            <label for="lastName2">Last name</label>
+            <input type="text" id="lastName2" name="lastName" [(ngModel)]="lastName2" placeholder="Last name">
+
+            <label for="roomNumbers" Room Number></label>
+            <input type="number" id="roomNumbers" name="roomNumber" [(ngModel)]="roomNumber"
+                   placeholder="Room numbers">
+
+            <label for="phoneNumber"> Phone</label>
+            <input type="string" id="phoneNumber" name="phoneNumber" [(ngModel)]="phoneNumber"
+                   placeholder="Phone number">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" [(ngModel)]="emailAddress" placeholder="Email">
+
+            <label for="streetNo">Street and No.</label>
+            <input type="text" id="streetNo" name="streetNo" [(ngModel)]="streetNo" placeholder="Example Street 1">
+
+            <label for="county">County</label>
+            <input type="text" id="county" name="county" [(ngModel)]="county" placeholder="County">
+
+            <label for="zipCode">Zip code</label>
+            <input type="number" id="zipCode" name="zipCode" [(ngModel)]="zipCode" placeholder="Zip code">
+
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" [(ngModel)]="country" placeholder="Country">
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" value="Update Staff" class="btn btn-secondary" form="editStaffForm">
+          <!--TODO: dismis modal-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-div-1">
     <form class="form" (ngSubmit)="submitShift()">
+      <div class="input-wrap">
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" [(ngModel)]="date" placeholder="dd/mm/yyyy">
+      </div>
 
-      <label for="date">Date</label>
-      <input type="date" id="date" name="date" [(ngModel)]="date" placeholder="dd/mm/yyyy">
+      <div class="input-wrap">
+        <label for="fromTime">From</label>
+        <input type="time" id="fromTime" name="fromTime" [(ngModel)]="fromTime" placeholder="From">
+      </div>
 
-      <label for="fromTime">From</label>
-      <input type="time" id="fromTime" name="fromTime" [(ngModel)]="fromTime" placeholder="From">
+      <div class="input-wrap">
+        <label for="toTime">To</label>
+        <input type="time" id="toTime" name="toTime" [(ngModel)]="toTime" placeholder="To">
+      </div>
 
-      <label for="toTime">To</label>
-      <input type="time" id="toTime" name="toTime" [(ngModel)]="toTime" placeholder="To">
-
-      <label for="roomNumbersShift"Room Numbers></label>
-      <input type="text" id="roomNumbersShift" name="roomNumbersShift" [(ngModel)]="roomNumbersShift" placeholder="Room numbers">
-
+      <div class="input-wrap">
+        <label for="roomNumbersShift" Room Numbers></label>
+        <input type="text" id="roomNumbersShift" name="roomNumbersShift" [(ngModel)]="roomNumbersShift"
+               placeholder="Room numbers">
+      </div>
 
       <input type="submit" value="Add Shift" class="btn">
 
     </form>
+  </div>
 
-    <div>
-      <h2>{{selectedStaffMember.firstName}} {{selectedStaffMember.name}}</h2>
-      <p></p>
+  <div class="page-div-3">
+    <div class="top">
+      <app-small-button text="Select all shifts" (click)="selectAllShiftsToggle()"></app-small-button>
+      <app-small-button text="Delete shifts" (click)="deleteShift()"></app-small-button>
+      <div>
+        <h2>Shift of {{selectedStaffMember.firstName}} {{selectedStaffMember.name}}</h2>
+        <p></p>
 
+      </div>
     </div>
+    <div class="bottom">
+      <table>
+        <title>Shifts</title>
 
-    <table>
-      <title>Shifts</title>
+        <tr>
+          <th>Arrived At</th>
+          <th>Left At</th>
+          <th>Rooms</th>
+          <th class="td-m">Edit</th>
+          <th class="td-s">X</th>
+        </tr>
 
-      <tr>
-        <th>Arrived At</th>
-        <th>Left At</th>
-        <th>Rooms</th>
-      </tr>
+        <tr *ngFor="let shiftId of selectedStaffMemberShifts.keys()">
+          <td>{{selectedStaffMemberShifts.get(shiftId).arrivedAt}}</td>
+          <td>{{selectedStaffMemberShifts.get(shiftId).leftAt}}</td>
+          <td>{{getShiftRooms(selectedStaffMemberShifts.get(shiftId))}}</td>
+          <td>
+            <button (click)="deleteShift()" type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#exampleModal">Edit
+            </button>
+          </td>
+          <td><input type="checkbox" name="selectedShift" [checked]="checks" (change)="toggleSelectedShifts(shiftId)">
+          </td>
+        </tr>
 
-      <tr *ngFor="let shiftId of selectedStaffMemberShifts.keys()">
-        <td>{{selectedStaffMemberShifts.get(shiftId).arrivedAt}}</td>
-        <td>{{selectedStaffMemberShifts.get(shiftId).leftAt}}</td>
-        <td>{{getShiftRooms(selectedStaffMemberShifts.get(shiftId))}}</td>
-        <td><button (click)="deleteShift()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
-        <td><input type="checkbox" name="selectedShift" [checked]="checks" (change)="toggleSelectedShifts(shiftId)"></td>
-      </tr>
-
-    </table>
+      </table>
+    </div>
+  </div>
 
 
 </app-page-content>
