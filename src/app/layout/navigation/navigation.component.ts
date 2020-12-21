@@ -12,7 +12,7 @@ export class NavigationComponent {
   /**
    * Emits an event to the navigation, which will open or close accordingly.
    */
-  onHideNav():void {
+  onHideNav(): void {
     this.hideNav.emit();
   }
 

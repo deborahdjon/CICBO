@@ -11,7 +11,7 @@
  */
 
 
-export interface RoomConstructor { 
+export interface RoomConstructor {
     number: number;
     name?: string;
 }

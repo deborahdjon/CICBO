@@ -15,7 +15,7 @@ import { Room } from './room';
 /**
  * Staff-object in querry
  */
-export interface StaffShiftWithResolvedRoom { 
+export interface StaffShiftWithResolvedRoom {
     arrivedAt: string;
     leftAt: string;
     rooms: Array<Room>;

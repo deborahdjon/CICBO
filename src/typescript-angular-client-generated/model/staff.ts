@@ -14,7 +14,7 @@
 /**
  * Staff-object in querry
  */
-export interface Staff { 
+export interface Staff {
     firstName: string;
     name: string;
     mail?: string;

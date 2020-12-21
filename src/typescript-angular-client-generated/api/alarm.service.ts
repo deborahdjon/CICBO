@@ -16,7 +16,7 @@ import { HttpClient, HttpHeaders, HttpParams,
          HttpResponse, HttpEvent }                           from '@angular/common/http';
 import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
-import { Observable} from "rxjs";
+import { Observable} from 'rxjs';
 
 import { AlarmQueryObject } from '../model/alarmQueryObject';
 import { ContactList } from '../model/contactList';
@@ -96,9 +96,9 @@ export class AlarmService {
             searchFilter,
             {
                 withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                headers,
+                observe,
+                reportProgress
             }
         );
     }

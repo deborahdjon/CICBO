@@ -11,7 +11,7 @@
  */
 
 
-export interface Room { 
+export interface Room {
     number: number;
     name?: string;
     active?: boolean;

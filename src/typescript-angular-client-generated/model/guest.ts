@@ -15,7 +15,7 @@ import { RoomIdentifier } from './roomIdentifier';
 /**
  * Guest-object in querry
  */
-export interface Guest { 
+export interface Guest {
     firstName: string;
     name: string;
     mail?: string;
