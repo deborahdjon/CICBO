@@ -72,7 +72,6 @@ export class StaffComponent implements OnInit {
     }
   }
 
-
   /**
    * Update selected staff member.
    * @param id
@@ -124,8 +123,6 @@ export class StaffComponent implements OnInit {
     }
   }
 
-
-
   /**
    * Sets the list of displayed staff to all staff currently in the database.
    */
@@ -174,7 +171,6 @@ export class StaffComponent implements OnInit {
     this.lastSearch=searchStaff;
     return searchStaff;
   }
-
   /**
    * Finds populates the list of currently viewed staff to all staff found in the search.
    */
@@ -186,7 +182,6 @@ export class StaffComponent implements OnInit {
     }else{
       searchObject = this.lastSearch;
     }
-
     try{
       this.staffService.findStaffMembers(searchObject).subscribe(res=>{
         if(res.length === 0){
@@ -205,8 +200,6 @@ export class StaffComponent implements OnInit {
       alert(e.message);
     }
   }
-
-
 
   /**
    * Selects a staff and sets the
@@ -325,6 +318,16 @@ export class StaffComponent implements OnInit {
 
   }
 
+  // /**
+  //  * Changes the background color of the row of the selected staff.
+  //  * @param staffMemberId Id of staff member to select.
+  //  */
+  // checkSelection(staffMemberId:number): string{
+  //   if(staffMemberId === this.selectedStaffMember.id){
+  //     return "marked-table-cell"
+  //   }else{return "table-cell"}
+  // }
+
 
   /**
    * Toggles all shifts as selected or not
@@ -361,5 +364,6 @@ export class StaffComponent implements OnInit {
     }
     this.selectStaff(this.selectedStaffMember.id);
   }
+
 
 }
