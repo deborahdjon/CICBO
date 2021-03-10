@@ -17,6 +17,7 @@ export class NewStaffComponent{
   @Input() houseNumber: string;
   @Input() county: string;
   @Input() zipCode: number;
+  @Input() city: string;
   @Input() country: string;
   modalContent;
 

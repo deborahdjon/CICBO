@@ -1,37 +1,46 @@
 <app-page-content text="Rooms">
-  <form class="form" (ngSubmit)="onSubmit()">
-    <label for="roomNumber">Room number</label>
-    <input type="number" id="roomNumber" name="roomNumber" [(ngModel)]="roomNumber">
+  <div class="page-div-1">
+    <form class="form" (ngSubmit)="onSubmit()">
 
-    <label for="roomName">Room Name</label>
-    <input type="text" id="roomName" name="roomName" [(ngModel)]="roomName">
-    <input type="submit" value="Submit" class="btn">
-  </form>
-  <app-small-button text="Show all Rooms" (click)="showAll()"></app-small-button>
-  <app-small-button text="Delete" (click)="delete()"></app-small-button>
+      <div class="input-wrap">
+        <label for="roomNumber">Room number</label>
+        <input type="number" id="roomNumber" name="roomNumber" [(ngModel)]="roomNumber" placeholder=" Room Number">
+      </div>
 
-  <div>
-    <table>
-      <tr>
-        <th>Room Number</th>
-        <th>Room Name</th>
-        <th>Select</th>
-      </tr>
+      <div class="input-wrap">
+        <label for="roomName">Room Name</label>
+        <input type="text" id="roomName" name="roomName" [(ngModel)]="roomName" placeholder="Room Name">
+      </div>
 
-      <tr *ngFor="let room of rooms">
-        <td>{{room.number}}</td>
-        <td>{{room.name}}</td>
-        <td><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes" (change)="toggleSelecteRoom(room.number)"></td>
-
-      </tr>
-
-    </table>
+      <input type="submit" value="Submit" class="btn">
+    </form>
   </div>
 
+  <div class="page-div-2">
 
+    <div class="top">
+      <app-small-button text="Show all Rooms" (click)="showAll()"></app-small-button>
+      <app-small-button text="Delete" (click)="delete()"></app-small-button>
+    </div>
 
+    <div class="bottom">
+      <table>
+        <tr>
+          <th>Room Number</th>
+          <th>Room Name</th>
+          <th>Select</th>
+        </tr>
 
+        <tr *ngFor="let room of rooms">
+          <td>{{room.number}}</td>
+          <td>{{room.name}}</td>
+          <td><input type="checkbox" name="selectGuest" [checked]="allCheckBoxes"
+                     (change)="toggleSelecteRoom(room.number)"></td>
 
+        </tr>
 
+      </table>
+    </div>
+  </div>
 
 </app-page-content>

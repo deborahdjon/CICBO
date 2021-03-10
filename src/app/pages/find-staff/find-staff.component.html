@@ -2,17 +2,21 @@
 
   
   <div class="page-div-1">
-  <form class="form" (ngSubmit)="onSubmit()">
+    <form class="form" (ngSubmit)="onSubmit()">
 
-    <label for="firstName">First name</label>
-    <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name" >
+      <div class="input-wrap">
+        <label for="firstName">First name</label>
+        <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First name">
+      </div>
 
-    <label for="lastName">Last name</label>
-    <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+      <div class="input-wrap">
+        <label for="lastName">Last name</label>
+        <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" placeholder="Last name">
+      </div>
 
-    <button type="submit"  class="btn btn-primary small-button">Find Staff</button>
+      <button type="submit" class="btn btn-primary small-button">Find Staff</button>
 
-  </form>
+    </form>
 
   </div>
 
@@ -38,14 +42,14 @@
           <td>{{staffMember.firstName}}</td>
           <td>{{staffMember.name}}</td>
           <td>{{staffMember.mail}}</td>
-          <td [class]="checkSelection(staffMember.id)+' td-m'"><button (click)="selectStaff(staffMember.id)" type="button" class="btn btn-primary">Select</button></td>
+          <td [class]="checkSelection(staffMember.id)+' td-m'">
+            <button (click)="selectStaff(staffMember.id)" type="button" class="btn btn-primary">Select</button>
+          </td>
         </tr>
       </table>
     </div>
 
   </div>
-
-
 
 
   <div class="page-div-3">
@@ -60,18 +64,19 @@
     <div class="bottom">
       <table>
         <thead>
-          <tr>
-            <th>Arrived At</th>
-            <th>Left At</th>
-            <th>Date</th>
-            <th class="td-s">X</th>
-          </tr>
+        <tr>
+          <th>Arrived At</th>
+          <th>Left At</th>
+          <th>Date</th>
+          <th class="td-s">X</th>
+        </tr>
         </thead>
         <tr *ngFor="let shiftId of selectedStaffMemberShifts.keys()">
           <td>{{selectedStaffMemberShifts.get(shiftId).arrivedAt.split(' ')[1]}}</td>
           <td>{{selectedStaffMemberShifts.get(shiftId).leftAt.split(' ')[1]}}</td>
           <td>{{selectedStaffMemberShifts.get(shiftId).leftAt.split(' ')[0]}}</td>
-          <td class="td-s"><input type="checkbox" name="selectedShift" [checked]="checks" (change)="toggleSelectedShifts(shiftId)"></td>
+          <td class="td-s"><input type="checkbox" name="selectedShift" [checked]="checks"
+                                  (change)="toggleSelectedShifts(shiftId)"></td>
         </tr>
       </table>
     </div>

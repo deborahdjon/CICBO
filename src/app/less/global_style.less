@@ -1,21 +1,21 @@
 // Colors -----------------------------------------------------
 @green: #559C5E;
-@light-green :#E6EBE8;
-@gray-green : #5D6A5E;
+@light-green: #E6EBE8;
+@gray-green: #5D6A5E;
 
-#colors(){
+#colors() {
   green: #559C5E;
-  light-green :#E6EBE8;
-  gray-green : #5D6A5E;
+  light-green: #E6EBE8;
+  gray-green: #5D6A5E;
 }
 
 // Font-----------------------------------------------------
 //-- Fontsize
 @extra-large: 55px;
-@large:  45px;
+@large: 45px;
 @medium: 25px;
 @small: 20px;
-@extra-small:15px;
+@extra-small: 15px;
 
 //--Font "weight"
 @thin: Arial Rounded MT;
@@ -36,8 +36,8 @@
 @cicbo-font: Arial;
 
 @width-1: 500px;
-@header-height:75px;
-@page-content-height:calc(100vh - 2*@header-height);
+@header-height: 75px;
+@page-content-height: calc(100vh - 2 * @header-height);
 
 
 @navigation-width: 500px;
@@ -46,65 +46,69 @@
 @space-1: 25px;
 
 
-.padding-lr{
+.padding-lr {
   padding-left: @space-1;
   padding-right: @space-1;
 }
 
 // Buttons and links -----------------------------------------------------
-.small-button{
+.small-button {
   background-color: @green;
   .font(@thick, @small, white);
   border-radius: 30px;
-  border-color:@green;
+  border-color: @green;
   margin: 10px;
 }
 
-a:hover, a:visited, a:link, a:active{
+a:hover, a:visited, a:link, a:active {
   color: white;
   text-decoration: none;
 }
 
 // Forms -----------------------------------------------------
-input{
+input {
   background-color: @light-green;
   border-radius: 20px;
   padding: 5px 15px 5px 15px;
   .font(@thin, @small, @gray-green);
   border-style: none;
 }
-label{
+
+label {
   margin-right: 20px;
   .font(@thin, @small, @gray-green);
 }
-.input-wrap{
+
+.input-wrap {
   display: flex;
   justify-content: space-between;
   padding: 0 0 15px 0;
 }
 
 // Tables -----------------------------------------------------
-thead{
+thead {
   position: absolute;
 }
 
-th, td{
-  min-width:250px
+th, td {
+  min-width: 250px
 }
 
-.td-s{
+.td-s {
   min-width: 50px;
-  max-width:50px
-}
-.td-m{
-  min-width: 100px;
-  max-width:100px
+  max-width: 50px
 }
 
-.td-l{
-  width:450px
+.td-m {
+  min-width: 100px;
+  max-width: 100px
 }
-th{
+
+.td-l {
+  width: 450px
+}
+
+th {
   background-color: @green;
   padding: 10px;
   border-style: solid;
@@ -114,7 +118,7 @@ th{
 }
 
 
-td{
+td {
   background-color: @light-green;
   padding: 10px;
   border-style: solid;
@@ -123,7 +127,22 @@ td{
   .font(@thick, @small, @gray-green)
 }
 
+.masterCol {
 
+  .font(@thin, @small, @gray-green);
+  padding: @pad-lr;
+}
+
+@media screen and (max-width: 768px) {
+  .masterCol {
+    max-width: 500px;
+  }
+}
+
+.submitButtonWrapper {
+  display: flex;
+  justify-content: flex-end
+}
 
 
 //.page-content(@flex-direction){
@@ -131,5 +150,5 @@ td{
 //  flex-direction: @flex-direction;
 //  height: calc(@page-content-height);
 //  flex-wrap: wrap;
-//  background-color: purple;
+//
 //}
