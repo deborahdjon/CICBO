@@ -5,7 +5,7 @@
 CICBO Is Corona Business Optimizer
 
 ## Project specifications
-https://hpe-my.sharepoint.com/:w:/p/ferdinand_koenig/EcO6d5LLL9dGrdLAqiohaMgBLYzZ_TTWC8uAkmEWiBJWqg?e=60QUCe
+CICBO (COVID-19 Infection Control and Business Operations) is a comprehensive application designed to assist business owners in efficiently managing COVID-19 cases among their staff and customers. In the event that a staff member or former customer reports a COVID-19 infection, CICBO empowers business operators to promptly and effectively notify all relevant staff members. Additionally, it provides a seamless solution for organizing and managing work shifts for the workforce, ensuring streamlined business operations during these challenging times.
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
